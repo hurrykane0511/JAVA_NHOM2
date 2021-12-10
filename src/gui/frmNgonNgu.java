@@ -32,22 +32,7 @@ public class frmNgonNgu extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         bll = new BLL_NgonNgu();
-        ResultSet rs = bll.layNgonNgu();
-        rs.last();
-        int row = rs.getRow();
-        if (row == 0) {
-            STT = 1;
-        }else {
-        rs.beforeFirst();
-            while (rs.next()) {
-               JOptionPane.showMessageDialog(null, rs.getObject(1).toString());
-               STT = Integer.parseInt(rs.getObject(1).toString().substring(2)) + 1;             
-            }
-        }
-        String ma = String.format("%02d", STT);
-        txtMaNgonNgu.setText("NN" + ma);
-        hienThi();
-        hienThiNN();
+        reset();
         txtMaNgonNgu.setEditable(false);
     }
 
@@ -73,18 +58,23 @@ public class frmNgonNgu extends javax.swing.JFrame {
         tblNgonNgu = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        btnMoi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(155, 177, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Mã ngôn ngữ:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 117, -1, -1));
 
         txtMaNgonNgu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanel1.add(txtMaNgonNgu, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 114, 130, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("Tên ngôn ngữ:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(346, 117, -1, -1));
 
         txtTenNgonNgu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtTenNgonNgu.addActionListener(new java.awt.event.ActionListener() {
@@ -92,6 +82,7 @@ public class frmNgonNgu extends javax.swing.JFrame {
                 txtTenNgonNguActionPerformed(evt);
             }
         });
+        jPanel1.add(txtTenNgonNgu, new org.netbeans.lib.awtextra.AbsoluteConstraints(475, 114, 182, -1));
 
         btnThem.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_add_26px.png"))); // NOI18N
@@ -101,6 +92,7 @@ public class frmNgonNgu extends javax.swing.JFrame {
                 btnThemActionPerformed(evt);
             }
         });
+        jPanel1.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, -1, -1));
 
         btnSua.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_edit_26px.png"))); // NOI18N
@@ -110,6 +102,7 @@ public class frmNgonNgu extends javax.swing.JFrame {
                 btnSuaActionPerformed(evt);
             }
         });
+        jPanel1.add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 100, -1));
 
         btnXoa.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_remove_26px_1.png"))); // NOI18N
@@ -119,6 +112,7 @@ public class frmNgonNgu extends javax.swing.JFrame {
                 btnXoaActionPerformed(evt);
             }
         });
+        jPanel1.add(btnXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 100, -1));
 
         btnThoat.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_shutdown_26px.png"))); // NOI18N
@@ -128,6 +122,7 @@ public class frmNgonNgu extends javax.swing.JFrame {
                 btnThoatActionPerformed(evt);
             }
         });
+        jPanel1.add(btnThoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 190, -1, -1));
 
         tblNgonNgu.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         tblNgonNgu.setModel(new javax.swing.table.DefaultTableModel(
@@ -142,6 +137,8 @@ public class frmNgonNgu extends javax.swing.JFrame {
             }
         ));
         jScrollPane2.setViewportView(tblNgonNgu);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 700, 190));
 
         jPanel2.setBackground(new java.awt.Color(84, 101, 225));
 
@@ -165,57 +162,17 @@ public class frmNgonNgu extends javax.swing.JFrame {
                 .addGap(19, 19, 19))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane2)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(btnThem)
-                        .addGap(40, 40, 40)
-                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
-                        .addComponent(btnThoat))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(323, 323, 323)
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtTenNgonNgu, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtMaNgonNgu, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(171, 171, 171)))))
-                .addContainerGap(43, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMaNgonNgu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(txtTenNgonNgu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSua)
-                    .addComponent(btnThoat)
-                    .addComponent(btnXoa)
-                    .addComponent(btnThem))
-                .addGap(29, 29, 29)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, -1));
+
+        btnMoi.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_new_26px_4.png"))); // NOI18N
+        btnMoi.setText("MỚI");
+        btnMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoiActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 100, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -258,9 +215,9 @@ public class frmNgonNgu extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(rootPane, "Thêm không thành công");
                     } else {
                         JOptionPane.showMessageDialog(rootPane, "Thêm thành công");
+                        reset();
                     }
-                    hienThiNN();
-                    reset();
+
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(frmNhanVien.class.getName()).log(Level.SEVERE, null, ex);
@@ -279,8 +236,8 @@ public class frmNgonNgu extends javax.swing.JFrame {
         } else {
             try {
                 bll.suaNgonNgu(et);
-                hienThiNN();
                 JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
+                reset();
             } catch (SQLException ex) {
                 Logger.getLogger(frmNgonNgu.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(rootPane, "Sửa không thành công");
@@ -302,9 +259,9 @@ public class frmNgonNgu extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(rootPane, "Xoá không thành công");
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "Xóa thành công");
+                    reset();
                 }
-                hienThiNN();
-                reset();
+
             } catch (SQLException ex) {
                 Logger.getLogger(frmNhanVien.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -312,6 +269,16 @@ public class frmNgonNgu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn ngôn ngữ");
         }
     }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
+
+        try {
+            reset();
+        } catch (SQLException ex) {
+            Logger.getLogger(frmNgonNgu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnMoiActionPerformed
     private void hienThi() {
         DefaultTableModel model = (DefaultTableModel) tblNgonNgu.getModel();
         model.setColumnCount(0);
@@ -343,8 +310,22 @@ public class frmNgonNgu extends javax.swing.JFrame {
         });
     }
 
-    public void reset() {
-        txtMaNgonNgu.setText("");
+    public void reset() throws SQLException {
+        ResultSet rs = bll.layNgonNgu();
+        rs.last();
+        int row = rs.getRow();
+        if (row == 0) {
+            STT = 1;
+        } else {
+            rs.beforeFirst();
+            while (rs.next()) {
+                STT = Integer.parseInt(rs.getObject(1).toString().substring(2)) + 1;
+            }
+        }
+        String ma = String.format("%02d", STT);
+        txtMaNgonNgu.setText("NN" + ma);
+        hienThi();
+        hienThiNN();
         txtTenNgonNgu.setText("");
     }
 
@@ -391,6 +372,7 @@ public class frmNgonNgu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnMoi;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnThoat;
