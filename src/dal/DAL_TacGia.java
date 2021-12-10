@@ -74,7 +74,7 @@ public class DAL_TacGia {
             conn = DatabaseUtil.getConnection();
             Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
-            String sql = "Select * from authors where id_author = '" + ma + "'";
+            String sql = "Select * from authors where author_name = '" + ma + "'";
             rs = st.executeQuery(sql);
             rs.last();
             row = rs.getRow();

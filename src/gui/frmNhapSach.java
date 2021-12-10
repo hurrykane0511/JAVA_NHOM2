@@ -56,6 +56,7 @@ public class frmNhapSach extends javax.swing.JFrame {
         bll = new BLL_Sach();
         bllHD = new BLL_HoaDon();
         bllNCC = new BLL_NhaCungCap();
+        bllCTHH = new BLL_ChiTietHD();
         AutoCompleteDecorator.decorate(cbbDM);
         AutoCompleteDecorator.decorate(cbbNN);
         AutoCompleteDecorator.decorate(cbbNXB);
@@ -89,15 +90,15 @@ public class frmNhapSach extends javax.swing.JFrame {
 
     public String themCTHH() throws Exception {
         ResultSet rs = bllCTHH.layDS();
-        JOptionPane.showConfirmDialog(cbbNN, "hehe");
+        JOptionPane.showConfirmDialog(null, "hehe");
         rs.last();
-        JOptionPane.showConfirmDialog(cbbNN, "last");
+        JOptionPane.showConfirmDialog(null, "last");
         int row = rs.getRow();
         if (row == 0) {
             STT = 1;
-            JOptionPane.showConfirmDialog(cbbNN, "true");
+            JOptionPane.showConfirmDialog(null, "true");
         } else {
-            JOptionPane.showConfirmDialog(cbbNN, "false");
+            JOptionPane.showConfirmDialog(null, "false");
             rs.beforeFirst();
             while (rs.next()) {
                 STT = Integer.parseInt(rs.getObject(1).toString().substring(2)) + 1;
@@ -355,15 +356,17 @@ public class frmNhapSach extends javax.swing.JFrame {
 //                        JOptionPane.showMessageDialog(null, "NV đơn đã tồn tại");
                         if (bllTD.checkTonTai(maTD)) {
                             maTD = bllTD.layMa(maTD);
+                            
                         } else {
                             maTD = themTD(txtTacGia.getText());
+
                         }
-                        if (bll.checkTonTai(txtMaSach.getText()) == true) {
+                        if (bll.checkTonTai(maSach) == true) {
                             int tong = bll.laySLSach(txtMaSach.getText()) + Integer.parseInt(txtSoLuong.getText());
                             ET_Sach et = new ET_Sach(maSach, ten, tong, Integer.parseInt(gia), Integer.parseInt(nxb), Integer.parseInt(st), maTD, maNXB, maDM, maNN);
                             ET_HoaDon HDon = new ET_HoaDon(mahd, nv, maNCC);
                             String maCT = themCTHH();
-                            ET_ChiTietHD CT = new ET_ChiTietHD(maCT, Integer.parseInt(sl), maNCC, maSach);
+                            ET_ChiTietHD CT = new ET_ChiTietHD(maCT, Integer.parseInt(sl), mahd, maSach);
                             bllHD.themHoaDon(HDon);
                             bllCTHH.themChiTietHD(CT);
                             try {
@@ -378,11 +381,6 @@ public class frmNhapSach extends javax.swing.JFrame {
                             }
                         } else {
                             ET_Sach et = new ET_Sach(maSach, ten, Integer.parseInt(sl), Integer.parseInt(gia), Integer.parseInt(nxb), Integer.parseInt(st), maTD, maNXB, maDM, maNN);
-                            ET_HoaDon HDon = new ET_HoaDon(mahd, nv, maNCC);
-                            String maCT = themCTHH();
-                            ET_ChiTietHD CT = new ET_ChiTietHD(maCT, Integer.parseInt(sl), maNCC, maSach);
-                            bllHD.themHoaDon(HDon);
-                            bllCTHH.themChiTietHD(CT);
                             try {
                                 if (bll.themSach(et)) {
                                     JOptionPane.showMessageDialog(rootPane, "Thêm thành công");
@@ -393,6 +391,14 @@ public class frmNhapSach extends javax.swing.JFrame {
                             } catch (SQLException ex) {
                                 Logger.getLogger(frmNhapSach.class.getName()).log(Level.SEVERE, null, ex);
                             }
+                            ET_HoaDon HDon = new ET_HoaDon(mahd, nv, maNCC);
+                            String maCT = themCTHH();
+                            ET_ChiTietHD CT = new ET_ChiTietHD(maCT, Integer.parseInt(sl), mahd, maSach);
+                            JOptionPane.showConfirmDialog(null, maCT);
+                            JOptionPane.showConfirmDialog(null, mahd);
+
+                            bllHD.themHoaDon(HDon);
+                            bllCTHH.themChiTietHD(CT);
                         }
 //                    } else {
 //                        JOptionPane.showMessageDialog(null, "Mã nhân viên không tồn tại");

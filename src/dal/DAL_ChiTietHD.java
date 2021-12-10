@@ -26,7 +26,7 @@ public class DAL_ChiTietHD {
     public boolean themChiTietHD(ET_ChiTietHD et) throws SQLException {
         Statement st = conn.createStatement();
         String sql = "insert into idv_detail(id_idv_detail,quantity,id_idv,id_book)"
-                + "values('"+et.getMaChiTietHD()+"','"+et.getSoLuong()+"','"+et.getMaHD()+"','"+et.getMaSach()+"')";
+                + "values('"+et.getMaChiTietHD()+"',"+et.getSoLuong()+",'"+et.getMaHD()+"','"+et.getMaSach()+"')";
         if (st.executeUpdate(sql) > 0) {
             return true;
         }

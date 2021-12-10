@@ -28,7 +28,7 @@ public class DAL_NXB {
         conn = DatabaseUtil.getConnection();
         ResultSet rs = null;
         Statement st = conn.createStatement();
-        String sql = "select * from publishers where name = '"+tenNXB+"' limit 1";
+        String sql = "select * from publishers where name like '%"+tenNXB+"%' limit 1";
         rs = st.executeQuery(sql);
         String ma = "";
         while (rs.next()) {
