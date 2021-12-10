@@ -1,40 +1,35 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package et;
 
 /**
  *
- * @author LENOVO
+ * @author dthan
  */
 public class ET_NgonNgu {
-     private String maNN;
-    private String tenNN;
+    private String maNgonNgu;
+    private String tenNgonNgu;
 
-    public String getMaNN() {
-        return maNN;
+    public ET_NgonNgu(String maNgonNgu, String tenNgonNgu) {
+        this.maNgonNgu = maNgonNgu;
+        this.tenNgonNgu = tenNgonNgu;
     }
 
-    public void setMaNN(String maNN) {
-        this.maNN = maNN;
+    public String getMaNgonNgu() {
+        return maNgonNgu;
     }
 
-    public String getTenNN() {
-        return tenNN;
+    public void setMaNgonNgu(String maNgonNgu) {
+        this.maNgonNgu = maNgonNgu;
     }
 
-    public void setTenNN(String tenNN) {
-        this.tenNN = tenNN;
+    public String getTenNgonNgu() {
+        return tenNgonNgu;
     }
 
-    public ET_NgonNgu() {
+    public void setTenNgonNgu(String tenNgonNgu) {
+        this.tenNgonNgu = tenNgonNgu;
     }
-
-    public ET_NgonNgu(String maNN, String tenNN) {
-        this.maNN = maNN;
-        this.tenNN = tenNN;
-    }
-    
 }

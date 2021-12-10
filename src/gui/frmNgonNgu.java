@@ -4,17 +4,51 @@
  */
 package gui;
 
+import javax.swing.table.DefaultTableModel;
+import et.ET_NgonNgu;
+import java.util.Date;
+import bll.BLL_NgonNgu;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 /**
  *
  * @author yushu
  */
 public class frmNgonNgu extends javax.swing.JFrame {
 
+    private BLL_NgonNgu bll;
+    private int STT = 0;
+
     /**
      * Creates new form frmNN
      */
-    public frmNgonNgu() {
+    public frmNgonNgu() throws Exception {
         initComponents();
+        this.setLocationRelativeTo(null);
+        bll = new BLL_NgonNgu();
+        ResultSet rs = bll.layNgonNgu();
+        rs.last();
+        int row = rs.getRow();
+        if (row == 0) {
+            STT = 1;
+        }else {
+        rs.beforeFirst();
+            while (rs.next()) {
+               JOptionPane.showMessageDialog(null, rs.getObject(1).toString());
+               STT = Integer.parseInt(rs.getObject(1).toString().substring(2)) + 1;             
+            }
+        }
+        String ma = String.format("%02d", STT);
+        txtMaNgonNgu.setText("NN" + ma);
+        hienThi();
+        hienThiNN();
+        txtMaNgonNgu.setEditable(false);
     }
 
     /**
@@ -28,87 +62,117 @@ public class frmNgonNgu extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        btnID = new javax.swing.JTextField();
+        txtMaNgonNgu = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        btnID2 = new javax.swing.JTextField();
+        txtTenNgonNgu = new javax.swing.JTextField();
         btnThem = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         btnThoat = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblNgonNgu = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(155, 177, 255));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Mã ngôn ngữ:");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("NGÔN NGỮ");
-
-        btnID.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtMaNgonNgu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("Tên ngôn ngữ:");
 
-        btnID2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnID2.addActionListener(new java.awt.event.ActionListener() {
+        txtTenNgonNgu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtTenNgonNgu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnID2ActionPerformed(evt);
+                txtTenNgonNguActionPerformed(evt);
             }
         });
 
         btnThem.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_add_26px.png"))); // NOI18N
         btnThem.setText("THÊM");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         btnSua.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_edit_26px.png"))); // NOI18N
         btnSua.setText("SỬA");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
         btnXoa.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_remove_26px_1.png"))); // NOI18N
         btnXoa.setText("XÓA");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         btnThoat.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_shutdown_26px.png"))); // NOI18N
         btnThoat.setText("THOÁT");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
 
-        jTable2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblNgonNgu.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        tblNgonNgu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Mã ngôn ngữ", "Tên ngôn ngữ"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tblNgonNgu);
+
+        jPanel2.setBackground(new java.awt.Color(84, 101, 225));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setText("NGÔN NGỮ");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(277, 277, 277)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(19, 19, 19))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnID2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane2)
-                .addContainerGap())
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane2)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnID, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(73, 73, 73)
                         .addComponent(btnThem)
@@ -119,30 +183,38 @@ public class frmNgonNgu extends javax.swing.JFrame {
                         .addGap(39, 39, 39)
                         .addComponent(btnThoat))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(274, 274, 274)
-                        .addComponent(jLabel1)))
-                .addContainerGap(92, Short.MAX_VALUE))
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(323, 323, 323)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtTenNgonNgu, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtMaNgonNgu, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(171, 171, 171)))))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1)
-                .addGap(27, 27, 27)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMaNgonNgu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
-                    .addComponent(btnID2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                    .addComponent(txtTenNgonNgu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSua)
                     .addComponent(btnThoat)
                     .addComponent(btnXoa)
                     .addComponent(btnThem))
                 .addGap(29, 29, 29)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -159,9 +231,122 @@ public class frmNgonNgu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnID2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnID2ActionPerformed
+    private void txtTenNgonNguActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenNgonNguActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnID2ActionPerformed
+    }//GEN-LAST:event_txtTenNgonNguActionPerformed
+
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        int kq = JOptionPane.showConfirmDialog(null, "Bạn có muốn thoát không", "Thông báo", JOptionPane.YES_NO_OPTION);
+        if (kq == 0) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_btnThoatActionPerformed
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        String maNgonNgu = txtMaNgonNgu.getText();
+        String tenNgonNgu = txtTenNgonNgu.getText();
+        ET_NgonNgu et = new ET_NgonNgu(maNgonNgu, tenNgonNgu);
+        if (maNgonNgu == "" || tenNgonNgu == "") {
+            JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
+        } else {
+            try {
+                if (bll.checkNN(maNgonNgu)) {
+                    JOptionPane.showMessageDialog(null, "Đã tồn tại ngôn ngữ");
+                } else {
+                    et = new ET_NgonNgu(maNgonNgu, tenNgonNgu);
+                    if (bll.themNgonNgu(et)) {
+                        JOptionPane.showMessageDialog(rootPane, "Thêm không thành công");
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "Thêm thành công");
+                    }
+                    hienThiNN();
+                    reset();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(frmNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(frmNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        String maNgonNgu = txtMaNgonNgu.getText();
+        String tenNgonNgu = txtTenNgonNgu.getText();
+        ET_NgonNgu et = new ET_NgonNgu(maNgonNgu, tenNgonNgu);
+        if (maNgonNgu == "" || tenNgonNgu == "") {
+            JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
+        } else {
+            try {
+                bll.suaNgonNgu(et);
+                hienThiNN();
+                JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
+            } catch (SQLException ex) {
+                Logger.getLogger(frmNgonNgu.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(rootPane, "Sửa không thành công");
+            }
+        }
+    }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+
+        String maNgonNgu = txtMaNgonNgu.getText();
+        String tenNgonNgu = txtTenNgonNgu.getText();
+        ET_NgonNgu et;
+
+        int row = tblNgonNgu.getSelectedRow();
+        if (row >= 0) {
+            et = new ET_NgonNgu(maNgonNgu, tenNgonNgu);
+            try {
+                if (bll.xoaNgonNgu(et)) {
+                    JOptionPane.showMessageDialog(rootPane, "Xoá không thành công");
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Xóa thành công");
+                }
+                hienThiNN();
+                reset();
+            } catch (SQLException ex) {
+                Logger.getLogger(frmNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn ngôn ngữ");
+        }
+    }//GEN-LAST:event_btnXoaActionPerformed
+    private void hienThi() {
+        DefaultTableModel model = (DefaultTableModel) tblNgonNgu.getModel();
+        model.setColumnCount(0);
+        model.setRowCount(0);
+        model.addColumn("Mã ngôn ngữ");
+        model.addColumn("Tên ngôn ngữ");
+        tblNgonNgu.setModel(model);
+    }
+
+    public void hienThiNN() throws SQLException {
+        ResultSet rs = bll.layNgonNgu();
+        DefaultTableModel model = (DefaultTableModel) tblNgonNgu.getModel();
+        model.setNumRows(0);
+        while (rs.next()) {
+            Object[] col = new Object[2];
+            for (int i = 1; i <= 2; i++) {
+                col[i - 1] = rs.getObject(i);
+            }
+            model.addRow(col);
+        }
+        tblNgonNgu.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (tblNgonNgu.getSelectedRow() >= 0) {
+                    txtMaNgonNgu.setText(tblNgonNgu.getValueAt(tblNgonNgu.getSelectedRow(), 0) + "");
+                    txtTenNgonNgu.setText(tblNgonNgu.getValueAt(tblNgonNgu.getSelectedRow(), 1) + "");
+                }
+            }
+        });
+    }
+
+    public void reset() {
+        txtMaNgonNgu.setText("");
+        txtTenNgonNgu.setText("");
+    }
 
     /**
      * @param args the command line arguments
@@ -190,18 +375,22 @@ public class frmNgonNgu extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmNgonNgu().setVisible(true);
+                try {
+                    new frmNgonNgu().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(frmNgonNgu.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField btnID;
-    private javax.swing.JTextField btnID2;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnThoat;
@@ -210,7 +399,10 @@ public class frmNgonNgu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable tblNgonNgu;
+    private javax.swing.JTextField txtMaNgonNgu;
+    private javax.swing.JTextField txtTenNgonNgu;
     // End of variables declaration//GEN-END:variables
 }
