@@ -269,7 +269,7 @@ public class frmNXB extends javax.swing.JFrame {
                     hienThiNXB();
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(frmNhapSach.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frmNXB.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
                 Logger.getLogger(frmNXB.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -293,7 +293,7 @@ public class frmNXB extends javax.swing.JFrame {
                 }
                 hienThiNXB();
             } catch (SQLException ex) {
-                Logger.getLogger(frmNhapSach.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frmNXB.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
                 Logger.getLogger(frmNXB.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -312,7 +312,7 @@ public class frmNXB extends javax.swing.JFrame {
                 }
                 hienThiNXB();
             } catch (SQLException ex) {
-                Logger.getLogger(frmNhapSach.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frmNXB.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
                 Logger.getLogger(frmNXB.class.getName()).log(Level.SEVERE, null, ex);
             }

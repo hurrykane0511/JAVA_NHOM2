@@ -3,11 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/HK3/JAVA/Nhom2/src/gui/frmTaiKhoan.java</file>
-            <file>file:/D:/HK3/JAVA/Nhom2/src/gui/frmNhanVien.java</file>
-            <file>file:/D:/HK3/JAVA/Nhom2/src/bll/BLL_DanhMuc.java</file>
-            <file>file:/D:/HK3/JAVA/Nhom2/src/dal/DAL_DanhMuc.java</file>
-            <file>file:/D:/HK3/JAVA/Nhom2/src/gui/frmDanhMuc.java</file>
+            <file>file:/D:/HK3/JAVA/Tuân%2014/Nhom2/Nhom2/src/gui/frmDangNhap.java</file>
+            <file>file:/D:/HK3/JAVA/Tuân%2014/Nhom2/Nhom2/src/dal/DAL_NXB.java</file>
+            <file>file:/D:/HK3/JAVA/Tuân%2014/Nhom2/Nhom2/src/dal/DAL_TaiKhoan.java</file>
+            <file>file:/D:/HK3/JAVA/Tuân%2014/Nhom2/Nhom2/src/gui/frmTraSach.java</file>
+            <file>file:/D:/HK3/JAVA/Tuân%2014/Nhom2/Nhom2/src/gui/frmNXB.java</file>
+            <file>file:/D:/HK3/JAVA/Tuân%2014/Nhom2/Nhom2/src/gui/frmTaiKhoan.java</file>
+            <file>file:/D:/HK3/JAVA/Tuân%2014/Nhom2/Nhom2/src/gui/frmNgonNgu.java</file>
         </group>
     </open-files>
 </project-private>
