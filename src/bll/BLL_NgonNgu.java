@@ -40,4 +40,13 @@ public class BLL_NgonNgu {
     public boolean checkNN(String  maNgonNgu) throws SQLException {
         return dal.checkNN(maNgonNgu);
     }
+    public boolean checkTonTai(String ma) throws SQLException{
+        return dal.checkTonTai(ma);
+    }
+    public String layMa(String ten) throws Exception {
+        return dal.layMaNN(ten);
+    }
+     public String layTen(String ma) throws Exception {
+        return dal.layTen(ma);
+    }
 }

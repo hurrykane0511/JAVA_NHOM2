@@ -6,6 +6,7 @@
 package bll;
 
 import dal.DAL_TacGia;
+import et.ET_TacGia;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -19,7 +20,9 @@ public class BLL_TacGia {
     public BLL_TacGia() throws Exception {
         dal = new DAL_TacGia();
     }
-
+    public boolean themTD(ET_TacGia et) throws SQLException, Exception {
+        return dal.themTD(et);
+    }
    
     public String layMa(String ten) throws Exception {
         return dal.layMaTG(ten);
@@ -29,5 +32,8 @@ public class BLL_TacGia {
     }
        public ResultSet layDS() throws SQLException, Exception {
         return dal.layDS();
+    }
+       public boolean checkTonTai(String ma) throws SQLException{
+        return dal.checkTonTai(ma);
     }
 }

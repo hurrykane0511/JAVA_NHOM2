@@ -111,5 +111,18 @@ public class DAL_NhaCungCap {
 //              JOptionPane.showMessageDialog(null, e,"Thong Bao Lo",1);
 //         }
 //         return (i != -1);
-    
+    public String layMaNCC(String tenNCC) throws Exception {
+        Connection conn = null;
+        conn = DatabaseUtil.getConnection();
+        ResultSet rs = null;
+        Statement st = conn.createStatement();
+        String sql = "select * from suppliers where supplier_name ='" + tenNCC + "' limit 1";
+        rs = st.executeQuery(sql);
+        String ma = "";
+        while (rs.next()) {
+            ma = (String) rs.getObject(1);
+            break;
+        }
+        return ma;
+    }
 }

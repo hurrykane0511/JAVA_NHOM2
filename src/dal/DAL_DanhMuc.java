@@ -32,7 +32,32 @@ public class DAL_DanhMuc {
         }
         return rs;
     }
-    
+     public String layMaDM(String tenDM) throws Exception {
+        Connection conn = null;
+        conn = DatabaseUtil.getConnection();
+        ResultSet rs = null;
+        Statement st = conn.createStatement();
+        String sql = "select * from categories where name = '"+tenDM+"'";
+        rs = st.executeQuery(sql);
+        String ma = "";
+        while (rs.next()) {
+            ma = (String) rs.getObject(1);
+        }
+        return ma;
+    }
+     public String layTenDM(String maDM) throws Exception {
+        Connection conn = null;
+        conn = DatabaseUtil.getConnection();
+        ResultSet rs = null;
+        Statement st = conn.createStatement();
+        String sql = "select * from categories where id_category = '"+maDM+"'";
+        rs = st.executeQuery(sql);
+        String ma = "";
+        while (rs.next()) {
+            ma = (String) rs.getObject(2);
+        }
+        return ma;
+    }
     public Boolean checkTT(String maDM) throws SQLException, Exception {
          Connection conn = null;;
         ResultSet rs = null;

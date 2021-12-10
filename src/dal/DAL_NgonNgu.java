@@ -101,4 +101,50 @@ public class DAL_NgonNgu {
         }
         return (row > 0);
     }
+    public Boolean checkTonTai(String ma) throws SQLException {
+        Connection conn = null;;
+        ResultSet rs = null;
+        int row = 0;
+        try {
+            conn = DatabaseUtil.getConnection();
+            Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+            String sql = "Select * from languages where id_language = '" + ma + "'";
+            rs = st.executeQuery(sql);
+            rs.last();
+            row = rs.getRow();
+            rs.beforeFirst();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return (row > 0);
+    }
+    public String layMaNN(String tenNN) throws Exception {
+        Connection conn = null;
+        conn = DatabaseUtil.getConnection();
+        ResultSet rs = null;
+        Statement st = conn.createStatement();
+        String sql = "select * from languages where name = '"+tenNN+"' limit 1";
+        rs = st.executeQuery(sql);
+        String ma = "";
+        while (rs.next()) {
+            ma = rs.getObject(1).toString();
+            break;
+        }
+        return ma;
+    }
+    public String layTen(String maNN) throws Exception {
+        Connection conn = null;
+        conn = DatabaseUtil.getConnection();
+        ResultSet rs = null;
+        Statement st = conn.createStatement();
+        String sql = "select * from languages where id_language	 = '"+maNN+"' limit 1";
+        rs = st.executeQuery(sql);
+        String ma = "";
+        while (rs.next()) {
+            ma = rs.getObject(2).toString();
+            break;
+        }
+        return ma;
+    }
 }

@@ -28,4 +28,10 @@ public class BLL_DanhMuc {
     public boolean suaDM(ET_DanhMuc et) throws Exception {
         return dal.suaDM(et);
     }
+     public String layMa(String ten) throws Exception {
+        return dal.layMaDM(ten);
+    }
+    public String layTen(String ma) throws Exception {
+        return dal.layTenDM(ma);
+    }
 }

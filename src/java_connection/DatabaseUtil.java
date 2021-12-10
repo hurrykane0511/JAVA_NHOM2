@@ -14,7 +14,7 @@ import java.sql.DriverManager;
 public class DatabaseUtil {
 
     public static Connection c;
-    private static String db_url = "jdbc:mysql://localhost:3306/qltv?characterEncoding=utf8";
+    private static String db_url = "jdbc:mysql://localhost:3306/qltv?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private static String username = "root";
     private static String password = "";
 

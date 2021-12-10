@@ -19,7 +19,9 @@ public class BLL_NhaCungCap {
     public BLL_NhaCungCap() {
         dal = new DAL_NhaCungCap();
     }
-    
+    public String layMa(String ten) throws Exception {
+        return dal.layMaNCC(ten);
+    }
     public Boolean themNCC(ET_NhaCungCap et) throws SQLException, Exception {
         return dal.themNCC(et);
     }
