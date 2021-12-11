@@ -16,7 +16,7 @@ public class Project {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        frmDangNhap frm = new frmDangNhap();
+        frmDanhMuc frm = new frmDanhMuc();
         frm.setVisible(true);
     }
     

@@ -1,10 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package gui;
-
 import java.awt.Component;
 import java.awt.event.WindowEvent;
 import java.util.HashMap;
@@ -28,22 +26,20 @@ import java.sql.SQLException;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-
 /**
  *
- * @author LENOVO
+ * @author yushu
  */
-public class frmMuonSach extends javax.swing.JFrame {
-
-    HashMap<String, String> hm_nv;
-    BLL_MuonSach bll_muonsach;
+public class frmMuonSach extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form FromMuonSach
+     * Creates new form frmMuonSach
      */
+      HashMap<String, String> hm_nv;
+    BLL_MuonSach bll_muonsach;
     public frmMuonSach() throws Exception {
         initComponents();
-        this.txtTenDocGia.setEditable(false);
+         this.txtTenDocGia.setEditable(false);
         this.bll_muonsach = new BLL_MuonSach();
         this.hm_nv = bll_muonsach.hm_NV();
         java.util.Date date = new java.util.Date();
@@ -52,8 +48,7 @@ public class frmMuonSach extends javax.swing.JFrame {
         loadCBNV();
         LoadDSPM();
     }
-
-    public void clearTextFields(Container container) {
+  public void clearTextFields(Container container) {
         for (Component c : container.getComponents()) {
             if (c instanceof JTextField) {
                 JTextField f = (JTextField) c;
@@ -80,7 +75,20 @@ public class frmMuonSach extends javax.swing.JFrame {
         }
 
     }
-
+     public String getMaNV() {
+        for (Entry<String, String> entry : hm_nv.entrySet()) {
+            if (entry.getValue().equals(cbNhanVien.getSelectedItem())) {
+                txtTenDocGia.setText(entry.getKey());
+                return entry.getKey();
+            }
+        }
+        return "";
+    }
+      public void LoadDSPM() throws Exception {
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        dtm.setRowCount(0);
+        bll_muonsach.SetTable(jTable1);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -90,7 +98,6 @@ public class frmMuonSach extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -118,10 +125,6 @@ public class frmMuonSach extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         btnTim = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 255));
         jPanel1.setToolTipText("");
@@ -260,7 +263,7 @@ public class frmMuonSach extends javax.swing.JFrame {
                 .addComponent(btnClear)
                 .addGap(62, 62, 62)
                 .addComponent(btnThoat)
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -362,92 +365,22 @@ public class frmMuonSach extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(450, 450, 450))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 905, Short.MAX_VALUE)
+            .addGap(0, 934, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 934, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5))
+            .addGap(0, 764, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        // TODO add your handling code here:
-        ET_MuonSach muonsach = new ET_MuonSach(txtMasach.getText(), txtMaDocGia.getText(), getMaNV(), ngayMuonJDate.getDate(), Integer.parseInt((String) cbNgay.getSelectedItem()), txtTinhTrang.getText());
-
-        try {
-            bll_muonsach.ChoMuon(muonsach);
-            clearTextFields(jPanel1);
-        } catch (SQLException ex) {
-            JOptionPane.showConfirmDialog(null, jPanel1, "File", JOptionPane.OK_OPTION, JOptionPane.PLAIN_MESSAGE);
-        }
-    }//GEN-LAST:event_btnThemActionPerformed
-
-    public String getMaNV() {
-        for (Entry<String, String> entry : hm_nv.entrySet()) {
-            if (entry.getValue().equals(cbNhanVien.getSelectedItem())) {
-                txtTenDocGia.setText(entry.getKey());
-                return entry.getKey();
-            }
-        }
-        return "";
-    }
-    private void cbNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNhanVienActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_cbNhanVienActionPerformed
-
-    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        // TODO add your handling code here:
-        ET_MuonSach muonsach = new ET_MuonSach(txtMasach.getText(), txtMaDocGia.getText(), getMaNV(), ngayMuonJDate.getDate(), Integer.parseInt((String) cbNgay.getSelectedItem()), txtTinhTrang.getText());
-
-        try {
-            bll_muonsach.SuaPhieu(muonsach, txtMaPhieu.getText());
-            clearTextFields(jPanel1);
-            LoadDSPM();
-        } catch (SQLException ex) {
-            JOptionPane.showConfirmDialog(null, jPanel1, "File", JOptionPane.OK_OPTION, JOptionPane.PLAIN_MESSAGE);
-        } catch (Exception ex) {
-            Logger.getLogger(frmMuonSach.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnSuaActionPerformed
-
-    public void LoadDSPM() throws Exception {
-        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
-        dtm.setRowCount(0);
-        bll_muonsach.SetTable(jTable1);
-    }
-
-    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        // TODO add your handling code here:
-        try {
-            bll_muonsach.XoaPhieu(txtMaPhieu.getText());
-            clearTextFields(jPanel1);
-            LoadDSPM();
-        } catch (SQLException ex) {
-            JOptionPane.showConfirmDialog(null, jPanel1, "File", JOptionPane.OK_OPTION, JOptionPane.PLAIN_MESSAGE);
-        } catch (Exception ex) {
-            Logger.getLogger(frmMuonSach.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnXoaActionPerformed
-
-
-    private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnTimActionPerformed
-
-    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        // TODO add your handling code here:
-        clearTextFields(jPanel1);
-    }//GEN-LAST:event_btnClearActionPerformed
 
     private void txtMaDocGiaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMaDocGiaFocusLost
         try {
@@ -463,45 +396,60 @@ public class frmMuonSach extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtMaDocGiaFocusLost
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmMuonSach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmMuonSach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmMuonSach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmMuonSach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+    private void cbNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNhanVienActionPerformed
+        // TODO add your handling code here:
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new frmMuonSach().setVisible(true);
-                } catch (Exception ex) {
-                    Logger.getLogger(frmMuonSach.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
+    }//GEN-LAST:event_cbNhanVienActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+        ET_MuonSach muonsach = new ET_MuonSach(txtMasach.getText(), txtMaDocGia.getText(), getMaNV(), ngayMuonJDate.getDate(), Integer.parseInt((String) cbNgay.getSelectedItem()), txtTinhTrang.getText());
+
+        try {
+            bll_muonsach.SuaPhieu(muonsach, txtMaPhieu.getText());
+            clearTextFields(jPanel1);
+            LoadDSPM();
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(null, jPanel1, "File", JOptionPane.OK_OPTION, JOptionPane.PLAIN_MESSAGE);
+        } catch (Exception ex) {
+            Logger.getLogger(frmMuonSach1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+        ET_MuonSach muonsach = new ET_MuonSach(txtMasach.getText(), txtMaDocGia.getText(), getMaNV(), ngayMuonJDate.getDate(), Integer.parseInt((String) cbNgay.getSelectedItem()), txtTinhTrang.getText());
+
+        try {
+            bll_muonsach.ChoMuon(muonsach);
+            clearTextFields(jPanel1);
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(null, jPanel1, "File", JOptionPane.OK_OPTION, JOptionPane.PLAIN_MESSAGE);
+        }
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+        try {
+            bll_muonsach.XoaPhieu(txtMaPhieu.getText());
+            clearTextFields(jPanel1);
+            LoadDSPM();
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(null, jPanel1, "File", JOptionPane.OK_OPTION, JOptionPane.PLAIN_MESSAGE);
+        } catch (Exception ex) {
+            Logger.getLogger(frmMuonSach1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTimActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        // TODO add your handling code here:
+        clearTextFields(jPanel1);
+    }//GEN-LAST:event_btnClearActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
@@ -517,7 +465,6 @@ public class frmMuonSach extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

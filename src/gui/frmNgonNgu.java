@@ -1,9 +1,8 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package gui;
-
 import javax.swing.table.DefaultTableModel;
 import et.ET_NgonNgu;
 import java.util.Date;
@@ -15,22 +14,19 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
 /**
  *
  * @author yushu
  */
-public class frmNgonNgu extends javax.swing.JFrame {
-
-    private BLL_NgonNgu bll;
-    private int STT = 0;
+public class frmNgonNgu extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form frmNN
+     * Creates new form frmNgonNgu
      */
+      private BLL_NgonNgu bll;
+    private int STT = 0;
     public frmNgonNgu() throws Exception {
         initComponents();
-        this.setLocationRelativeTo(null);
         bll = new BLL_NgonNgu();
         reset();
         txtMaNgonNgu.setEditable(false);
@@ -46,6 +42,7 @@ public class frmNgonNgu extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txtMaNgonNgu = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -56,25 +53,25 @@ public class frmNgonNgu extends javax.swing.JFrame {
         btnThoat = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblNgonNgu = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnMoi = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setBackground(new java.awt.Color(155, 177, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setBackground(new java.awt.Color(155, 177, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Mã ngôn ngữ:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 117, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 117, -1, -1));
 
         txtMaNgonNgu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel1.add(txtMaNgonNgu, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 114, 130, -1));
+        jPanel2.add(txtMaNgonNgu, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 114, 130, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("Tên ngôn ngữ:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(346, 117, -1, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(346, 117, -1, -1));
 
         txtTenNgonNgu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtTenNgonNgu.addActionListener(new java.awt.event.ActionListener() {
@@ -82,7 +79,7 @@ public class frmNgonNgu extends javax.swing.JFrame {
                 txtTenNgonNguActionPerformed(evt);
             }
         });
-        jPanel1.add(txtTenNgonNgu, new org.netbeans.lib.awtextra.AbsoluteConstraints(475, 114, 182, -1));
+        jPanel2.add(txtTenNgonNgu, new org.netbeans.lib.awtextra.AbsoluteConstraints(475, 114, 182, -1));
 
         btnThem.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_add_26px.png"))); // NOI18N
@@ -92,7 +89,7 @@ public class frmNgonNgu extends javax.swing.JFrame {
                 btnThemActionPerformed(evt);
             }
         });
-        jPanel1.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, -1, -1));
+        jPanel2.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, -1, -1));
 
         btnSua.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_edit_26px.png"))); // NOI18N
@@ -102,7 +99,7 @@ public class frmNgonNgu extends javax.swing.JFrame {
                 btnSuaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 100, -1));
+        jPanel2.add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 100, -1));
 
         btnXoa.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_remove_26px_1.png"))); // NOI18N
@@ -112,7 +109,7 @@ public class frmNgonNgu extends javax.swing.JFrame {
                 btnXoaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 100, -1));
+        jPanel2.add(btnXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 100, -1));
 
         btnThoat.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_shutdown_26px.png"))); // NOI18N
@@ -122,7 +119,7 @@ public class frmNgonNgu extends javax.swing.JFrame {
                 btnThoatActionPerformed(evt);
             }
         });
-        jPanel1.add(btnThoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 190, -1, -1));
+        jPanel2.add(btnThoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 190, -1, -1));
 
         tblNgonNgu.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         tblNgonNgu.setModel(new javax.swing.table.DefaultTableModel(
@@ -138,31 +135,31 @@ public class frmNgonNgu extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tblNgonNgu);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 700, 190));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 700, 190));
 
-        jPanel2.setBackground(new java.awt.Color(84, 101, 225));
+        jPanel3.setBackground(new java.awt.Color(84, 101, 225));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("NGÔN NGỮ");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(277, 277, 277)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(27, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(19, 19, 19))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, -1));
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, -1));
 
         btnMoi.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_new_26px_4.png"))); // NOI18N
@@ -172,7 +169,9 @@ public class frmNgonNgu extends javax.swing.JFrame {
                 btnMoiActionPerformed(evt);
             }
         });
-        jPanel1.add(btnMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 100, -1));
+        jPanel2.add(btnMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 100, -1));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -191,13 +190,6 @@ public class frmNgonNgu extends javax.swing.JFrame {
     private void txtTenNgonNguActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenNgonNguActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTenNgonNguActionPerformed
-
-    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
-        int kq = JOptionPane.showConfirmDialog(null, "Bạn có muốn thoát không", "Thông báo", JOptionPane.YES_NO_OPTION);
-        if (kq == 0) {
-            System.exit(0);
-        }
-    }//GEN-LAST:event_btnThoatActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         String maNgonNgu = txtMaNgonNgu.getText();
@@ -220,9 +212,9 @@ public class frmNgonNgu extends javax.swing.JFrame {
 
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(frmNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frmNhanVien1.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
-                Logger.getLogger(frmNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frmNhanVien1.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_btnThemActionPerformed
@@ -239,7 +231,7 @@ public class frmNgonNgu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
                 reset();
             } catch (SQLException ex) {
-                Logger.getLogger(frmNgonNgu.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frmNgonNgu1.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(rootPane, "Sửa không thành công");
             }
         }
@@ -263,23 +255,29 @@ public class frmNgonNgu extends javax.swing.JFrame {
                 }
 
             } catch (SQLException ex) {
-                Logger.getLogger(frmNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frmNhanVien1.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn ngôn ngữ");
         }
     }//GEN-LAST:event_btnXoaActionPerformed
 
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        int kq = JOptionPane.showConfirmDialog(null, "Bạn có muốn thoát không", "Thông báo", JOptionPane.YES_NO_OPTION);
+        if (kq == 0) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnThoatActionPerformed
+
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
 
         try {
             reset();
         } catch (SQLException ex) {
-            Logger.getLogger(frmNgonNgu.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frmNgonNgu1.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_btnMoiActionPerformed
-    private void hienThi() {
+  private void hienThi() {
         DefaultTableModel model = (DefaultTableModel) tblNgonNgu.getModel();
         model.setColumnCount(0);
         model.setRowCount(0);
@@ -329,47 +327,6 @@ public class frmNgonNgu extends javax.swing.JFrame {
         txtTenNgonNgu.setText("");
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmNgonNgu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmNgonNgu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmNgonNgu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmNgonNgu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new frmNgonNgu().setVisible(true);
-                } catch (Exception ex) {
-                    Logger.getLogger(frmNgonNgu.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMoi;
@@ -382,6 +339,7 @@ public class frmNgonNgu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblNgonNgu;
     private javax.swing.JTextField txtMaNgonNgu;

@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package gui;
 
@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  *
  * @author yushu
  */
-public class frmNhanVien extends javax.swing.JFrame {
+public class frmNhanVien extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form frmNhanVien
@@ -28,8 +28,6 @@ public class frmNhanVien extends javax.swing.JFrame {
 
     public frmNhanVien() throws Exception {
         initComponents();
-        this.setLocationRelativeTo(null);
-        this.setTitle("Nhân viên");
         bll = new BLL_NhanVien();
         hienThi();
         hienThiNV();
@@ -66,8 +64,6 @@ public class frmNhanVien extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblNhanVien = new javax.swing.JTable();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(155, 177, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -236,9 +232,9 @@ public class frmNhanVien extends javax.swing.JFrame {
                     reset();
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(frmNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frmNhanVien1.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
-                Logger.getLogger(frmNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frmNhanVien1.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_btnThemActionPerformed
@@ -275,7 +271,7 @@ public class frmNhanVien extends javax.swing.JFrame {
                 hienThiNV();
                 reset();
             } catch (SQLException ex) {
-                Logger.getLogger(frmNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frmNhanVien1.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_btnSuaActionPerformed
@@ -290,11 +286,11 @@ public class frmNhanVien extends javax.swing.JFrame {
         String soDT = txtSDT.getText();
         Date ngaySinh = dtpNgSinh.getDate();
         String cCCD = txtCCCD.getText();
-         ET_NhanVien et;
-         
+        ET_NhanVien et;
+
         int row2 = tblNhanVien.getSelectedRow();
         if (row2 >= 0) {
-           et = new ET_NhanVien(maNV, ho, ten, diaChi, soDT, ngaySinh, cCCD);
+            et = new ET_NhanVien(maNV, ho, ten, diaChi, soDT, ngaySinh, cCCD);
             try {
                 if (bll.xoaNV(et)) {
                     JOptionPane.showMessageDialog(rootPane, "Xoá thành công");
@@ -304,13 +300,20 @@ public class frmNhanVien extends javax.swing.JFrame {
                 hienThiNV();
                 reset();
             } catch (SQLException ex) {
-                Logger.getLogger(frmNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frmNhanVien1.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn nhân viên");
         }
-
     }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        // TODO add your handling code here:
+        int kq = JOptionPane.showConfirmDialog(null, "Bạn có muốn thoát không", "Thông báo", JOptionPane.YES_NO_OPTION);
+        if (kq == 0) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_btnThoatActionPerformed
 
     private void tblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMouseClicked
         // TODO add your handling code here:
@@ -325,54 +328,6 @@ public class frmNhanVien extends javax.swing.JFrame {
         txtCCCD.setText(model.getValueAt(row, 6).toString());
         //JOptionPane.showMessageDialog(rootPane, model.getValueAt(row, 6).toString());
     }//GEN-LAST:event_tblNhanVienMouseClicked
-
-    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
-        // TODO add your handling code here:
-        int kq = JOptionPane.showConfirmDialog(null, "Bạn có muốn thoát không", "Thông báo", JOptionPane.YES_NO_OPTION);
-        if (kq == 0) {
-            System.exit(0);
-        }
-    }//GEN-LAST:event_btnThoatActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new frmNhanVien().setVisible(true);
-                } catch (Exception ex) {
-                    Logger.getLogger(frmNhanVien.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
-
     public void hienThi() {
         DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
         model.setColumnCount(0);

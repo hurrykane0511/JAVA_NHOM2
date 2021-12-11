@@ -124,7 +124,8 @@ public class frmChonTCDN extends javax.swing.JFrame {
 
     private void loginThuThuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginThuThuMouseClicked
         // TODO add your handling code here:
-        frmTrangChu fr = new frmTrangChu();
+        this.dispose();
+        frmDangNhap fr = new frmDangNhap();
         fr.setVisible(true);
     }//GEN-LAST:event_loginThuThuMouseClicked
 

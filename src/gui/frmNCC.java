@@ -1,9 +1,8 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package gui;
-
 import bll.BLL_NhaCungCap;
 import et.ET_NhaCungCap;
 import java.sql.ResultSet;
@@ -12,30 +11,70 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author yushu
  */
-public class frmNCC extends javax.swing.JFrame {
-
-    private BLL_NhaCungCap bll;
-    private int STT = 0;
+public class frmNCC extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form frmNCC
      */
-    public frmNCC() throws SQLException, Exception {
+     private BLL_NhaCungCap bll;
+    private int STT = 0;
+    public frmNCC() throws Exception {
         initComponents();
-        this.setLocationRelativeTo(null);
-        bll = new BLL_NhaCungCap();
+         bll = new BLL_NhaCungCap();
         txtMaNCC.setEditable(false);
         txtTenNCC.requestFocus();
         layMa();
         hienThi();
         hienThiNCC();
     }
+ public void hienThi() {
+        DefaultTableModel model = (DefaultTableModel) tbNCC.getModel();
+        model.setColumnCount(0);
+        model.setRowCount(0);
+        model.addColumn("Mã NCC");
+        model.addColumn("Tên NCC");
+        model.addColumn("Địa chỉ");
+        model.addColumn("Số ĐT");
+        tbNCC.setModel(model);
+    }
 
+    public void hienThiNCC() throws SQLException {
+        ResultSet rs = bll.layNCC();
+        DefaultTableModel model = (DefaultTableModel) tbNCC.getModel();
+        model.setNumRows(0);
+        while (rs.next()) {
+            Object[] col = new Object[4];
+            for (int i = 1; i <= 4; i++) {
+                col[i - 1] = rs.getObject(i);
+            }
+            model.addRow(col);
+        }
+    }
+
+    public void layMa() throws Exception {
+        ResultSet rs = bll.layNCC();
+        rs.last();
+        // JOptionPane.showMessageDialog(null, rs.getRow());
+        int row = rs.getRow();
+        if (row == 0) {
+            STT = 1;
+        } else {
+            rs.beforeFirst();
+            while (rs.next()) {
+                STT = Integer.parseInt(rs.getObject(1).toString().substring(3)) + 1;
+            }
+        }
+        String ma = String.format("%02d", STT);
+        txtMaNCC.setText("NCC" + ma);
+        txtTenNCC.setText("");
+        txtDiaChi.setText("");
+        txtSDT.setText("");
+        txtTenNCC.requestFocus();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,8 +84,6 @@ public class frmNCC extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txtMaNCC = new javax.swing.JTextField();
@@ -64,21 +101,6 @@ public class frmNCC extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txtSDT = new javax.swing.JTextField();
         btnMoi = new javax.swing.JButton();
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Mã NCC:");
@@ -171,7 +193,7 @@ public class frmNCC extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -246,7 +268,7 @@ public class frmNCC extends javax.swing.JFrame {
                     .addComponent(btnThem)
                     .addComponent(btnMoi))
                 .addGap(30, 30, 30)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -270,9 +292,9 @@ public class frmNCC extends javax.swing.JFrame {
         String diaChi = txtDiaChi.getText();
         String soDT = txtSDT.getText();
         if (maNCC.compareTo("") == 0
-                || tenNCC.compareTo("") == 0
-                || diaChi.compareTo("") == 0
-                || soDT.compareTo("") == 0) {
+            || tenNCC.compareTo("") == 0
+            || diaChi.compareTo("") == 0
+            || soDT.compareTo("") == 0) {
             JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
         } else {
             ET_NhaCungCap et = new ET_NhaCungCap(maNCC, tenNCC, diaChi, soDT);
@@ -291,12 +313,46 @@ public class frmNCC extends javax.swing.JFrame {
 
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(frmNCC.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frmNCC1.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
-                Logger.getLogger(frmNCC.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frmNCC1.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+        int dong = tbNCC.getSelectedRow();
+        String maNCC = tbNCC.getValueAt(dong, 0).toString();
+        String tenNCC = txtTenNCC.getText();
+        String diaChi = txtDiaChi.getText();
+        String soDT = txtSDT.getText();
+        ET_NhaCungCap et;
+        if (dong != -1) {
+            if (maNCC.compareTo("") == 0
+                || tenNCC.compareTo("") == 0
+                || diaChi.compareTo("") == 0
+                || soDT.compareTo("") == 0) {
+                JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
+            } else {
+
+                try {
+                    et = new ET_NhaCungCap(maNCC, tenNCC, diaChi, soDT);
+                    if (bll.suaNCC(et)) {
+                        JOptionPane.showMessageDialog(rootPane, "Thành công");
+                        layMa();
+                        hienThiNCC();
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "Không thành công");
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn nhà cung cấp");
+        }
+    }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
@@ -325,8 +381,13 @@ public class frmNCC extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn nhà cung cấp");
         }
-        
+
     }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_btnThoatActionPerformed
 
     private void tbNCCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNCCMouseClicked
         // TODO add your handling code here:
@@ -336,145 +397,17 @@ public class frmNCC extends javax.swing.JFrame {
         txtTenNCC.setText(model.getValueAt(row, 1).toString());
         txtDiaChi.setText(model.getValueAt(row, 2).toString());
         txtSDT.setText(model.getValueAt(row, 3).toString());
-
     }//GEN-LAST:event_tbNCCMouseClicked
-
-    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_btnThoatActionPerformed
-
-    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        // TODO add your handling code here:
-        int dong = tbNCC.getSelectedRow();
-        String maNCC = tbNCC.getValueAt(dong, 0).toString();
-        JOptionPane.showMessageDialog(null, maNCC);
-        String tenNCC = txtTenNCC.getText();
-        String diaChi = txtDiaChi.getText();
-        String soDT = txtSDT.getText();
-        ET_NhaCungCap et;
-        if (dong != -1) {
-            if (maNCC.compareTo("") == 0
-                    || tenNCC.compareTo("") == 0
-                    || diaChi.compareTo("") == 0
-                    || soDT.compareTo("") == 0) {
-                JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
-            } else {
-
-                try {
-                    et = new ET_NhaCungCap(maNCC, tenNCC, diaChi, soDT);
-                    if (bll.suaNCC(et)) {
-                        JOptionPane.showMessageDialog(rootPane, "Thành công");
-                        layMa();
-                        hienThiNCC();
-                    } else {
-                        JOptionPane.showMessageDialog(rootPane, "Không thành công");
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Vui lòng chọn nhà cung cấp");
-        }
-
-    }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
         try {
             // TODO add your handling code here:
             layMa();
         } catch (Exception ex) {
-            Logger.getLogger(frmDanhMuc.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frmDanhMuc1.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnMoiActionPerformed
 
-    public void hienThi() {
-        DefaultTableModel model = (DefaultTableModel) tbNCC.getModel();
-        model.setColumnCount(0);
-        model.setRowCount(0);
-        model.addColumn("Mã NCC");
-        model.addColumn("Tên NCC");
-        model.addColumn("Địa chỉ");
-        model.addColumn("Số ĐT");
-        tbNCC.setModel(model);
-    }
-
-    public void hienThiNCC() throws SQLException {
-        ResultSet rs = bll.layNCC();
-        DefaultTableModel model = (DefaultTableModel) tbNCC.getModel();
-        model.setNumRows(0);
-        while (rs.next()) {
-            Object[] col = new Object[4];
-            for (int i = 1; i <= 4; i++) {
-                col[i - 1] = rs.getObject(i);
-            }
-            model.addRow(col);
-        }
-    }
-
-    public void layMa() throws Exception {
-        ResultSet rs = bll.layNCC();
-        rs.last();
-        // JOptionPane.showMessageDialog(null, rs.getRow());
-        int row = rs.getRow();
-        if (row == 0) {
-            STT = 1;
-        } else {
-            rs.beforeFirst();
-            while (rs.next()) {
-                STT = Integer.parseInt(rs.getObject(1).toString().substring(3)) + 1;
-            }
-        }
-        String ma = String.format("%02d", STT);
-        txtMaNCC.setText("NCC" + ma);
-        txtTenNCC.setText("");
-        txtDiaChi.setText("");
-        txtSDT.setText("");
-        txtTenNCC.requestFocus();
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmNCC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmNCC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmNCC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmNCC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new frmNCC().setVisible(true);
-                } catch (Exception ex) {
-                    Logger.getLogger(frmNCC.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMoi;
@@ -488,9 +421,7 @@ public class frmNCC extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable tbNCC;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtMaNCC;

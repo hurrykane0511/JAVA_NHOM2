@@ -5,6 +5,13 @@
  */
 package gui;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author LENOVO
@@ -14,12 +21,34 @@ public class frmTrangChu extends javax.swing.JFrame {
     /**
      * Creates new form TrangChu
      */
+    private frmMuonSach frmMuonSach = null;
+    private frmNCC frmNCC = null;
+    private frmNXB frmNXB = null;
+    private frmNgonNgu frmNgonNgu = null;
+    private frmNhanVien frmNhanVien = null;
+    private frmNhapSach frmNhapSach = null;
+    private frmTaiKhoan frmTaiKhoan = null;
+    private frmTimKiem frmTimKiem = null;
+    private frmTraSach frmTraSach = null;
+    private frmDanhMuc frmDanhMuc = null;
+    private frmTheThuVien frmTheThuVien = null;
+
     public frmTrangChu() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Trang chủ");
-        this.setResizable(false);
-        this.setSize(1100, 650);
+        // Kích thước form trang chủ = kích thước màn hình 
+        Dimension mainDimension = Toolkit.getDefaultToolkit().getScreenSize();
+        // Lấy kích thước menuBar
+        Dimension menuBarDimension = menuBar.getSize();
+        // Khởi tạo kích thước cho desktopPane
+        Dimension dpDimension = new Dimension();
+        dpDimension.setSize(mainDimension.getWidth(), mainDimension.getHeight() - menuBarDimension.getHeight());
+        this.setMaximumSize(mainDimension);
+        dpMain.setMaximumSize(dpDimension);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//         this.setResizable(false);
+//        this.setSize(1100, 800);
     }
 
     /**
@@ -31,135 +60,398 @@ public class frmTrangChu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
+        dpMain = new javax.swing.JDesktopPane();
+        menuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        mnuDangXuat = new javax.swing.JMenuItem();
+        mnuThoat = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
+        mnuQL_NhapSach = new javax.swing.JMenuItem();
+        mnuQL_NhanVien = new javax.swing.JMenuItem();
+        mnuQL_TheTV = new javax.swing.JMenuItem();
+        mnuQL_DanhMuc = new javax.swing.JMenuItem();
+        mnuQL_NgonNgu = new javax.swing.JMenuItem();
+        mnuQL_NXB = new javax.swing.JMenuItem();
+        mnuNCC = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        mnuMuonSach = new javax.swing.JMenuItem();
+        mnuTraSach = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem13 = new javax.swing.JMenuItem();
-        jMenuItem14 = new javax.swing.JMenuItem();
+        mnuTimKiemSach = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Trang chủ");
 
-        jMenuBar1.setAlignmentX(1.5F);
-        jMenuBar1.setAlignmentY(2.0F);
-        jMenuBar1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        javax.swing.GroupLayout dpMainLayout = new javax.swing.GroupLayout(dpMain);
+        dpMain.setLayout(dpMainLayout);
+        dpMainLayout.setHorizontalGroup(
+            dpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 963, Short.MAX_VALUE)
+        );
+        dpMainLayout.setVerticalGroup(
+            dpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 574, Short.MAX_VALUE)
+        );
+
+        menuBar.setAlignmentX(1.5F);
+        menuBar.setAlignmentY(2.0F);
+        menuBar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jMenu1.setText("Hệ thống");
         jMenu1.setAlignmentX(1.0F);
         jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        jMenuItem3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jMenuItem3.setText("Đăng xuất");
-        jMenu1.add(jMenuItem3);
+        mnuDangXuat.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mnuDangXuat.setText("Đăng xuất");
+        mnuDangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuDangXuatActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnuDangXuat);
 
-        jMenuItem4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jMenuItem4.setText("Thoát");
-        jMenu1.add(jMenuItem4);
+        mnuThoat.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mnuThoat.setText("Thoát");
+        mnuThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuThoatActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnuThoat);
 
-        jMenuBar1.add(jMenu1);
+        menuBar.add(jMenu1);
 
         jMenu2.setText("Quản lý");
         jMenu2.setAlignmentX(1.0F);
         jMenu2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        jMenuItem1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jMenuItem1.setText("Nhập sách");
-        jMenu2.add(jMenuItem1);
+        mnuQL_NhapSach.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mnuQL_NhapSach.setText("Nhập sách");
+        mnuQL_NhapSach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuQL_NhapSachActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnuQL_NhapSach);
 
-        jMenuItem2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jMenuItem2.setText("Nhân viên");
-        jMenu2.add(jMenuItem2);
+        mnuQL_NhanVien.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mnuQL_NhanVien.setText("Nhân viên");
+        mnuQL_NhanVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuQL_NhanVienActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnuQL_NhanVien);
 
-        jMenuItem5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jMenuItem5.setText("Thẻ thư viện");
-        jMenu2.add(jMenuItem5);
+        mnuQL_TheTV.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mnuQL_TheTV.setText("Thẻ thư viện");
+        mnuQL_TheTV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuQL_TheTVActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnuQL_TheTV);
 
-        jMenuItem8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jMenuItem8.setText("Tác giả");
-        jMenu2.add(jMenuItem8);
+        mnuQL_DanhMuc.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mnuQL_DanhMuc.setText("Danh mục");
+        mnuQL_DanhMuc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuQL_DanhMucActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnuQL_DanhMuc);
 
-        jMenuItem9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jMenuItem9.setText("Danh mục");
-        jMenu2.add(jMenuItem9);
+        mnuQL_NgonNgu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mnuQL_NgonNgu.setText("Ngôn ngữ");
+        mnuQL_NgonNgu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuQL_NgonNguMouseClicked(evt);
+            }
+        });
+        mnuQL_NgonNgu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuQL_NgonNguActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnuQL_NgonNgu);
 
-        jMenuItem10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jMenuItem10.setText("Ngôn ngữ");
-        jMenu2.add(jMenuItem10);
+        mnuQL_NXB.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mnuQL_NXB.setText("Nhà xuất bản");
+        mnuQL_NXB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuQL_NXBActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnuQL_NXB);
 
-        jMenuItem11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jMenuItem11.setText("Nhà xuất bản");
-        jMenu2.add(jMenuItem11);
+        mnuNCC.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mnuNCC.setText("Nhà cung cấp");
+        mnuNCC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuNCCActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnuNCC);
 
-        jMenuItem12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jMenuItem12.setText("Nhà cung cấp");
-        jMenu2.add(jMenuItem12);
-
-        jMenuBar1.add(jMenu2);
+        menuBar.add(jMenu2);
 
         jMenu3.setText("Mượn-trả sách");
         jMenu3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        jMenuItem6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jMenuItem6.setText("Mượn sách");
-        jMenu3.add(jMenuItem6);
+        mnuMuonSach.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mnuMuonSach.setText("Mượn sách");
+        mnuMuonSach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuMuonSachActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnuMuonSach);
 
-        jMenuItem7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jMenuItem7.setText("Trả sách");
-        jMenu3.add(jMenuItem7);
+        mnuTraSach.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mnuTraSach.setText("Trả sách");
+        mnuTraSach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuTraSachActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnuTraSach);
 
-        jMenuBar1.add(jMenu3);
+        menuBar.add(jMenu3);
 
         jMenu4.setText("Tìm kiếm");
         jMenu4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        jMenuItem13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jMenuItem13.setText("Tìm sách");
-        jMenu4.add(jMenuItem13);
+        mnuTimKiemSach.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mnuTimKiemSach.setText("Tìm sách");
+        mnuTimKiemSach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuTimKiemSachActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnuTimKiemSach);
 
-        jMenuItem14.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jMenuItem14.setText("Thông tin độc giả");
-        jMenu4.add(jMenuItem14);
-
-        jMenuBar1.add(jMenu4);
+        menuBar.add(jMenu4);
 
         jMenu5.setText("Báo cáo");
         jMenu5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jMenuBar1.add(jMenu5);
+        menuBar.add(jMenu5);
 
         jMenu6.setText("Trợ giúp");
         jMenu6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jMenuBar1.add(jMenu6);
+        menuBar.add(jMenu6);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 963, Short.MAX_VALUE)
+            .addComponent(dpMain)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 574, Short.MAX_VALUE)
+            .addComponent(dpMain)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void mnuQL_DanhMucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuQL_DanhMucActionPerformed
+        // TODO add your handling code here:
+        if (frmDanhMuc == null || frmDanhMuc.isClosed()) {
+            frmDanhMuc = new frmDanhMuc();
+            dpMain.add(frmDanhMuc);
+            frmDanhMuc.setLocation(this.getWidth() / 2 - frmDanhMuc.getWidth() / 2, (this.getHeight() - 20) / 2 - frmDanhMuc.getHeight() / 2 - 20);
+            frmDanhMuc.setVisible(true);
+        } else {
+            frmDanhMuc.setLocation(this.getWidth() / 2 - frmDanhMuc.getWidth() / 2, (this.getHeight() - 20) / 2 - frmDanhMuc.getHeight() / 2 - 20);
+            frmDanhMuc.setVisible(true);
+            frmDanhMuc.toFront();
+        }
+    }//GEN-LAST:event_mnuQL_DanhMucActionPerformed
+
+    private void mnuThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuThoatActionPerformed
+        // TODO add your handling code here:
+        int kq = JOptionPane.showConfirmDialog(null, "Bạn có muốn thoát không?", "Thông báo", JOptionPane.YES_NO_OPTION);
+        if (kq == 0) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_mnuThoatActionPerformed
+
+    private void mnuDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuDangXuatActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        frmDangNhap frm = new frmDangNhap();
+        frm.setVisible(true);
+    }//GEN-LAST:event_mnuDangXuatActionPerformed
+
+    private void mnuQL_NhapSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuQL_NhapSachActionPerformed
+        // TODO add your handling code here:
+    if (frmNhapSach == null || frmNhapSach.isClosed()) {
+        try {
+            frmNhapSach = new frmNhapSach();
+        } catch (Exception ex) {
+            Logger.getLogger(frmTrangChu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            dpMain.add(frmNhapSach);
+            frmNhapSach.setLocation(this.getWidth() / 2 - frmNhapSach.getWidth() / 2, (this.getHeight() - 20) / 2 - frmNhapSach.getHeight() / 2 - 20);
+            frmNhapSach.setVisible(true);
+        } else {
+            frmNhapSach.setLocation(this.getWidth() / 2 - frmNhapSach.getWidth() / 2, (this.getHeight() - 20) / 2 - frmNhapSach.getHeight() / 2 - 20);
+            frmNhapSach.setVisible(true);
+            frmNhapSach.toFront();
+        }
+    }//GEN-LAST:event_mnuQL_NhapSachActionPerformed
+
+    private void mnuQL_NgonNguActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuQL_NgonNguActionPerformed
+        // TODO add your handling code here:
+        if (frmNgonNgu == null || frmNgonNgu.isClosed()) {
+            try {
+                frmNgonNgu = new frmNgonNgu();
+            } catch (Exception ex) {
+                Logger.getLogger(frmTrangChu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            dpMain.add(frmNgonNgu);
+            frmNgonNgu.setLocation(this.getWidth() / 2 - frmNgonNgu.getWidth() / 2, (this.getHeight() - 20) / 2 - frmNgonNgu.getHeight() / 2 - 20);
+            frmNgonNgu.setVisible(true);
+        } else {
+            frmNgonNgu.setLocation(this.getWidth() / 2 - frmNgonNgu.getWidth() / 2, (this.getHeight() - 20) / 2 - frmNgonNgu.getHeight() / 2 - 20);
+            frmNgonNgu.setVisible(true);
+            frmNgonNgu.toFront();
+        }
+    }//GEN-LAST:event_mnuQL_NgonNguActionPerformed
+
+    private void mnuQL_NgonNguMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuQL_NgonNguMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnuQL_NgonNguMouseClicked
+
+    private void mnuQL_NhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuQL_NhanVienActionPerformed
+        // TODO add your handling code here:
+         if (frmNhanVien == null || frmNhanVien.isClosed()) {
+            try {
+                frmNhanVien = new frmNhanVien();
+            } catch (Exception ex) {
+                Logger.getLogger(frmTrangChu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            dpMain.add(frmNhanVien);
+            frmNhanVien.setLocation(this.getWidth() / 2 - frmNhanVien.getWidth() / 2, (this.getHeight() - 20) / 2 - frmNhanVien.getHeight() / 2 - 20);
+            frmNgonNgu.setVisible(true);
+        } else {
+            frmNhanVien.setLocation(this.getWidth() / 2 - frmNhanVien.getWidth() / 2, (this.getHeight() - 20) / 2 - frmNhanVien.getHeight() / 2 - 20);
+            frmNhanVien.setVisible(true);
+            frmNhanVien.toFront();
+        }
+    }//GEN-LAST:event_mnuQL_NhanVienActionPerformed
+
+    private void mnuQL_TheTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuQL_TheTVActionPerformed
+        // TODO add your handling code here:
+         if (frmTheThuVien == null || frmTheThuVien.isClosed()) {
+            try {
+                frmTheThuVien = new frmTheThuVien();
+            } catch (Exception ex) {
+                Logger.getLogger(frmTrangChu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            dpMain.add(frmTheThuVien);
+            frmTheThuVien.setLocation(this.getWidth() / 2 - frmTheThuVien.getWidth() / 2, (this.getHeight() - 20) / 2 - frmTheThuVien.getHeight() / 2 - 20);
+            frmTheThuVien.setVisible(true);
+        } else {
+            frmTheThuVien.setLocation(this.getWidth() / 2 - frmTheThuVien.getWidth() / 2, (this.getHeight() - 20) / 2 - frmTheThuVien.getHeight() / 2 - 20);
+            frmTheThuVien.setVisible(true);
+            frmTheThuVien.toFront();
+        }
+    }//GEN-LAST:event_mnuQL_TheTVActionPerformed
+
+    private void mnuQL_NXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuQL_NXBActionPerformed
+        // TODO add your handling code here:
+         if (frmNXB == null || frmNXB.isClosed()) {
+            try {
+                frmNXB = new frmNXB();
+            } catch (Exception ex) {
+                Logger.getLogger(frmTrangChu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            dpMain.add(frmNXB);
+            frmNXB.setLocation(this.getWidth() / 2 - frmNXB.getWidth() / 2, (this.getHeight() - 20) / 2 - frmNXB.getHeight() / 2 - 20);
+            frmNXB.setVisible(true);
+        } else {
+            frmNXB.setLocation(this.getWidth() / 2 - frmNXB.getWidth() / 2, (this.getHeight() - 20) / 2 - frmNXB.getHeight() / 2 - 20);
+            frmNXB.setVisible(true);
+            frmNXB.toFront();
+        }
+    }//GEN-LAST:event_mnuQL_NXBActionPerformed
+
+    private void mnuNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuNCCActionPerformed
+        // TODO add your handling code here:
+        if (frmNCC == null || frmNCC.isClosed()) {
+            try {
+                frmNCC = new frmNCC();
+            } catch (Exception ex) {
+                Logger.getLogger(frmTrangChu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            dpMain.add(frmNCC);
+            frmNCC.setLocation(this.getWidth() / 2 - frmNCC.getWidth() / 2, (this.getHeight() - 20) / 2 - frmNCC.getHeight() / 2 - 20);
+            frmNCC.setVisible(true);
+        } else {
+            frmNCC.setLocation(this.getWidth() / 2 - frmNCC.getWidth() / 2, (this.getHeight() - 20) / 2 - frmNCC.getHeight() / 2 - 20);
+            frmNCC.setVisible(true);
+            frmNCC.toFront();
+        }
+    }//GEN-LAST:event_mnuNCCActionPerformed
+
+    private void mnuMuonSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuMuonSachActionPerformed
+        // TODO add your handling code here:
+        if (frmMuonSach == null || frmMuonSach.isClosed()) {
+            try {
+                frmMuonSach = new frmMuonSach();
+            } catch (Exception ex) {
+                Logger.getLogger(frmTrangChu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            dpMain.add(frmMuonSach);
+            frmMuonSach.setLocation(this.getWidth() / 2 - frmMuonSach.getWidth() / 2, (this.getHeight() - 20) / 2 - frmMuonSach.getHeight() / 2 - 20);
+            frmMuonSach.setVisible(true);
+        } else {
+            frmMuonSach.setLocation(this.getWidth() / 2 - frmMuonSach.getWidth() / 2, (this.getHeight() - 20) / 2 - frmMuonSach.getHeight() / 2 - 20);
+            frmMuonSach.setVisible(true);
+            frmMuonSach.toFront();
+        }
+    }//GEN-LAST:event_mnuMuonSachActionPerformed
+
+    private void mnuTraSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuTraSachActionPerformed
+        // TODO add your handling code here:
+//         if (frmTraSach == null || frmTraSach.isClosed()) {
+//            try {
+//                frmTraSach = new frmTraSach();
+//            } catch (Exception ex) {
+//                Logger.getLogger(frmTrangChu.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            dpMain.add(frmTraSach);
+//            frmTraSach.setLocation(this.getWidth() / 2 - frmTraSach.getWidth() / 2, (this.getHeight() - 20) / 2 - frmTraSach.getHeight() / 2 - 20);
+//            frmTraSach.setVisible(true);
+//        } else {
+//            frmTraSach.setLocation(this.getWidth() / 2 - frmTraSach.getWidth() / 2, (this.getHeight() - 20) / 2 - frmTraSach.getHeight() / 2 - 20);
+//            frmTraSach.setVisible(true);
+//            frmTraSach.toFront();
+//        }
+    }//GEN-LAST:event_mnuTraSachActionPerformed
+
+    private void mnuTimKiemSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuTimKiemSachActionPerformed
+        // TODO add your handling code here:
+        if (frmTimKiem == null || frmTimKiem.isClosed()) {
+            try {
+                frmTimKiem = new frmTimKiem();
+            } catch (Exception ex) {
+                Logger.getLogger(frmTrangChu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            dpMain.add(frmTimKiem);
+            frmTimKiem.setLocation(this.getWidth() / 2 - frmTimKiem.getWidth() / 2, (this.getHeight() - 20) / 2 - frmTimKiem.getHeight() / 2 - 20);
+            frmTimKiem.setVisible(true);
+        } else {
+            frmTimKiem.setLocation(this.getWidth() / 2 - frmTimKiem.getWidth() / 2, (this.getHeight() - 20) / 2 - frmTimKiem.getHeight() / 2 - 20);
+            frmTimKiem.setVisible(true);
+            frmTimKiem.toFront();
+        }
+    }//GEN-LAST:event_mnuTimKiemSachActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,13 +470,17 @@ public class frmTrangChu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmTrangChu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmTrangChu.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmTrangChu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmTrangChu.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmTrangChu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmTrangChu.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmTrangChu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmTrangChu.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -198,26 +494,25 @@ public class frmTrangChu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane dpMain;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenuItem mnuDangXuat;
+    private javax.swing.JMenuItem mnuMuonSach;
+    private javax.swing.JMenuItem mnuNCC;
+    private javax.swing.JMenuItem mnuQL_DanhMuc;
+    private javax.swing.JMenuItem mnuQL_NXB;
+    private javax.swing.JMenuItem mnuQL_NgonNgu;
+    private javax.swing.JMenuItem mnuQL_NhanVien;
+    private javax.swing.JMenuItem mnuQL_NhapSach;
+    private javax.swing.JMenuItem mnuQL_TheTV;
+    private javax.swing.JMenuItem mnuThoat;
+    private javax.swing.JMenuItem mnuTimKiemSach;
+    private javax.swing.JMenuItem mnuTraSach;
     // End of variables declaration//GEN-END:variables
 }

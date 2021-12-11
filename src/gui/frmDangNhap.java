@@ -19,12 +19,12 @@ public class frmDangNhap extends javax.swing.JFrame {
     /**
      * Creates new form frmChonTuCachDN
      */
-    private DAL_TaiKhoan dal;
+    private DAL_TaiKhoan dal = new DAL_TaiKhoan();
 
     public frmDangNhap() {
         initComponents();
         this.setLocationRelativeTo(null);
-        dal = new DAL_TaiKhoan();
+       
     }
 
     /**
@@ -43,7 +43,7 @@ public class frmDangNhap extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtTenDN = new javax.swing.JTextField();
         txtMK = new javax.swing.JPasswordField();
-        btnThoat = new javax.swing.JButton();
+        btnQuayVe = new javax.swing.JButton();
         btnDN = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -83,11 +83,11 @@ public class frmDangNhap extends javax.swing.JFrame {
 
         txtMK.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        btnThoat.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnThoat.setText("Thoát");
-        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+        btnQuayVe.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnQuayVe.setText("Quay Về");
+        btnQuayVe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThoatActionPerformed(evt);
+                btnQuayVeActionPerformed(evt);
             }
         });
 
@@ -117,7 +117,7 @@ public class frmDangNhap extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnQuayVe, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnDN))
                             .addComponent(txtMK, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -141,7 +141,7 @@ public class frmDangNhap extends javax.swing.JFrame {
                         .addGap(13, 13, 13)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnQuayVe, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDN, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
         );
@@ -182,7 +182,7 @@ public class frmDangNhap extends javax.swing.JFrame {
                             if (rs.getObject(4).toString().compareTo("ThuKho") == 0) {
                                 frmTrangChu frmTC = new frmTrangChu();
                                 frmTC.setVisible(true);
-                            } 
+                            }
                         }
                     }
                 } else {
@@ -196,13 +196,16 @@ public class frmDangNhap extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDNActionPerformed
 
-    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+    private void btnQuayVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayVeActionPerformed
         // TODO add your handling code here:
-        int kq = JOptionPane.showConfirmDialog(null, "Bạn có muốn thoát không", "Thông báo", JOptionPane.YES_NO_OPTION);
-        if (kq == 0) {
-            System.exit(0);
-        }
-    }//GEN-LAST:event_btnThoatActionPerformed
+//        int kq = JOptionPane.showConfirmDialog(null, "Bạn có muốn thoát không", "Thông báo", JOptionPane.YES_NO_OPTION);
+//        if (kq == 0) {
+//            System.exit(0);
+//        }
+        this.dispose();
+        frmChonTCDN frm = new frmChonTCDN();
+        frm.setVisible(true);
+    }//GEN-LAST:event_btnQuayVeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,7 +245,7 @@ public class frmDangNhap extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDN;
-    private javax.swing.JButton btnThoat;
+    private javax.swing.JButton btnQuayVe;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -1,9 +1,8 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package gui;
-
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import bll.BLL_TaiKhoan;
@@ -12,23 +11,20 @@ import et.ET_TaiKhoan;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 /**
  *
  * @author yushu
  */
-public class frmTaiKhoan extends javax.swing.JFrame {
+public class frmTaiKhoan extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form frmTaiKhoan
      */
     private BLL_TaiKhoan bll;
     private int STT;
-
     public frmTaiKhoan() throws Exception {
         initComponents();
-        this.setLocationRelativeTo(null);
-        this.setTitle("Tài khoản");
+         this.setTitle("Tài khoản");
         bll = new BLL_TaiKhoan();
         txtMaTK.setEditable(false);
         layMa();
@@ -64,8 +60,6 @@ public class frmTaiKhoan extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txtMaTK = new javax.swing.JTextField();
         btnMoi = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -221,7 +215,7 @@ public class frmTaiKhoan extends javax.swing.JFrame {
                     }
                 }
             } catch (Exception ex) {
-                Logger.getLogger(frmTaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frmTaiKhoan1.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_btnThemActionPerformed
@@ -254,7 +248,7 @@ public class frmTaiKhoan extends javax.swing.JFrame {
                     }
                 }
             } catch (Exception ex) {
-                Logger.getLogger(frmTaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frmTaiKhoan1.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_btnSuaActionPerformed
@@ -281,7 +275,7 @@ public class frmTaiKhoan extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(rootPane, "Xóa không thành công");
                     }
                 } catch (Exception ex) {
-                    Logger.getLogger(frmTaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(frmTaiKhoan1.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         } else {
@@ -312,50 +306,11 @@ public class frmTaiKhoan extends javax.swing.JFrame {
         try {
             layMa();
         } catch (Exception ex) {
-           JOptionPane.showMessageDialog(rootPane, ex);
+            JOptionPane.showMessageDialog(rootPane, ex);
         }
     }//GEN-LAST:event_btnMoiActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmTaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmTaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmTaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmTaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new frmTaiKhoan().setVisible(true);
-                } catch (Exception ex) {
-                    Logger.getLogger(frmTaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
-
-    public void hienThi() {
+  public void hienThi() {
         DefaultTableModel model = (DefaultTableModel) tblTaiKhoan.getModel();
         model.setRowCount(0);
         model.setColumnCount(0);
@@ -410,7 +365,6 @@ public class frmTaiKhoan extends javax.swing.JFrame {
         txtMaTK.setText("TK" + ma);
         reset();
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMoi;
