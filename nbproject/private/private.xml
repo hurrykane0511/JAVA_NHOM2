@@ -3,13 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/HK3/JAVA/Tuân%2014/Nhom2/Nhom2/src/gui/frmDangNhap.java</file>
-            <file>file:/D:/HK3/JAVA/Tuân%2014/Nhom2/Nhom2/src/dal/DAL_NXB.java</file>
-            <file>file:/D:/HK3/JAVA/Tuân%2014/Nhom2/Nhom2/src/dal/DAL_TaiKhoan.java</file>
-            <file>file:/D:/HK3/JAVA/Tuân%2014/Nhom2/Nhom2/src/gui/frmTraSach.java</file>
-            <file>file:/D:/HK3/JAVA/Tuân%2014/Nhom2/Nhom2/src/gui/frmNXB.java</file>
-            <file>file:/D:/HK3/JAVA/Tuân%2014/Nhom2/Nhom2/src/gui/frmTaiKhoan.java</file>
-            <file>file:/D:/HK3/JAVA/Tuân%2014/Nhom2/Nhom2/src/gui/frmNgonNgu.java</file>
+            <file>file:/E:/data/Trí/java/DoAn/ver2/JAVA_NHOM2/src/dal/DAL_NhanVien.java</file>
+            <file>file:/E:/data/Trí/java/DoAn/ver2/JAVA_NHOM2/src/bll/BLL_Sach.java</file>
+            <file>file:/E:/data/Trí/java/DoAn/ver2/JAVA_NHOM2/src/gui/frmNhapSach.java</file>
+            <file>file:/E:/data/Trí/java/DoAn/ver2/JAVA_NHOM2/src/dal/DAL_TacGia.java</file>
+            <file>file:/E:/data/Trí/java/DoAn/ver2/JAVA_NHOM2/src/bll/BLL_ChiTietHD.java</file>
+            <file>file:/E:/data/Trí/java/DoAn/ver2/JAVA_NHOM2/src/bll/BLL_NXB.java</file>
+            <file>file:/E:/data/Trí/java/DoAn/ver2/JAVA_NHOM2/src/bll/BLL_TacGia.java</file>
+            <file>file:/E:/data/Trí/java/DoAn/ver2/JAVA_NHOM2/src/dal/DAL_NXB.java</file>
         </group>
     </open-files>
 </project-private>
