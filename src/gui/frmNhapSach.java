@@ -57,6 +57,7 @@ public class frmNhapSach extends javax.swing.JFrame {
         bllHD = new BLL_HoaDon();
         bllNCC = new BLL_NhaCungCap();
         bllCTHH = new BLL_ChiTietHD();
+        bllNV = new BLL_NhanVien();
         AutoCompleteDecorator.decorate(cbbDM);
         AutoCompleteDecorator.decorate(cbbNN);
         AutoCompleteDecorator.decorate(cbbNXB);
@@ -90,15 +91,11 @@ public class frmNhapSach extends javax.swing.JFrame {
 
     public String themCTHH() throws Exception {
         ResultSet rs = bllCTHH.layDS();
-        JOptionPane.showConfirmDialog(null, "hehe");
         rs.last();
-        JOptionPane.showConfirmDialog(null, "last");
         int row = rs.getRow();
         if (row == 0) {
             STT = 1;
-            JOptionPane.showConfirmDialog(null, "true");
         } else {
-            JOptionPane.showConfirmDialog(null, "false");
             rs.beforeFirst();
             while (rs.next()) {
                 STT = Integer.parseInt(rs.getObject(1).toString().substring(2)) + 1;
@@ -259,6 +256,11 @@ public class frmNhapSach extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblDS.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDSMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblDS);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 460, 990, 240));
@@ -351,15 +353,13 @@ public class frmNhapSach extends javax.swing.JFrame {
                 if (bllHD.checkTonTai(mahd)) {
                     JOptionPane.showMessageDialog(null, "Mã hoá đơn đã tồn tại");
                 } else {
-//                    JOptionPane.showMessageDialog(null, nv);
-//                    if (bllNV.checkTT(nv)) {
-//                        JOptionPane.showMessageDialog(null, "NV đơn đã tồn tại");
+                    JOptionPane.showMessageDialog(null, nv);
+                    if (bllNV.checkTT(nv)) {
                         if (bllTD.checkTonTai(maTD)) {
                             maTD = bllTD.layMa(maTD);
-                            
+
                         } else {
                             maTD = themTD(txtTacGia.getText());
-
                         }
                         if (bll.checkTonTai(maSach) == true) {
                             int tong = bll.laySLSach(txtMaSach.getText()) + Integer.parseInt(txtSoLuong.getText());
@@ -394,15 +394,12 @@ public class frmNhapSach extends javax.swing.JFrame {
                             ET_HoaDon HDon = new ET_HoaDon(mahd, nv, maNCC);
                             String maCT = themCTHH();
                             ET_ChiTietHD CT = new ET_ChiTietHD(maCT, Integer.parseInt(sl), mahd, maSach);
-                            JOptionPane.showConfirmDialog(null, maCT);
-                            JOptionPane.showConfirmDialog(null, mahd);
-
                             bllHD.themHoaDon(HDon);
                             bllCTHH.themChiTietHD(CT);
                         }
-//                    } else {
-//                        JOptionPane.showMessageDialog(null, "Mã nhân viên không tồn tại");
-//                    }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Mã nhân viên không tồn tại");
+                    }
                 }
             } catch (Exception ex) {
                 Logger.getLogger(frmNhapSach.class.getName()).log(Level.SEVERE, null, ex);
@@ -417,6 +414,10 @@ public class frmNhapSach extends javax.swing.JFrame {
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_btnThoatActionPerformed
+
+    private void tblDSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblDSMouseClicked
 
     /**
      * @param args the command line arguments
@@ -505,6 +506,7 @@ public class frmNhapSach extends javax.swing.JFrame {
             cbbNN.addItem(rs.getString("name"));
         }
     }
+
     public void comboboxNCC() throws Exception {
         bllNCC = new BLL_NhaCungCap();
         cbbNCC.removeAllItems();
