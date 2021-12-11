@@ -349,23 +349,27 @@ public class frmTheThuVien extends javax.swing.JFrame {
         String CCCD = txtCCCD.getText();
         ET_TheThuVien et;
         ET_DocGia etdg;
-        if (txtMaDocGia.getText().compareTo("") > 0 || txtTen.getText().compareTo("") > 0 || txtHo.getText().compareTo("") > 0 || txtDiaChi.getText().compareTo("") > 0 || txtCCCD.getText().compareTo("") > 0 ) {
-            
-             try {
-                if( bllDG.checkTT(CCCD)== true ){
-                    JOptionPane.showMessageDialog(null, "Độc giả đã tồn tại");
-                }else{
-                    if(bllThe.checkTT(maThe) == true)
-                    {
-                        JOptionPane.showMessageDialog(null, "Thẻ đã tồn tại");
-                    }else{
-                        etdg = new ET_DocGia(maDG, ho, ten, ngaySinh, gioiTinh,CCCD,diaChi , trangThaiThe);
-                        et = new ET_TheThuVien(maThe,maDG,slSach,nhanVien, tinhTrang);              
-                        if (bllDG.themDG(etdg) == true ) {
+        if (maDG.compareTo("") == 0 || maThe.compareTo("") == 0 || ten.compareTo("") == 0 || ho.compareTo("") == 0 || diaChi.compareTo("") == 0 || CCCD.compareTo("") == 0) {
+            JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
+
+        } else {
+            try {
+                if (bllThe.checkTT(maThe) == true) {
+                    JOptionPane.showMessageDialog(null, "Thẻ đã tồn tại");
+                     reset();
+                } else {
+                    if (bllDG.checkTT(maDG) == true) {
+                        JOptionPane.showMessageDialog(null, "Độc giả đã tồn tại");
+                         reset();
+                    } else {
+                        etdg = new ET_DocGia(maDG, ho, ten, ngaySinh, gioiTinh, CCCD, diaChi, trangThaiThe);
+                        et = new ET_TheThuVien(maThe, maDG, slSach, nhanVien, tinhTrang);
+                        if (bllDG.themDG(etdg) == true) {
                             JOptionPane.showMessageDialog(rootPane, "Thêm thành công");
-                           
+
                         } else {
                             JOptionPane.showMessageDialog(rootPane, "Thêm không thành công");
+                             reset();
                         }
                         bllThe.themThe(et);
                         reset();
@@ -375,8 +379,6 @@ public class frmTheThuVien extends javax.swing.JFrame {
             } catch (Exception ex) {
                 Logger.getLogger(frmTheThuVien.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else {
-           JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
         }
        
     }//GEN-LAST:event_btnThemActionPerformed
