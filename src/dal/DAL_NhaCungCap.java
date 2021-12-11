@@ -25,7 +25,8 @@ public class DAL_NhaCungCap {
         Connection conn = null;
         try {
             conn = DatabaseUtil.getConnection();
-            Statement st = conn.createStatement();
+             Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
             String sql = "select * from suppliers";
             rs = st.executeQuery(sql);
         } catch (Exception e) {
@@ -67,13 +68,13 @@ public class DAL_NhaCungCap {
         }
         return (row > 0);
     }
-      public Boolean xoaNCC(ET_NhaCungCap et) throws SQLException {
+      public Boolean xoaNCC(String maNCC) throws SQLException {
         Boolean kq = false;
         Connection conn = null;
         try {
             conn = DatabaseUtil.getConnection();
             Statement st = conn.createStatement();
-            String sql = "delete from suppliers where id_supplier = '" + et.getMaNCC()+"'";
+            String sql = "delete from suppliers where id_supplier = '" + maNCC+"'";
             if (st.executeUpdate(sql) > 0) {
                 kq = true;
             }

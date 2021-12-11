@@ -12,8 +12,8 @@ import bll.Bll_CapNhatSach;
 import et.ET_Sach;
 import bll.BLL_NXB;
 import et.ET_NXB;
-import bll.BLL_NgonNgu1;
-import et.ET_NgonNgu1;
+import bll.BLL_NgonNgu;
+import et.ET_NgonNgu;
 import bll.BLL_TheLoai;
 import et.ET_TheLoai;
 import bll.BLL_TacGia;
@@ -31,7 +31,7 @@ public class frmCapNhatSach extends javax.swing.JFrame {
 
     private Bll_CapNhatSach bll;
     private BLL_NXB bllNXB;
-    private BLL_NgonNgu1 bllNN;
+    private BLL_NgonNgu bllNN;
     private BLL_TheLoai bllTL;
     private BLL_TacGia bllTG;
 
@@ -389,9 +389,9 @@ public class frmCapNhatSach extends javax.swing.JFrame {
     }
 
     public void comboboxNN() throws Exception {
-        bllNN = new BLL_NgonNgu1();
+        bllNN = new BLL_NgonNgu();
         cbNgonNgu.removeAllItems();
-        ResultSet rs = bllNN.layDS();
+        ResultSet rs = bllNN.layNgonNgu();
         while (rs.next()) {
             cbNgonNgu.addItem(rs.getString("title"));
         }

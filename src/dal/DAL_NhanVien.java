@@ -110,5 +110,33 @@ public class DAL_NhanVien {
         //conn.close();
         return kq;
     }
+     public String layMaNV(String tenNV) throws Exception {
+        Connection conn = null;
+        conn = DatabaseUtil.getConnection();
+        ResultSet rs = null;
+        Statement st = conn.createStatement();
+        String sql = "select * from staffs where firstname = '"+tenNV+"' limit 1";
+        rs = st.executeQuery(sql);
+        String ma = "";
+        while (rs.next()) {
+            ma = rs.getObject(1).toString();
+            break;
+        }
+        return ma;
+    }
+    public String layTen(String maNV) throws Exception {
+        Connection conn = null;
+        conn = DatabaseUtil.getConnection();
+        ResultSet rs = null;
+        Statement st = conn.createStatement();
+        String sql = "select * from staffs where id_staff = '"+maNV+"' limit 1";
+        rs = st.executeQuery(sql);
+        String ten = "";
+        while (rs.next()) {
+            ten = rs.getObject(2).toString();
+            break;
+        }
+        return ten;
+    }
 
 }

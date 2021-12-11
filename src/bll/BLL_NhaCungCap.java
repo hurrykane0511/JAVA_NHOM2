@@ -25,8 +25,8 @@ public class BLL_NhaCungCap {
     public Boolean themNCC(ET_NhaCungCap et) throws SQLException, Exception {
         return dal.themNCC(et);
     }
-     public Boolean xoaNCC(ET_NhaCungCap et) throws SQLException {
-        return dal.xoaNCC(et);
+     public Boolean xoaNCC(String maNCC) throws SQLException {
+        return dal.xoaNCC(maNCC);
     }
       public Boolean suaNCC(ET_NhaCungCap et) throws SQLException {
         return dal.suaNCC(et);

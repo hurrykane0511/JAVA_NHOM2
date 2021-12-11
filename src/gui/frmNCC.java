@@ -20,14 +20,18 @@ import javax.swing.table.DefaultTableModel;
 public class frmNCC extends javax.swing.JFrame {
 
     private BLL_NhaCungCap bll;
+    private int STT = 0;
 
     /**
      * Creates new form frmNCC
      */
-    public frmNCC() throws SQLException {
+    public frmNCC() throws SQLException, Exception {
         initComponents();
         this.setLocationRelativeTo(null);
         bll = new BLL_NhaCungCap();
+        txtMaNCC.setEditable(false);
+        txtTenNCC.requestFocus();
+        layMa();
         hienThi();
         hienThiNCC();
     }
@@ -59,6 +63,7 @@ public class frmNCC extends javax.swing.JFrame {
         txtDiaChi = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtSDT = new javax.swing.JTextField();
+        btnMoi = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -153,43 +158,60 @@ public class frmNCC extends javax.swing.JFrame {
 
         txtSDT.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        btnMoi.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_new_26px_4.png"))); // NOI18N
+        btnMoi.setText("MỚI");
+        btnMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(87, Short.MAX_VALUE)
-                .addComponent(btnThem)
-                .addGap(40, 40, 40)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addGap(27, 27, 27)
                 .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(45, 45, 45)
                 .addComponent(btnThoat)
-                .addGap(73, 73, 73))
+                .addGap(22, 22, 22))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtMaNCC, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                            .addComponent(txtTenNCC))
-                        .addGap(39, 39, 39)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel7))
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtDiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-                            .addComponent(txtSDT)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(245, 245, 245)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(btnMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtMaNCC, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                                    .addComponent(txtTenNCC))
+                                .addGap(39, 39, 39)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel7))
+                                .addGap(26, 26, 26)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtDiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                                    .addComponent(txtSDT)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(btnThem)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -221,7 +243,8 @@ public class frmNCC extends javax.swing.JFrame {
                     .addComponent(btnSua)
                     .addComponent(btnThoat)
                     .addComponent(btnXoa)
-                    .addComponent(btnThem))
+                    .addComponent(btnThem)
+                    .addComponent(btnMoi))
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -259,10 +282,13 @@ public class frmNCC extends javax.swing.JFrame {
                 } else {
                     if (bll.themNCC(et)) {
                         JOptionPane.showMessageDialog(rootPane, "Thành công");
+                        STT++;
+                        layMa();
+                        hienThiNCC();
                     } else {
                         JOptionPane.showMessageDialog(rootPane, "Không thành công");
                     }
-                    hienThiNCC();
+
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(frmNCC.class.getName()).log(Level.SEVERE, null, ex);
@@ -274,27 +300,32 @@ public class frmNCC extends javax.swing.JFrame {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
-        String maNCC = txtMaNCC.getText();
-        String tenNCC = txtTenNCC.getText();
-        String diaChi = txtDiaChi.getText();
-        String soDT = txtSDT.getText();
 
         int row = tbNCC.getSelectedRow();
-        if (row >= 0) {
-            ET_NhaCungCap et = new ET_NhaCungCap(maNCC, tenNCC, diaChi, soDT);
+        if (row != -1) {
             try {
-                if (bll.xoaNCC(et)) {
-                    JOptionPane.showMessageDialog(rootPane, "Thành công");
-                } else {
-                    JOptionPane.showMessageDialog(rootPane, "Không thành công");
+                String maNCC = txtMaNCC.getText();
+                String tenNCC = txtTenNCC.getText().compareTo("") > 0 ? txtTenNCC.getText() : "";
+                String diaChi = txtDiaChi.getText().compareTo("") > 0 ? txtDiaChi.getText() : "";
+                String soDT = txtSDT.getText().compareTo("") > 0 ? txtSDT.getText() : "";
+                if (maNCC != "" && tenNCC != "" && diaChi != "" && soDT != "") {
+                    ET_NhaCungCap et = new ET_NhaCungCap(maNCC, tenNCC, diaChi, soDT);
+
+                    if (bll.xoaNCC(maNCC)) {
+                        JOptionPane.showMessageDialog(rootPane, "Thành công");
+                        layMa();
+                        hienThiNCC();
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "Không thành công");
+                    }
                 }
-                hienThiNCC();
-            } catch (SQLException ex) {
-                Logger.getLogger(frmNCC.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
         } else {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn nhà cung cấp");
         }
+        
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void tbNCCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNCCMouseClicked
@@ -322,32 +353,41 @@ public class frmNCC extends javax.swing.JFrame {
         String diaChi = txtDiaChi.getText();
         String soDT = txtSDT.getText();
         ET_NhaCungCap et;
-        if (dong >= 0) {
-        if (maNCC.compareTo("") == 0
-                || tenNCC.compareTo("") == 0
-                || diaChi.compareTo("") == 0
-                || soDT.compareTo("") == 0) {
-            JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
-        } else {
+        if (dong != -1) {
+            if (maNCC.compareTo("") == 0
+                    || tenNCC.compareTo("") == 0
+                    || diaChi.compareTo("") == 0
+                    || soDT.compareTo("") == 0) {
+                JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
+            } else {
 
-            try {
-                et = new ET_NhaCungCap(maNCC, tenNCC, diaChi, soDT);
-                if (bll.suaNCC(et)) {
-                    JOptionPane.showMessageDialog(rootPane, "Thành công");
-                } else {
-                    JOptionPane.showMessageDialog(rootPane, "Không thành công");
+                try {
+                    et = new ET_NhaCungCap(maNCC, tenNCC, diaChi, soDT);
+                    if (bll.suaNCC(et)) {
+                        JOptionPane.showMessageDialog(rootPane, "Thành công");
+                        layMa();
+                        hienThiNCC();
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "Không thành công");
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
-                hienThiNCC();
-            } catch (SQLException ex) {
-                Logger.getLogger(frmNhanVien.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn nhà cung cấp");
         }
-        }else
-        {
-             JOptionPane.showMessageDialog(null, "Vui lòng chọn nhà cung cấp");
-        }
-        
+
     }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
+        try {
+            // TODO add your handling code here:
+            layMa();
+        } catch (Exception ex) {
+            Logger.getLogger(frmDanhMuc.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnMoiActionPerformed
 
     public void hienThi() {
         DefaultTableModel model = (DefaultTableModel) tbNCC.getModel();
@@ -371,6 +411,27 @@ public class frmNCC extends javax.swing.JFrame {
             }
             model.addRow(col);
         }
+    }
+
+    public void layMa() throws Exception {
+        ResultSet rs = bll.layNCC();
+        rs.last();
+        // JOptionPane.showMessageDialog(null, rs.getRow());
+        int row = rs.getRow();
+        if (row == 0) {
+            STT = 1;
+        } else {
+            rs.beforeFirst();
+            while (rs.next()) {
+                STT = Integer.parseInt(rs.getObject(1).toString().substring(3)) + 1;
+            }
+        }
+        String ma = String.format("%02d", STT);
+        txtMaNCC.setText("NCC" + ma);
+        txtTenNCC.setText("");
+        txtDiaChi.setText("");
+        txtSDT.setText("");
+        txtTenNCC.requestFocus();
     }
 
     /**
@@ -416,6 +477,7 @@ public class frmNCC extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnMoi;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnThoat;
