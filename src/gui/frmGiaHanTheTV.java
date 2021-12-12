@@ -4,6 +4,12 @@
  */
 package gui;
 
+import javax.swing.JOptionPane;
+import bll.BLL_TheThuVien;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author yushu
@@ -13,8 +19,11 @@ public class frmGiaHanTheTV extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmGiaHanTheTV
      */
-    public frmGiaHanTheTV() {
+    private BLL_TheThuVien bll;
+
+    public frmGiaHanTheTV() throws Exception {
         initComponents();
+        bll = new BLL_TheThuVien();
     }
 
     /**
@@ -29,21 +38,22 @@ public class frmGiaHanTheTV extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtMaDM = new javax.swing.JTextField();
+        txtMaThe = new javax.swing.JTextField();
         btnSua = new javax.swing.JButton();
         btnThoat = new javax.swing.JButton();
-        txtTenDM = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblDanhMuc = new javax.swing.JTable();
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("PHIẾU THU TIỀN");
+        jLabel1.setText("GIA HẠN THẺ");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel5.setText("Mã DM:");
+        jLabel5.setText("Mã thẻ:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, -1));
 
-        txtMaDM.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtMaThe.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanel1.add(txtMaThe, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 230, 30));
 
         btnSua.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_edit_26px.png"))); // NOI18N
@@ -53,6 +63,7 @@ public class frmGiaHanTheTV extends javax.swing.JInternalFrame {
                 btnSuaActionPerformed(evt);
             }
         });
+        jPanel1.add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, 176, -1));
 
         btnThoat.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_shutdown_26px.png"))); // NOI18N
@@ -62,92 +73,15 @@ public class frmGiaHanTheTV extends javax.swing.JInternalFrame {
                 btnThoatActionPerformed(evt);
             }
         });
-
-        txtTenDM.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel6.setText("Tên DM:");
-
-        tblDanhMuc.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        tblDanhMuc.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Mã danh mục", "Tên danh mục"
-            }
-        ));
-        tblDanhMuc.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblDanhMucMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(tblDanhMuc);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel5)
-                .addGap(36, 36, 36)
-                .addComponent(txtMaDM, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(40, 40, 40)
-                .addComponent(txtTenDM, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(134, 134, 134))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(218, 218, 218)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 777, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(46, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(16, 16, 16)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMaDM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTenDM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel5))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(btnThoat)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(179, 179, 179)
-                        .addComponent(btnSua)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
+        jPanel1.add(btnThoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 154, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,26 +93,25 @@ public class frmGiaHanTheTV extends javax.swing.JInternalFrame {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-        int row = tblDanhMuc.getSelectedRow();
-        if (row != -1) {
+        if (txtMaThe.getText().compareTo("") > 0) {
             try {
-                String maDM = txtMaDM.getText();
-                if (txtTenDM.getText().compareTo("") > 0) {
-                    String tenDM = txtTenDM.getText();
-                    ET_DanhMuc et = new ET_DanhMuc(maDM, tenDM);
-                    if (bll.suaDM(et)) {
-                        JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
-                        reset();
+                if (bll.checkTT(txtMaThe.getText())) {
+                    JOptionPane.showMessageDialog(rootPane, txtMaThe);
+                    if (bll.giaHan(txtMaThe.getText())) {
+                        JOptionPane.showConfirmDialog(null, "Gia hạn thành công");
                     } else {
-                        JOptionPane.showMessageDialog(rootPane, "Sửa không thành công");
+                        JOptionPane.showMessageDialog(rootPane, "Gia hạn không thành công");
                     }
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Không tồn tại mã thư viện mày");
                 }
+            } catch (SQLException ex) {
+                Logger.getLogger(frmGiaHanTheTV.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
-                ex.printStackTrace();
+                Logger.getLogger(frmGiaHanTheTV.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn danh mục để sửa");
         }
+
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
@@ -189,25 +122,13 @@ public class frmGiaHanTheTV extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnThoatActionPerformed
 
-    private void tblDanhMucMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhMucMouseClicked
-        // TODO add your handling code here:
-        int row = tblDanhMuc.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel) tblDanhMuc.getModel();
-        txtMaDM.setText(model.getValueAt(row, 0).toString());
-        txtTenDM.setText(model.getValueAt(row, 1).toString());
-    }//GEN-LAST:event_tblDanhMucMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThoat;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tblDanhMuc;
-    private javax.swing.JTextField txtMaDM;
-    private javax.swing.JTextField txtTenDM;
+    private javax.swing.JTextField txtMaThe;
     // End of variables declaration//GEN-END:variables
 }

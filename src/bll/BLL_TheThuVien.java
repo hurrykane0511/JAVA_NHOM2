@@ -37,5 +37,8 @@ public class BLL_TheThuVien {
     public Boolean checkTT(String ma) throws SQLException {
         return dal.checkTonTai(ma);
     }
-
+    
+      public Boolean giaHan(String ma) throws SQLException, Exception {
+        return dal.giaHanTheThuVien(ma);
+    }
 }

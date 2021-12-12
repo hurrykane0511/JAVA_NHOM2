@@ -7,6 +7,7 @@ package dal;
 
 import et.ET_TheThuVien;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -85,13 +86,14 @@ public class DAL_TheThuVien {
         return (row > 0);
     }
 
-  public Boolean giaHanTheThuVien(ET_TheThuVien et) throws SQLException, Exception {
+  public Boolean giaHanTheThuVien(String maThe) throws SQLException, Exception {
         Boolean kq = false;
         Connection conn = null;
         try {
             conn = DatabaseUtil.getConnection();
             Statement st = conn.createStatement();
-            String sql = "UPDATE member_card SET expiration_date = '"+et.getNgayHetHan()+" WHERE id_lib_card = '"+et.getMaThe();
+            long millis = System.currentTimeMillis();
+            String sql = "UPDATE member_card SET expiration_date = '"+new java.sql.Date(millis)+"' WHERE id_lib_card = '"+maThe+"'";
             if (st.executeUpdate(sql) > 0) {
                 kq = true;
             }
@@ -101,6 +103,4 @@ public class DAL_TheThuVien {
         //conn.close();
         return kq;
     }
-
-  
 }
