@@ -177,6 +177,11 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
         btnThoat.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_shutdown_26px.png"))); // NOI18N
         btnThoat.setText("THOÁT");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -377,11 +382,8 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
         try {
             // TODO add your handling code here:
             if (!bll_muonsach.HetHan(txtMaDocGia.getText())) {
-                int reply = JOptionPane.showConfirmDialog(null, "Thẻ đã hết hạn, bạn có muốn gia hạn hong", "Thông báo", JOptionPane.YES_NO_OPTION);
+                JOptionPane.showMessageDialog(null, "Thẻ đã hết hạn, vui lòng gian hạn thêm", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
 
-                if (reply == JOptionPane.YES_OPTION) {
-                    // Mở form gia hạn
-                }
                 return;
             }
             if (!bll_muonsach.DuocMuon(txtMaDocGia.getText())) {
@@ -400,12 +402,18 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
         ET_MuonSach muonsach = new ET_MuonSach(txtMasach.getText(), txtMaDocGia.getText(), getMaNV(), ngayMuonJDate.getDate(), Integer.parseInt((String) cbNgay.getSelectedItem()), txtTinhTrang.getText());
 
         try {
+
             bll_muonsach.ChoMuon(muonsach);
             clearTextFields(jPanel1);
             JOptionPane.showMessageDialog(null, "Mượn thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-          
+            LoadDSPM();
         } catch (SQLException ex) {
             JOptionPane.showConfirmDialog(null, jPanel1, "Mượn thất bại lỗi" + ex, JOptionPane.OK_OPTION, JOptionPane.PLAIN_MESSAGE);
+            try {
+
+            } catch (Exception ex1) {
+                Logger.getLogger(frmMuonSach.class.getName()).log(Level.SEVERE, null, ex1);
+            }
             try {
                 LoadDSPM();
             } catch (Exception ex1) {
@@ -425,6 +433,14 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         clearTextFields(jPanel1);
     }//GEN-LAST:event_btnClearActionPerformed
+
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        // TODO add your handling code here:
+        int kq = JOptionPane.showConfirmDialog(null, "Bạn có muốn thoát không", "Thông báo", JOptionPane.YES_NO_OPTION);
+        if (kq == 0) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnThoatActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

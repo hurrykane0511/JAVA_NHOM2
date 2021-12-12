@@ -3,7 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package gui;
-
+import et.ET_DanhMuc;
+import javax.swing.JOptionPane;
+import bll.BLL_DanhMuc;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author yushu
@@ -159,6 +162,7 @@ public class frmGiaHanTheTV extends javax.swing.JInternalFrame {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
+        BLL_DanhMuc bll = new BLL_DanhMuc();
         int row = tblDanhMuc.getSelectedRow();
         if (row != -1) {
             try {
@@ -168,7 +172,7 @@ public class frmGiaHanTheTV extends javax.swing.JInternalFrame {
                     ET_DanhMuc et = new ET_DanhMuc(maDM, tenDM);
                     if (bll.suaDM(et)) {
                         JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
-                        reset();
+                    
                     } else {
                         JOptionPane.showMessageDialog(rootPane, "Sửa không thành công");
                     }

@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -64,6 +65,11 @@ public class frmTimKiem extends javax.swing.JInternalFrame {
         btnTim1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnTim1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_shutdown_26px.png"))); // NOI18N
         btnTim1.setText("THOÁT");
+        btnTim1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTim1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("TÌM KIẾM SÁCH");
@@ -155,25 +161,21 @@ public class frmTimKiem extends javax.swing.JInternalFrame {
         try {
             // TODO add your handling code here:
             bll_tim.TimSach(hm.get(cbtimkiem.getSelectedItem()), txtNhapTT.getText(), jTable1);
-           
+
         } catch (Exception ex) {
             Logger.getLogger(frmTimKiem.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnTimActionPerformed
-    void LoadCB() {
-        cbtimkiem.removeAllItems();
 
-        hm.put("Mã sách", "where b.id_book = ? ");
-        hm.put("Tên sách", "where b.title like concat('%', ? , '%')");
-        hm.put("Thể loại", "where ctg.name Like concat('%', ? , '%')");
-        hm.put("Tác giả", "where a.author_name like concat('%', ? , '%')");
-        hm.put("Nhà XB", "where p.name like concat('%', ? , '%')");
-        hm.put("Ngôn ngữ", "where lan.name like concat('%', ? , '%')");
-
-        for (Map.Entry<String, String> entry : hm.entrySet()) {
-            Object key = entry.getKey();
-            cbtimkiem.addItem(key.toString());
+    private void btnTim1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTim1ActionPerformed
+        // TODO add your handling code here:
+        int kq = JOptionPane.showConfirmDialog(null, "Bạn có muốn thoát không", "Thông báo", JOptionPane.YES_NO_OPTION);
+        if (kq == 0) {
+            this.dispose();
         }
+    }//GEN-LAST:event_btnTim1ActionPerformed
+    void LoadCB() {
+        bll_tim.setCB(cbtimkiem);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

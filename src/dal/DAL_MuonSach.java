@@ -41,7 +41,7 @@ public class DAL_MuonSach {
             pst.setString(6, phieu.getTinhTrang());
 
             if (pst.executeUpdate() > 0) {
-                String sql2 = "update books set quantity = quantity - 1 where id_book = ? ;";
+                String sql2 = "update books set reality_quantity = reality_quantity - 1 where id_book = ? ;";
                 try 
                 {
                     PreparedStatement pst1 = conn.prepareStatement(sql2);
@@ -82,7 +82,7 @@ public class DAL_MuonSach {
     public ResultSet GetQtyBook(String masach) {
         ResultSet rs = null;
         PreparedStatement pst = null;
-        String sql = "select quantity from books where id_book = ? ;";
+        String sql = "select reality_quantity from books where id_book = ? ;";
         try {
             pst = conn.prepareStatement(sql);
             pst.setString(1, masach);
@@ -91,26 +91,6 @@ public class DAL_MuonSach {
 
         }
         return rs;
-    }
-
-    public boolean SuaPhieuMuon(ET_MuonSach phieu, String maphieu) throws SQLException {
-        Statement st = conn.createStatement();
-        String sql = "update rental_detail set borrowed_date = ?, return_date = ?, id_book = ?, id_lib_card = ?, id_staff = ? , `status` = ? where `id_rental_detail` = ? ;";
-
-        try {
-            PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setDate(1, phieu.getNgaymuon());
-            pst.setDate(2, phieu.getNgaytra());
-            pst.setString(3, phieu.getMasach());
-            pst.setString(4, phieu.getMathe());
-            pst.setString(5, phieu.getManv());
-            pst.setString(6, phieu.getTinhTrang());
-            pst.setString(7, maphieu);
-            return pst.executeUpdate() > 0;
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-        return false;
     }
 
     public ResultSet LayDG(String madg) throws SQLException, Exception {
@@ -129,20 +109,6 @@ public class DAL_MuonSach {
 
     }
 
-    public boolean XoaPhieuMuon(String maphieu) throws SQLException {
-        Statement st = conn.createStatement();
-        String sql = "delete from `rental_detail` where `id_rental_detail` = ? ;";
-
-        try {
-            PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setString(1, maphieu);
-            return pst.executeUpdate() > 0;
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-        return false;
-    }
-
     public ResultSet LayDSPhieu() throws SQLException, Exception {
         Connection conn = null;
         ResultSet rs = null;
@@ -150,7 +116,7 @@ public class DAL_MuonSach {
             conn = DatabaseUtil.getConnection();
             Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
-            String sql = "SELECT * FROM qltv.rental_detail order by borrowed_date asc";
+            String sql = "SELECT * FROM qltv.rental_detail order by id_rental_detail desc";
             rs = st.executeQuery(sql);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);

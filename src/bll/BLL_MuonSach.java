@@ -42,7 +42,6 @@ public class BLL_MuonSach {
         while (rs.next()) {
             dangMuon = Integer.parseInt(rs.getString("sum"));
             duocMuon = Integer.parseInt(rs.getString("quantity"));
-            
         }
         if (dangMuon >= duocMuon) {
             return false;
@@ -64,7 +63,9 @@ public class BLL_MuonSach {
         ResultSet rs = dal_muonsach.GetQtyBook(masach);
         int book = 0;
         while (rs.next()) {
-            book = rs.getInt("quantity");
+            
+            book = rs.getInt("reality_quantity");
+            
         }
         Date now = new Date();
         return book > 0;
@@ -96,13 +97,6 @@ public class BLL_MuonSach {
         return dal_muonsach.ChoMuonSach(phieu);
     }
 
-    public boolean SuaPhieu(ET_MuonSach phieu, String maphieu) throws SQLException {
-        return dal_muonsach.SuaPhieuMuon(phieu, maphieu);
-    }
-
-    public boolean XoaPhieu(String phieu) throws SQLException {
-        return dal_muonsach.XoaPhieuMuon(phieu);
-    }
 
     public String GetTenDG(String madg) throws SQLException, Exception {
         ResultSet rs = dal_muonsach.LayDG(madg);
