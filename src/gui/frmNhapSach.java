@@ -21,7 +21,6 @@ import et.ET_NhanVien;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -461,7 +460,8 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
                         }
                         if (bll.checkTonTai(maSach) == true) {
                             int tong = bll.laySLSach(txtMaSach.getText()) + Integer.parseInt(txtSoLuong.getText());
-                            ET_Sach et = new ET_Sach(maSach, ten, tong, Integer.parseInt(gia), Integer.parseInt(nxb), Integer.parseInt(st), maTD, maNXB, maDM, maNN);
+                            int tongTT = bll.laySLSachThucTe(txtMaSach.getText()) + Integer.parseInt(txtSoLuong.getText());
+                            ET_Sach et = new ET_Sach(maSach, ten, tong, Integer.parseInt(gia), Integer.parseInt(nxb), Integer.parseInt(st), maTD, maNXB, maDM, maNN,tongTT);
                             ET_HoaDon HDon = new ET_HoaDon(mahd, maNV, maNCC);
                             String maCT = themCTHH();
                             ET_ChiTietHD CT = new ET_ChiTietHD(maCT, Integer.parseInt(sl), mahd, maSach);
@@ -474,11 +474,11 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
                                     JOptionPane.showMessageDialog(null, "Thêm không thành công");
                                 }
                             } catch (SQLException ex) {
-                                Logger.getLogger(frmNhapSach1.class.getName()).log(Level.SEVERE, null, ex);
+                                ex.printStackTrace();
                             }
                             hienHoaDon();
                         } else {
-                            ET_Sach et = new ET_Sach(maSach, ten, Integer.parseInt(sl), Integer.parseInt(gia), Integer.parseInt(nxb), Integer.parseInt(st), maTD, maNXB, maDM, maNN);
+                            ET_Sach et = new ET_Sach(maSach, ten, Integer.parseInt(sl), Integer.parseInt(gia), Integer.parseInt(nxb), Integer.parseInt(st), maTD, maNXB, maDM, maNN,Integer.parseInt(sl));
                             try {
                                 if (bll.themSach(et)) {
                                     JOptionPane.showMessageDialog(rootPane, "Thêm thành công");
@@ -487,7 +487,7 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
                                 }
                                 hienHoaDon();
                             } catch (SQLException ex) {
-                                Logger.getLogger(frmNhapSach1.class.getName()).log(Level.SEVERE, null, ex);
+                               ex.printStackTrace();
                             }
                             ET_HoaDon HDon = new ET_HoaDon(mahd, maNV, maNCC);
                             String maCT = themCTHH();
@@ -501,7 +501,7 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
                     }
                 }
             } catch (Exception ex) {
-                Logger.getLogger(frmNhapSach1.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
         }
     }//GEN-LAST:event_btnthemActionPerformed

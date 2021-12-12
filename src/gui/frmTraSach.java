@@ -1,21 +1,135 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package gui;
 
+import bll.BLL_TraSachh;
+import et.ET_TraSachh;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
- * @author LENOVO
+ * @author yushu
  */
-public class frmTraSach extends javax.swing.JFrame {
+public class frmTraSach extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form FormTraSach
+     * Creates new form frmTra
      */
-    public frmTraSach() {
+    private BLL_TraSachh bll;
+    HashMap<String, String> hm_nv = new HashMap<String, String>();
+    private Boolean kq = false;
+
+    public frmTraSach() throws Exception {
         initComponents();
+        bll = new BLL_TraSachh();
+
+        hienThi();
+        hienThiTraSach();
+
+        txtMaSach.setEditable(false);
+        txtSoNgayQuaHan.setEditable(false);
+        dtpNgayThucTra.setEnabled(false);
+        dtpNgayDuKienTra.setEnabled(false);
+        txtDocGia.setEditable(false);
+        txtMaTheThuVien.setEditable(false);
+        //txtTienPhat.setEditable(false);
+
+        // lấy ngày hiện tại 
+        Date date = new Date();
+        dtpNgayThucTra.setDate(date);
+
+        this.bll = new BLL_TraSachh();
+        this.hm_nv = bll.hm_NV();
+        loadCBNV();
+    }
+
+    public void loadCBNV() {
+
+        cbbNhanVien.removeAllItems();
+        Map<String, String> map = new TreeMap<>(hm_nv);
+
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            Object value = entry.getValue();
+            cbbNhanVien.addItem(value.toString());
+        }
+    }
+
+    public String getMaNV() {
+        for (Map.Entry<String, String> entry : hm_nv.entrySet()) {
+            if (entry.getValue().equals(cbbNhanVien.getSelectedItem())) {
+                return entry.getKey();
+            }
+        }
+        return "";
+    }
+
+    public void hienThi() {
+        DefaultTableModel model = (DefaultTableModel) tblTraSach.getModel();
+        model.setColumnCount(0);
+        model.setRowCount(0);
+        model.addColumn("Mã trả sách");
+        model.addColumn("Mã mượn sách");
+        model.addColumn("Ngày dự trả");
+        model.addColumn("Ngày thực trả");
+        model.addColumn("Mã sách");
+        model.addColumn("Tên đọc giả");
+        model.addColumn("Mã thẻ thư viện");
+        model.addColumn("Số ngày quá hạn");
+        model.addColumn("Tiền phạt");
+        model.addColumn("Mã nhân viên");
+        model.addColumn("Tình trạng sách");
+        tblTraSach.setModel(model);
+    }
+
+    public void hienThiTraSach() throws SQLException {
+
+        DefaultTableModel model = (DefaultTableModel) tblTraSach.getModel();
+        model.setRowCount(0);
+        ResultSet rs = bll.layTraSach();
+
+        while (rs.next()) {
+            Object[] col = new Object[10];
+            for (int i = 1; i <= 10; i++) {
+                col[i - 1] = rs.getObject(i);
+            }
+            model.addRow(col);
+        }
+    }
+
+    public void soNgayQuaHan() {
+        SimpleDateFormat fr = new SimpleDateFormat("yyyy-MM-dd");
+        Date ngayDuKienTra = null;
+        Date ngayTra = null;
+
+        try {
+            if (kq) {
+                ngayTra = fr.parse(fr.format(dtpNgayThucTra.getDate()));
+                ngayDuKienTra = fr.parse(fr.format(dtpNgayDuKienTra.getDate()));
+                int datediff = (int) (ngayTra.getTime() - ngayDuKienTra.getTime());
+                int days = datediff / (60 * 60 * 1000) / 24;
+                if (days < 0) {
+                    txtSoNgayQuaHan.setText("0");
+                } else {
+                    txtSoNgayQuaHan.setText(Long.toString(days));
+                }
+            } else {
+                txtSoNgayQuaHan.setText("0");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -27,73 +141,37 @@ public class frmTraSach extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel4 = new javax.swing.JLabel();
-        txtMaSach1 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txtMaSach = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        btnLuu = new javax.swing.JButton();
-        btnThoat = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtSoNgayQuaHan = new javax.swing.JTextField();
+        txtMaMuonSach = new javax.swing.JTextField();
+        btnLuu = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblTraSach = new javax.swing.JTable();
+        btnThoat = new javax.swing.JButton();
+        dtpNgayThucTra = new com.toedter.calendar.JDateChooser();
         jLabel7 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtaTinhTrangSach = new javax.swing.JTextArea();
+        txtMaSach = new javax.swing.JTextField();
+        btnTim = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        dtpNgayDuKienTra = new com.toedter.calendar.JDateChooser();
+        txtDocGia = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        txtMaTheThuVien = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        cbbNhanVien = new javax.swing.JComboBox<>();
+        btnMoi = new javax.swing.JButton();
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel4.setText("Mã sách");
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        jPanel1.setBackground(new java.awt.Color(155, 177, 250));
+        jPanel1.setBackground(new java.awt.Color(155, 177, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Mã sách", "Tên sách", "Ngày mượn"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 785, 309));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel2.setText("Mã thẻ thư viện");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel3.setText("Mã sách");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
-        jPanel1.add(txtMaSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 178, 28));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel5.setText("Ngày trả sách");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, -1, -1));
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 178, 30));
-
-        btnLuu.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        btnLuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_save_26px.png"))); // NOI18N
-        btnLuu.setText("LƯU");
-        jPanel1.add(btnLuu, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 330, -1, -1));
-
-        btnThoat.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_add_26px.png"))); // NOI18N
-        btnThoat.setText("THOÁT");
-        jPanel1.add(btnThoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 330, -1, 29));
 
         jPanel2.setBackground(new java.awt.Color(84, 101, 225));
 
@@ -104,122 +182,312 @@ public class frmTraSach extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(340, 340, 340)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(493, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(500, Short.MAX_VALUE))
+                .addGap(477, 477, 477))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, -1));
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, -1));
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Mã mượn sách");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel7.setText("Số ngày quá hạn");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 200, -1, -1));
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setText("Ngày thực trả");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, -1, -1));
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jTextField2.setEnabled(false);
-        jTextField2.setName(""); // NOI18N
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setText("Mã sách");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, -1, 23));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setText("Nhân viên");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, -1, 28));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setText("Số ngày quá hạn");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 210, -1, -1));
+
+        txtSoNgayQuaHan.setMinimumSize(new java.awt.Dimension(7, 28));
+        txtSoNgayQuaHan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                txtSoNgayQuaHanActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 190, 58, -1));
+        jPanel1.add(txtSoNgayQuaHan, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 210, 100, 28));
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel8.setText("Mã nhân viên:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, 120, -1));
+        txtMaMuonSach.setMinimumSize(new java.awt.Dimension(7, 28));
+        txtMaMuonSach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMaMuonSachActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtMaMuonSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 170, 28));
 
-        jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 140, 140, -1));
+        btnLuu.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnLuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_add_26px.png"))); // NOI18N
+        btnLuu.setText("LƯU");
+        btnLuu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLuuActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLuu, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 380, -1, 32));
+
+        tblTraSach.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tblTraSach);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 890, 210));
+
+        btnThoat.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_shutdown_26px.png"))); // NOI18N
+        btnThoat.setText("THOÁT");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnThoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 380, -1, 32));
+
+        dtpNgayThucTra.setDateFormatString("dd/MM/yyyy");
+        jPanel1.add(dtpNgayThucTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 170, 30));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setText("Tình trạng sách");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 270, -1, -1));
+
+        txtaTinhTrangSach.setColumns(20);
+        txtaTinhTrangSach.setRows(5);
+        jScrollPane2.setViewportView(txtaTinhTrangSach);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 270, -1, -1));
+
+        txtMaSach.setMinimumSize(new java.awt.Dimension(7, 28));
+        txtMaSach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMaSachActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtMaSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 170, 28));
+
+        btnTim.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnTim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_search_26px.png"))); // NOI18N
+        btnTim.setText("Tìm");
+        btnTim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnTim, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, -1, 28));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel8.setText("Ngày dự trả");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
+
+        dtpNgayDuKienTra.setDateFormatString("dd/MM/yyyy");
+        jPanel1.add(dtpNgayDuKienTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 170, 30));
+
+        txtDocGia.setMinimumSize(new java.awt.Dimension(7, 28));
+        txtDocGia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDocGiaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtDocGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 80, 170, 28));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel9.setText("Tên đọc giả");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, -1, 28));
+
+        txtMaTheThuVien.setMinimumSize(new java.awt.Dimension(7, 28));
+        txtMaTheThuVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMaTheThuVienActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtMaTheThuVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 140, 100, 28));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel10.setText("Mã thẻ thư viện");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 140, -1, 23));
+
+        cbbNhanVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbNhanVienActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cbbNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 340, 170, 28));
+
+        btnMoi.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_new_26px_4.png"))); // NOI18N
+        btnMoi.setText("MỚI");
+        btnMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoiActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 380, 100, 32));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 849, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 942, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtSoNgayQuaHanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoNgayQuaHanActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txtSoNgayQuaHanActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    private void txtMaMuonSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaMuonSachActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMaMuonSachActionPerformed
+
+    private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
+        String maMuon = txtMaMuonSach.getText();
+        java.sql.Date ngayDuTra = new java.sql.Date(dtpNgayDuKienTra.getDate().getTime());
+        java.sql.Date ngayThucTra = new java.sql.Date(dtpNgayThucTra.getDate().getTime());
+        String maSach = txtMaSach.getText();
+        String tenDocGia = txtDocGia.getText();
+        String maThuVien = txtMaTheThuVien.getText();
+        String soNgayQuaHan = txtSoNgayQuaHan.getText();
+        String maNhanVien = getMaNV();
+        String tinhTrangSach = txtaTinhTrangSach.getText();
+
+        ET_TraSachh et = new ET_TraSachh(Integer.parseInt(maMuon), ngayDuTra, ngayThucTra, maSach, tenDocGia, maThuVien, Integer.parseInt(soNgayQuaHan), maNhanVien, tinhTrangSach);
+
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+            if (bll.themTraSach(et)) {
+                JOptionPane.showMessageDialog(rootPane, "Thêm thành công");
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmTraSach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmTraSach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmTraSach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmTraSach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Thêm không thành công");
         }
-        //</editor-fold>
-        //</editor-fold>
+        try {
+            hienThiTraSach();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_btnLuuActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmTraSach().setVisible(true);
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        int kq = JOptionPane.showConfirmDialog(null, "Bạn có muốn thoát không", "Thông báo", JOptionPane.YES_NO_OPTION);
+        if (kq == 0) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnThoatActionPerformed
+
+    private void txtMaSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaSachActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMaSachActionPerformed
+
+    private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
+
+        try {
+            ResultSet rs = bll.timTraSach(txtMaMuonSach.getText());
+            if (rs.next() == false) {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy mã mượn sách");
+                txtMaMuonSach.setText("");
+                txtMaSach.setText("");
+                txtDocGia.setText("");
+                txtaTinhTrangSach.setText("");
+                txtMaTheThuVien.setText("");
+                txtSoNgayQuaHan.setText("");
+                kq = false;
+                dtpNgayDuKienTra.setDate(null);
+            } else {
+                txtMaMuonSach.setText(rs.getString("id_rental_detail"));
+                dtpNgayDuKienTra.setDate(rs.getDate("return_date"));
+                txtMaSach.setText(rs.getString("id_book"));
+                txtMaTheThuVien.setText(rs.getString("id_lib_card"));
+                kq = true;
+                try {
+                    String rs1 = bll.layTenDocGia(txtMaTheThuVien.getText());
+                    txtDocGia.setText(rs1);
+                } catch (Exception ex) {
+                  ex.printStackTrace();
+                }
+                txtaTinhTrangSach.setText(rs.getString("status"));
             }
-        });
-    }
+        } catch (Exception e) {
+        }
+        soNgayQuaHan();
+        //tienPhat();
+    }//GEN-LAST:event_btnTimActionPerformed
+
+    private void txtDocGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDocGiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDocGiaActionPerformed
+
+    private void txtMaTheThuVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaTheThuVienActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMaTheThuVienActionPerformed
+
+    private void cbbNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbNhanVienActionPerformed
+
+    }//GEN-LAST:event_cbbNhanVienActionPerformed
+
+    private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
+
+    }//GEN-LAST:event_btnMoiActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLuu;
+    private javax.swing.JButton btnMoi;
     private javax.swing.JButton btnThoat;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JButton btnTim;
+    private javax.swing.JComboBox<String> cbbNhanVien;
+    private com.toedter.calendar.JDateChooser dtpNgayDuKienTra;
+    private com.toedter.calendar.JDateChooser dtpNgayThucTra;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tblTraSach;
+    private javax.swing.JTextField txtDocGia;
+    private javax.swing.JTextField txtMaMuonSach;
     private javax.swing.JTextField txtMaSach;
-    private javax.swing.JTextField txtMaSach1;
+    private javax.swing.JTextField txtMaTheThuVien;
+    private javax.swing.JTextField txtSoNgayQuaHan;
+    private javax.swing.JTextArea txtaTinhTrangSach;
     // End of variables declaration//GEN-END:variables
 }

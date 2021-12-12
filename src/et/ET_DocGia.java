@@ -19,7 +19,7 @@ public class ET_DocGia {
     private String  gioiTinh;
     private String cccd;
      private String diaChi;
-    private int trangThai;
+    private int loaiDG;
 
     public String getMaDocGia() {
         return maDocGia;
@@ -77,15 +77,15 @@ public class ET_DocGia {
         this.diaChi = diaChi;
     }
 
-    public int getTrangThai() {
-        return trangThai;
+    public int getloaiDG() {
+        return loaiDG;
     }
 
     public void setTrangThai(int trangThai) {
-        this.trangThai = trangThai;
+        this.loaiDG = trangThai;
     }
 
-    public ET_DocGia(String maDocGia, String ho, String ten, Date ngaySinh, String gioiTinh, String cccd, String diaChi, int trangThai) {
+    public ET_DocGia(String maDocGia, String ho, String ten, Date ngaySinh, String gioiTinh, String cccd, String diaChi, int loaiDG) {
         this.maDocGia = maDocGia;
         this.ho = ho;
         this.ten = ten;
@@ -93,7 +93,7 @@ public class ET_DocGia {
         this.gioiTinh = gioiTinh;
         this.cccd = cccd;
         this.diaChi = diaChi;
-        this.trangThai = trangThai;
+        this.loaiDG = loaiDG;
     }
 
     

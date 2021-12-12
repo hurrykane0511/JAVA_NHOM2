@@ -215,7 +215,7 @@ public class frmTaiKhoan extends javax.swing.JInternalFrame {
                     }
                 }
             } catch (Exception ex) {
-                Logger.getLogger(frmTaiKhoan1.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
         }
     }//GEN-LAST:event_btnThemActionPerformed
@@ -248,7 +248,7 @@ public class frmTaiKhoan extends javax.swing.JInternalFrame {
                     }
                 }
             } catch (Exception ex) {
-                Logger.getLogger(frmTaiKhoan1.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
         }
     }//GEN-LAST:event_btnSuaActionPerformed
@@ -275,7 +275,7 @@ public class frmTaiKhoan extends javax.swing.JInternalFrame {
                         JOptionPane.showMessageDialog(rootPane, "Xóa không thành công");
                     }
                 } catch (Exception ex) {
-                    Logger.getLogger(frmTaiKhoan1.class.getName()).log(Level.SEVERE, null, ex);
+                   ex.printStackTrace();
                 }
             }
         } else {

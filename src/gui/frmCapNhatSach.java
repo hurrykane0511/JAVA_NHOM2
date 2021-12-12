@@ -340,7 +340,7 @@ public class frmCapNhatSach extends javax.swing.JFrame {
                 hienThiSach();
 
             } catch (SQLException ex) {
-                Logger.getLogger(frmNhanVien1.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frmNhanVien.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         }else
@@ -352,7 +352,7 @@ public class frmCapNhatSach extends javax.swing.JFrame {
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void tbSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSachMouseClicked
@@ -365,22 +365,22 @@ public class frmCapNhatSach extends javax.swing.JFrame {
             cbTheLoai.setSelectedItem(bllTL.layTen(model.getValueAt(row, 2).toString()));
 
         } catch (Exception ex) {
-            Logger.getLogger(frmCapNhatSach.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         try {
             cbNgonNgu.setSelectedItem(bllNN.layTen(model.getValueAt(row, 3).toString()));
         } catch (Exception ex) {
-            Logger.getLogger(frmCapNhatSach.class.getName()).log(Level.SEVERE, null, ex);
+           ex.printStackTrace();
         }
         try {
             cbTacGia.setSelectedItem(bllTG.layTen(model.getValueAt(row, 4).toString()));
         } catch (Exception ex) {
-            Logger.getLogger(frmCapNhatSach.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         try {
             cbNXB.setSelectedItem(bllNXB.layTen(model.getValueAt(row, 5).toString()));
         } catch (Exception ex) {
-            Logger.getLogger(frmCapNhatSach.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         txtNamXB.setText(model.getValueAt(row, 6).toString());
     }//GEN-LAST:event_tbSachMouseClicked
@@ -398,7 +398,7 @@ public class frmCapNhatSach extends javax.swing.JFrame {
         cbNgonNgu.removeAllItems();
         ResultSet rs = bllNN.layNgonNgu();
         while (rs.next()) {
-            cbNgonNgu.addItem(rs.getString("title"));
+            cbNgonNgu.addItem(rs.getString("name"));
         }
     }
 
@@ -407,7 +407,7 @@ public class frmCapNhatSach extends javax.swing.JFrame {
         cbTheLoai.removeAllItems();
         ResultSet rs = bllTL.layDS();
         while (rs.next()) {
-            cbTheLoai.addItem(rs.getString("title"));
+            cbTheLoai.addItem(rs.getString("name"));
         }
     }
 
@@ -460,7 +460,7 @@ public class frmCapNhatSach extends javax.swing.JFrame {
                 try {
                     new frmCapNhatSach().setVisible(true);
                 } catch (Exception ex) {
-                    Logger.getLogger(frmNhanVien1.class.getName()).log(Level.SEVERE, null, ex);
+                   ex.printStackTrace();
                 }
             }
         });

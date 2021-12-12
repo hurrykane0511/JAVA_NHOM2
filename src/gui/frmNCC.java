@@ -313,9 +313,9 @@ public class frmNCC extends javax.swing.JInternalFrame {
 
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(frmNCC1.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             } catch (Exception ex) {
-                Logger.getLogger(frmNCC1.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
         }
     }//GEN-LAST:event_btnThemActionPerformed
@@ -386,7 +386,7 @@ public class frmNCC extends javax.swing.JInternalFrame {
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+       this.dispose();
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void tbNCCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNCCMouseClicked
@@ -404,7 +404,7 @@ public class frmNCC extends javax.swing.JInternalFrame {
             // TODO add your handling code here:
             layMa();
         } catch (Exception ex) {
-            Logger.getLogger(frmDanhMuc1.class.getName()).log(Level.SEVERE, null, ex);
+           ex.printStackTrace();
         }
     }//GEN-LAST:event_btnMoiActionPerformed
 

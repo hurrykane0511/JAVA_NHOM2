@@ -25,7 +25,7 @@ public class DAL_TheThuVien {
             conn = DatabaseUtil.getConnection();
              Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
-            String sql = "SELECT id_lib_card, readers.id_reader, readers.lastname ,readers.firstname,readers.id_card,readers.gender,readers.birthday,readers.address, createAt_date,id_staff, member_card.status, readers.status  FROM member_card join readers on member_card.id_reader = readers.id_reader where readers.status = 1 ";
+            String sql = "SELECT id_lib_card, readers.lastname ,readers.firstname,readers.pid,readers.gender,readers.birthday,readers.address, created_at,id_staff, expiration_date FROM member_card join readers on member_card.id_reader = readers.id_reader";
             rs = st.executeQuery(sql);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -34,14 +34,29 @@ public class DAL_TheThuVien {
         //conn.close();
         return rs;
     }
+    
+     public ResultSet layDSTheTV() throws SQLException {
+        ResultSet rs = null;
+        Connection conn = null;
+        try {
+            conn = DatabaseUtil.getConnection();
+             Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+            String sql = "SELECT * from member_card";
+            rs = st.executeQuery(sql);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return rs;
+    }
     public Boolean themTheThuVien(ET_TheThuVien et) throws SQLException, Exception {
         Boolean kq = false;
         Connection conn = null;
         try {
             conn = DatabaseUtil.getConnection();
             Statement st = conn.createStatement();
-            String sql = "insert into member_card (id_lib_card,limited_quantity,status ,id_staff,id_reader) "
-                    + "values ('" + et.getMaThe()+ "','" + et.getGioiHanSl()+ "','"+ et.getTinhTrang()+ "','" + et.getMaNhanVien()+ "','" + et.getMaDocGia()+ "')";
+            String sql = "insert into member_card (id_lib_card,id_staff,id_reader,expiration_date) "
+                    + "values ('" + et.getMaThe()+ "','" + et.getMaNhanVien()+ "','" + et.getMaDocGia()+ "','"+new java.sql.Date(et.getNgayHetHan().getTime())+"')";
             if (st.executeUpdate(sql) > 0) {
                 kq = true;
             }
@@ -70,7 +85,22 @@ public class DAL_TheThuVien {
         return (row > 0);
     }
 
-  
+  public Boolean giaHanTheThuVien(ET_TheThuVien et) throws SQLException, Exception {
+        Boolean kq = false;
+        Connection conn = null;
+        try {
+            conn = DatabaseUtil.getConnection();
+            Statement st = conn.createStatement();
+            String sql = "UPDATE member_card SET expiration_date = '"+et.getNgayHetHan()+" WHERE id_lib_card = '"+et.getMaThe();
+            if (st.executeUpdate(sql) > 0) {
+                kq = true;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        //conn.close();
+        return kq;
+    }
 
   
 }

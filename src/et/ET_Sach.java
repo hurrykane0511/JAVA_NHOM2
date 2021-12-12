@@ -22,6 +22,29 @@ public class ET_Sach {
     private String maNXB;
     private String theLoai;
     private String ngonNgu;
+    private int sLuongThuc;
+
+    public int getsLuongThuc() {
+        return sLuongThuc;
+    }
+
+    public void setsLuongThuc(int sLuongThuc) {
+        this.sLuongThuc = sLuongThuc;
+    }
+
+    public ET_Sach(String maSach, String tenSach, int soLuong, int gia, int namXB, int soTrang, String maTD, String maNXB, String theLoai, String ngonNgu, int sLuongThuc) {
+        this.maSach = maSach;
+        this.tenSach = tenSach;
+        this.soLuong = soLuong;
+        this.gia = gia;
+        this.namXB = namXB;
+        this.soTrang = soTrang;
+        this.maTD = maTD;
+        this.maNXB = maNXB;
+        this.theLoai = theLoai;
+        this.ngonNgu = ngonNgu;
+        this.sLuongThuc = sLuongThuc;
+    }
     public String getMaSach() {
         return maSach;
     }

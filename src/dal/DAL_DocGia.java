@@ -18,15 +18,15 @@ import javax.swing.JOptionPane;
  * @author LENOVO
  */
 public class DAL_DocGia {
-    
+
     public Boolean themDocGia(ET_DocGia et) throws SQLException, Exception {
         Boolean kq = false;
         Connection conn = null;
         try {
             conn = DatabaseUtil.getConnection();
             Statement st = conn.createStatement();
-            String sql = "insert into readers (id_reader, firstname,lastname, birthday,gender,id_card,address,status) "
-                    + "values ('" + et.getMaDocGia()+ "','" + et.getHo()+ "','" + et.getTen()+ "','" + new java.sql.Date(et.getNgaySinh().getTime())+ "','" + et.getGioiTinh()+ "','" + et.getCccd()+"','" + et.getDiaChi()+ "'," + et.getTrangThai()+")";
+            String sql = "insert into readers (id_reader, firstname,lastname, birthday,gender,pid,address,reader_type) "
+                    + "values ('" + et.getMaDocGia() + "','" + et.getTen()+ "','" + et.getHo()+ "','" + new java.sql.Date(et.getNgaySinh().getTime()) + "','" + et.getGioiTinh() + "','" + et.getCccd() + "','" + et.getDiaChi() + "'," + et.getloaiDG() + ")";
             if (st.executeUpdate(sql) > 0) {
                 kq = true;
             }
@@ -36,16 +36,16 @@ public class DAL_DocGia {
         //conn.close();
         return kq;
     }
-    
+
     public Boolean checkTT(String cccd) throws SQLException, Exception {
-         Connection conn = null;;
+        Connection conn = null;;
         ResultSet rs = null;
         int row = 0;
         try {
             conn = DatabaseUtil.getConnection();
             Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
-            String sql = "Select * from readers where id_card =" + cccd + " and status = 1";
+            String sql = "Select * from readers where pid ='" + cccd+"'";
             rs = st.executeQuery(sql);
             rs.last();
             row = rs.getRow();
@@ -56,14 +56,37 @@ public class DAL_DocGia {
         //conn.close();
         return (row > 0);
     }
-    public Boolean xoaThe(ET_DocGia et) throws SQLException {
+
+    public ResultSet layDS() throws SQLException, Exception {
+        Connection conn = null;;
+        ResultSet rs = null;
+        int row = 0;
+        try {
+            conn = DatabaseUtil.getConnection();
+            Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+            String sql = "Select * from readers";
+            rs = st.executeQuery(sql);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        //conn.close();
+        return rs;
+    }
+
+    public Boolean suaThe(ET_DocGia et) throws SQLException {
         Boolean kq = false;
         Connection conn = null;
         try {
             conn = DatabaseUtil.getConnection();
             Statement st = conn.createStatement();
             String sql = "update readers "
-                    + "set status = 0 "
+                    + "set firstname =  '" + et.getTen() + "',"
+                    + "lastname = '" + et.getHo() + "',"
+                    + "birthday = '" + et.getNgaySinh() + "',"
+                    + "gender = '" + et.getGioiTinh() + "',"
+                    + "pid = '" + et.getCccd() + "',"
+                    + "address = '" + et.getDiaChi() + " "
                     + "where id_reader ='" + et.getMaDocGia() + "'";
             if (st.executeUpdate(sql) > 0) {
                 kq = true;

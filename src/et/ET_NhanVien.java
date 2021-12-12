@@ -75,9 +75,7 @@ public class ET_NhanVien {
     public void setCCCD(String CCCD) {
         this.CCCD = CCCD;
     }
-    public String toString(){
-        return ten;
-    }
+
     public ET_NhanVien(String maNhanVien, String ten, String ho, String diaChi, String soDT, Date ngaySinh, String CCCD) {
         this.maNhanVien = maNhanVien;
         this.ho = ho;
@@ -87,8 +85,16 @@ public class ET_NhanVien {
         this.ngaySinh = ngaySinh;
         this.CCCD = CCCD;
     }
+
+    @Override
+    public String toString() {
+        return getHo()+ " "+getTen();
+    }
+    
+
     public ET_NhanVien(String maNhanVien, String ten) {
         this.maNhanVien = maNhanVien;
         this.ten = ten;
     }
+
 }

@@ -15,19 +15,27 @@ import java.sql.SQLException;
  * @author LENOVO
  */
 public class BLL_TheThuVien {
-     private DAL_TheThuVien dal;
+
+    private DAL_TheThuVien dal;
+
     public BLL_TheThuVien() throws Exception {
         dal = new DAL_TheThuVien();
     }
+
     public ResultSet layDSThe() throws SQLException {
         return dal.layDSThe();
     }
+
+    public ResultSet layDSTheTV() throws SQLException {
+        return dal.layDSThe();
+    }
+
     public Boolean themThe(ET_TheThuVien et) throws SQLException, Exception {
         return dal.themTheThuVien(et);
     }
-     
-     public Boolean checkTT(String ma) throws SQLException {
+
+    public Boolean checkTT(String ma) throws SQLException {
         return dal.checkTonTai(ma);
     }
-    
+
 }

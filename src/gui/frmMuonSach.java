@@ -3,29 +3,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package gui;
+
 import java.awt.Component;
-import java.awt.event.WindowEvent;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import bll.BLL_MuonSach;
-import java.sql.Date;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Map.Entry;
-import java.util.SortedSet;
 import java.util.TreeMap;
-import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComboBox;
 import et.ET_MuonSach;
 import java.awt.Container;
-import java.awt.Panel;
 import java.sql.SQLException;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author yushu
@@ -35,20 +29,24 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmMuonSach
      */
-      HashMap<String, String> hm_nv;
+    HashMap<String, String> hm_nv;
     BLL_MuonSach bll_muonsach;
+
     public frmMuonSach() throws Exception {
         initComponents();
-         this.txtTenDocGia.setEditable(false);
+
+        this.txtTenDocGia.setEditable(false);
         this.bll_muonsach = new BLL_MuonSach();
         this.hm_nv = bll_muonsach.hm_NV();
         java.util.Date date = new java.util.Date();
         ngayMuonJDate.setDate(date);
+        ngayMuonJDate.setEnabled(false);
 
         loadCBNV();
         LoadDSPM();
     }
-  public void clearTextFields(Container container) {
+
+    public void clearTextFields(Container container) {
         for (Component c : container.getComponents()) {
             if (c instanceof JTextField) {
                 JTextField f = (JTextField) c;
@@ -75,20 +73,22 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
         }
 
     }
-     public String getMaNV() {
+
+    public String getMaNV() {
         for (Entry<String, String> entry : hm_nv.entrySet()) {
             if (entry.getValue().equals(cbNhanVien.getSelectedItem())) {
-                txtTenDocGia.setText(entry.getKey());
                 return entry.getKey();
             }
         }
         return "";
     }
-      public void LoadDSPM() throws Exception {
+
+    public void LoadDSPM() throws Exception {
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         dtm.setRowCount(0);
         bll_muonsach.SetTable(jTable1);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -109,9 +109,7 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtMasach = new javax.swing.JTextField();
-        btnSua = new javax.swing.JButton();
         btnThem = new javax.swing.JButton();
-        btnXoa = new javax.swing.JButton();
         btnThoat = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -167,30 +165,12 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
 
         txtMasach.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        btnSua.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_edit_26px.png"))); // NOI18N
-        btnSua.setText("SỬA");
-        btnSua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSuaActionPerformed(evt);
-            }
-        });
-
         btnThem.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_add_26px.png"))); // NOI18N
         btnThem.setText("THÊM");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemActionPerformed(evt);
-            }
-        });
-
-        btnXoa.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_remove_26px_1.png"))); // NOI18N
-        btnXoa.setText("XÓA");
-        btnXoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaActionPerformed(evt);
             }
         });
 
@@ -203,7 +183,7 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Mã phiếu", "Mã thẻ", "Mã NV", "Mã Sách", "Ngày mượn", "Ngày phải trả", "Tình trạng"
+                "Mã phiếu", "Mã thẻ", "Mã NV", "Mã Sách", "Ngày mượn", "Ngày phải trả", "Tình trạng sách", "Trạng thái"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -239,8 +219,8 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
         });
 
         btnClear.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_shutdown_26px.png"))); // NOI18N
-        btnClear.setText("Clean");
+        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_new_26px_4.png"))); // NOI18N
+        btnClear.setText("New");
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClearActionPerformed(evt);
@@ -252,25 +232,32 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(btnThem)
-                .addGap(57, 57, 57)
-                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
-                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
-                .addComponent(btnClear)
-                .addGap(62, 62, 62)
-                .addComponent(btnThoat)
-                .addContainerGap(67, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(420, 420, 420))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(87, 87, 87)
-                        .addComponent(jLabel9))
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 334, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel6))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtMaPhieu)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ngayMuonJDate, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTenDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -282,27 +269,14 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
                                     .addComponent(txtMasach)
                                     .addComponent(txtMaDocGia, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(cbNhanVien, javax.swing.GroupLayout.Alignment.TRAILING, 0, 213, Short.MAX_VALUE)))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel6))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtMaPhieu)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(ngayMuonJDate, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTenDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(53, 53, 53)
+                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(119, 119, 119)
+                        .addComponent(btnThoat)))
                 .addGap(133, 133, 133))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(420, 420, 420))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -343,7 +317,7 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
                                 .addComponent(txtMaPhieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(100, 100, 100))
+                        .addGap(18, 18, 18))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel9)
@@ -352,8 +326,6 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(32, 32, 32))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnXoa)
-                    .addComponent(btnSua)
                     .addComponent(btnClear)
                     .addComponent(btnThoat)
                     .addComponent(btnThem))
@@ -401,48 +373,52 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_cbNhanVienActionPerformed
 
-    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        // TODO add your handling code here:
-        ET_MuonSach muonsach = new ET_MuonSach(txtMasach.getText(), txtMaDocGia.getText(), getMaNV(), ngayMuonJDate.getDate(), Integer.parseInt((String) cbNgay.getSelectedItem()), txtTinhTrang.getText());
-
-        try {
-            bll_muonsach.SuaPhieu(muonsach, txtMaPhieu.getText());
-            clearTextFields(jPanel1);
-            LoadDSPM();
-        } catch (SQLException ex) {
-            JOptionPane.showConfirmDialog(null, jPanel1, "File", JOptionPane.OK_OPTION, JOptionPane.PLAIN_MESSAGE);
-        } catch (Exception ex) {
-            Logger.getLogger(frmMuonSach1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnSuaActionPerformed
-
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            if (!bll_muonsach.HetHan(txtMaDocGia.getText())) {
+                int reply = JOptionPane.showConfirmDialog(null, "Thẻ đã hết hạn, bạn có muốn gia hạn hong", "Thông báo", JOptionPane.YES_NO_OPTION);
+
+                if (reply == JOptionPane.YES_OPTION) {
+                    // Mở form gia hạn
+                }
+                return;
+            }
+            if (!bll_muonsach.DuocMuon(txtMaDocGia.getText())) {
+                JOptionPane.showMessageDialog(null, "Mượn vượt quá mức !!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            if (!bll_muonsach.GetQtyBook(txtMasach.getText())) {
+                JOptionPane.showMessageDialog(null, "Sách đã hết !!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(frmMuonSach.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         ET_MuonSach muonsach = new ET_MuonSach(txtMasach.getText(), txtMaDocGia.getText(), getMaNV(), ngayMuonJDate.getDate(), Integer.parseInt((String) cbNgay.getSelectedItem()), txtTinhTrang.getText());
 
         try {
             bll_muonsach.ChoMuon(muonsach);
             clearTextFields(jPanel1);
+            JOptionPane.showMessageDialog(null, "Mượn thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+          
         } catch (SQLException ex) {
-            JOptionPane.showConfirmDialog(null, jPanel1, "File", JOptionPane.OK_OPTION, JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showConfirmDialog(null, jPanel1, "Mượn thất bại lỗi" + ex, JOptionPane.OK_OPTION, JOptionPane.PLAIN_MESSAGE);
+            try {
+                LoadDSPM();
+            } catch (Exception ex1) {
+                Logger.getLogger(frmMuonSach.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(frmMuonSach.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
-    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        // TODO add your handling code here:
-        try {
-            bll_muonsach.XoaPhieu(txtMaPhieu.getText());
-            clearTextFields(jPanel1);
-            LoadDSPM();
-        } catch (SQLException ex) {
-            JOptionPane.showConfirmDialog(null, jPanel1, "File", JOptionPane.OK_OPTION, JOptionPane.PLAIN_MESSAGE);
-        } catch (Exception ex) {
-            Logger.getLogger(frmMuonSach1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnXoaActionPerformed
-
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_btnTimActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
@@ -453,11 +429,9 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
-    private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnThoat;
     private javax.swing.JButton btnTim;
-    private javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cbNgay;
     private javax.swing.JComboBox<String> cbNhanVien;
     private javax.swing.JLabel jLabel1;

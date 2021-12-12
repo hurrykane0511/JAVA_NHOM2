@@ -14,35 +14,18 @@ import java.util.Date;
 public class ET_TheThuVien {
     private String maThe;
     private String maDocGia; 
-    private int gioiHanSl;
     private String maNhanVien;
-    private String tinhTrang;
     private Date ngayTao;
+    private Date ngayHetHan;
 
-  
-    public ET_TheThuVien(String maThe, String maDocGia, int gioiHanSl, String maNhanVien, String tinhTrang, Date ngayTao) {
+    public ET_TheThuVien(String maThe, String maDocGia, String maNhanVien, Date ngayTao, Date ngayHetHan) {
         this.maThe = maThe;
         this.maDocGia = maDocGia;
-        this.gioiHanSl = gioiHanSl;
         this.maNhanVien = maNhanVien;
-        this.tinhTrang = tinhTrang;
         this.ngayTao = ngayTao;
-    }
-    public ET_TheThuVien(String maThe, String maDocGia, int gioiHanSl, String maNhanVien, String tinhTrang) {
-        this.maThe = maThe;
-        this.maDocGia = maDocGia;
-        this.gioiHanSl = gioiHanSl;
-        this.maNhanVien = maNhanVien;
-        this.tinhTrang = tinhTrang;
-    }
-    public String getTinhTrang() {
-        return tinhTrang;
+        this.ngayHetHan = ngayHetHan;
     }
 
-    public void setTinhTrang(String tinhTrang) {
-        this.tinhTrang = tinhTrang;
-    }
-    
     public String getMaThe() {
         return maThe;
     }
@@ -57,14 +40,6 @@ public class ET_TheThuVien {
 
     public void setMaDocGia(String maDocGia) {
         this.maDocGia = maDocGia;
-    }
-
-    public int getGioiHanSl() {
-        return gioiHanSl;
-    }
-
-    public void setGioiHanSl(int gioiHanSl) {
-        this.gioiHanSl = gioiHanSl;
     }
 
     public String getMaNhanVien() {
@@ -83,7 +58,12 @@ public class ET_TheThuVien {
         this.ngayTao = ngayTao;
     }
 
-    
-    
-    
+    public Date getNgayHetHan() {
+        return ngayHetHan;
+    }
+
+    public void setNgayHetHan(Date ngayHetHan) {
+        this.ngayHetHan = ngayHetHan;
+    }
+  
 }
