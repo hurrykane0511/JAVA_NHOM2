@@ -1,6 +1,7 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package gui;
 
@@ -24,21 +25,23 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author yushu
+ * @author LENOVO
  */
-public class frmCapNhatSach extends javax.swing.JInternalFrame {
+public class frmCapNhatSach1 extends javax.swing.JFrame {
 
-    /**
-     * Creates new form frmCapNhatSach
-     */
     private Bll_CapNhatSach bll;
     private BLL_NXB bllNXB;
     private BLL_NgonNgu bllNN;
     private BLL_TheLoai bllTL;
     private BLL_TacGia bllTG;
 
-    public frmCapNhatSach() throws Exception {
+    /**
+     * Creates new form FormCapNhat
+     */
+    public frmCapNhatSach1() throws SQLException, Exception {
         initComponents();
+        this.setLocationRelativeTo(null);
+
         bll = new Bll_CapNhatSach();
         comboboxNN();
         comboboxNXB();
@@ -46,70 +49,6 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
         comboboxTG();
         hienThi();
         hienThiSach();
-    }
-
-    public void comboboxNXB() throws Exception {
-        bllNXB = new BLL_NXB();
-        cbNXB.removeAllItems();
-        ResultSet rs = bllNXB.layDS();
-        while (rs.next()) {
-            cbNXB.addItem(rs.getString("name"));
-        }
-    }
-
-    public void comboboxNN() throws Exception {
-        bllNN = new BLL_NgonNgu();
-        cbNgonNgu.removeAllItems();
-        ResultSet rs = bllNN.layNgonNgu();
-        while (rs.next()) {
-            cbNgonNgu.addItem(rs.getString("name"));
-        }
-    }
-
-    public void comboboxTL() throws Exception {
-        bllTL = new BLL_TheLoai();
-        cbTheLoai.removeAllItems();
-        ResultSet rs = bllTL.layDS();
-        while (rs.next()) {
-            cbTheLoai.addItem(rs.getString("name"));
-        }
-    }
-
-    public void comboboxTG() throws Exception {
-        bllTG = new BLL_TacGia();
-        cbTacGia.removeAllItems();
-        ResultSet rs = bllTG.layDS();
-        while (rs.next()) {
-            cbTacGia.addItem(rs.getString("author_name"));
-        }
-    }
-
-    public void hienThi() {
-        DefaultTableModel model = (DefaultTableModel) tbSach.getModel();
-        model.setColumnCount(0);
-        model.setRowCount(0);
-        model.addColumn("Mã Sách");
-        model.addColumn("Tên Sách");
-        model.addColumn("Thể loại");
-        model.addColumn("Ngôn ngữ");
-        model.addColumn("Tác giả");
-        model.addColumn("Nhà xuất bản");
-        model.addColumn("Năm xuất bản");
-        tbSach.setModel(model);
-    }
-
-    public void hienThiSach() throws SQLException {
-        ResultSet rs = bll.layDSSach();
-        DefaultTableModel model = (DefaultTableModel) tbSach.getModel();
-        model.setRowCount(0);
-        while (rs.next()) {
-            Object[] col = new Object[7];
-            for (int i = 1; i <= 7; i++) {
-                col[i - 1] = rs.getObject(i);
-            }
-            model.addRow(col);
-        }
-        // rs.close();
     }
 
     /**
@@ -142,6 +81,8 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
         cbNXB = new javax.swing.JComboBox<>();
         cbNgonNgu = new javax.swing.JComboBox<>();
         cbTacGia = new javax.swing.JComboBox<>();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(155, 177, 255));
 
@@ -251,7 +192,7 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(32, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 893, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -352,6 +293,71 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMasachActionPerformed
 
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+        int row = tbSach.getSelectedRow();
+        if (row >= 0) {
+        String maSach = tbSach.getValueAt(row, 0).toString();
+        JOptionPane.showMessageDialog(null, maSach);
+        String tenSach = txtTensach.getText();
+        String theLoai = null;
+        try {
+            theLoai = bllTL.layMa(cbTheLoai.getSelectedItem().toString());
+        } catch (Exception ex) {
+            Logger.getLogger(frmCapNhatSach1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String ngonNgu = null;
+        try {
+            ngonNgu = bllNN.layMa(cbNgonNgu.getSelectedItem().toString());
+        } catch (Exception ex) {
+            Logger.getLogger(frmCapNhatSach1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String tacGia = null;
+        try {
+            tacGia = bllTG.layMa(cbTacGia.getSelectedItem().toString());
+        } catch (Exception ex) {
+            Logger.getLogger(frmCapNhatSach1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String NXB = null;
+        try {
+            NXB = bllNXB.layMa(cbNXB.getSelectedItem().toString());;
+        } catch (Exception ex) {
+            Logger.getLogger(frmCapNhatSach1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int namXB = Integer.parseInt(txtNamXB.getText());
+        
+        ET_Sach et;
+        if (maSach.compareTo("") == 0
+                || tenSach.compareTo("") == 0
+                || (txtNamXB.getText()).compareTo("") == 0) {
+            JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
+        } else {
+            try {
+                et = new ET_Sach(maSach, tenSach, theLoai, ngonNgu, tacGia, NXB, namXB);
+
+                if (bll.suaSach(et)) {
+                    JOptionPane.showMessageDialog(rootPane, "Thành công");
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Không thành công");
+                }
+                hienThiSach();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(frmNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        }else
+        {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn nhân viên");
+        }
+
+    }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnThoatActionPerformed
+
     private void tbSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSachMouseClicked
         // TODO add your handling code here:
         int row = tbSach.getSelectedRow();
@@ -367,7 +373,7 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
         try {
             cbNgonNgu.setSelectedItem(bllNN.layTen(model.getValueAt(row, 3).toString()));
         } catch (Exception ex) {
-            ex.printStackTrace();
+           ex.printStackTrace();
         }
         try {
             cbTacGia.setSelectedItem(bllTG.layTen(model.getValueAt(row, 4).toString()));
@@ -381,69 +387,123 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
         }
         txtNamXB.setText(model.getValueAt(row, 6).toString());
     }//GEN-LAST:event_tbSachMouseClicked
+    public void comboboxNXB() throws Exception {
+        bllNXB = new BLL_NXB();
+        cbNXB.removeAllItems();
+        ResultSet rs = bllNXB.layDS();
+        while (rs.next()) {
+            cbNXB.addItem(rs.getString("name"));
+        }
+    }
 
-    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        // TODO add your handling code here:
-        int row = tbSach.getSelectedRow();
-        if (row >= 0) {
-            String maSach = tbSach.getValueAt(row, 0).toString();
-            JOptionPane.showMessageDialog(null, maSach);
-            String tenSach = txtTensach.getText();
-            String theLoai = null;
-            try {
-                theLoai = bllTL.layMa(cbTheLoai.getSelectedItem().toString());
-            } catch (Exception ex) {
-                Logger.getLogger(frmCapNhatSach1.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            String ngonNgu = null;
-            try {
-                ngonNgu = bllNN.layMa(cbNgonNgu.getSelectedItem().toString());
-            } catch (Exception ex) {
-                Logger.getLogger(frmCapNhatSach1.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            String tacGia = null;
-            try {
-                tacGia = bllTG.layMa(cbTacGia.getSelectedItem().toString());
-            } catch (Exception ex) {
-                Logger.getLogger(frmCapNhatSach1.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            String NXB = null;
-            try {
-                NXB = bllNXB.layMa(cbNXB.getSelectedItem().toString());;
-            } catch (Exception ex) {
-                Logger.getLogger(frmCapNhatSach1.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            int namXB = Integer.parseInt(txtNamXB.getText());
+    public void comboboxNN() throws Exception {
+        bllNN = new BLL_NgonNgu();
+        cbNgonNgu.removeAllItems();
+        ResultSet rs = bllNN.layNgonNgu();
+        while (rs.next()) {
+            cbNgonNgu.addItem(rs.getString("title"));
+        }
+    }
 
-            ET_Sach et;
-            if (maSach.compareTo("") == 0
-                    || tenSach.compareTo("") == 0
-                    || (txtNamXB.getText()).compareTo("") == 0) {
-                JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
-            } else {
-                try {
-                    et = new ET_Sach(maSach, tenSach, theLoai, ngonNgu, tacGia, NXB, namXB);
+    public void comboboxTL() throws Exception {
+        bllTL = new BLL_TheLoai();
+        cbTheLoai.removeAllItems();
+        ResultSet rs = bllTL.layDS();
+        while (rs.next()) {
+            cbTheLoai.addItem(rs.getString("title"));
+        }
+    }
 
-                    if (bll.suaSach(et)) {
-                        JOptionPane.showMessageDialog(rootPane, "Thành công");
-                    } else {
-                        JOptionPane.showMessageDialog(rootPane, "Không thành công");
-                    }
-                    hienThiSach();
+    public void comboboxTG() throws Exception {
+        bllTG = new BLL_TacGia();
+        cbTacGia.removeAllItems();
+        ResultSet rs = bllTG.layDS();
+        while (rs.next()) {
+            cbTacGia.addItem(rs.getString("author_name"));
+        }
+    }
 
-                } catch (SQLException ex) {
-                    Logger.getLogger(frmNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
                 }
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Vui lòng chọn nhân viên");
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(frmCapNhatSach1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(frmCapNhatSach1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(frmCapNhatSach1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(frmCapNhatSach1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnSuaActionPerformed
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
-    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_btnThoatActionPerformed
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    new frmCapNhatSach1().setVisible(true);
+                } catch (Exception ex) {
+                   ex.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void hienThi() {
+        DefaultTableModel model = (DefaultTableModel) tbSach.getModel();
+        model.setColumnCount(0);
+        model.setRowCount(0);
+        model.addColumn("Mã Sách");
+        model.addColumn("Tên Sách");
+        model.addColumn("Thể loại");
+        model.addColumn("Ngôn ngữ");
+        model.addColumn("Tác giả");
+        model.addColumn("Nhà xuất bản");
+        model.addColumn("Năm xuất bản");
+        tbSach.setModel(model);
+    }
+
+    public void hienThiSach() throws SQLException {
+        ResultSet rs = bll.layDSSach();
+        DefaultTableModel model = (DefaultTableModel) tbSach.getModel();
+        model.setRowCount(0);
+        while (rs.next()) {
+            Object[] col = new Object[7];
+            for (int i = 1; i <= 7; i++) {
+                col[i - 1] = rs.getObject(i);
+            }
+            model.addRow(col);
+        }
+        // rs.close();
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

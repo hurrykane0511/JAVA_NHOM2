@@ -34,6 +34,7 @@ public class frmTrangChu extends javax.swing.JFrame {
     private frmTheThuVien frmTheThuVien = null;
     private frmGiaHanTheTV frmGiaHan = null;
     private frmLoaiDocGia frmLoaiDocGia = null;
+    private frmCapNhatSach1 frmCapNhatSach = null;
 
     public frmTrangChu() {
         initComponents();
@@ -69,6 +70,7 @@ public class frmTrangChu extends javax.swing.JFrame {
         mnuThoat = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         mnuQL_NhapSach = new javax.swing.JMenuItem();
+        mnuCapNhat = new javax.swing.JMenuItem();
         mnuQL_NhanVien = new javax.swing.JMenuItem();
         mnuQL_DanhMuc = new javax.swing.JMenuItem();
         mnuQL_NgonNgu = new javax.swing.JMenuItem();
@@ -140,6 +142,15 @@ public class frmTrangChu extends javax.swing.JFrame {
             }
         });
         jMenu2.add(mnuQL_NhapSach);
+
+        mnuCapNhat.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mnuCapNhat.setText("Cập nhật sách");
+        mnuCapNhat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuCapNhatActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnuCapNhat);
 
         mnuQL_NhanVien.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         mnuQL_NhanVien.setText("Nhân viên");
@@ -544,6 +555,24 @@ public class frmTrangChu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mnuLoaiDGActionPerformed
 
+    private void mnuCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCapNhatActionPerformed
+        // TODO add your handling code here:
+         if (frmCapNhatSach == null || frmCapNhatSach.isClosed()) {
+            try {
+                frmCapNhatSach = new frmLoaiDocGia();
+            } catch (Exception ex) {
+                Logger.getLogger(frmTrangChu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            dpMain.add(frmLoaiDocGia);
+            frmLoaiDocGia.setLocation(this.getWidth() / 2 - frmLoaiDocGia.getWidth() / 2, (this.getHeight() - 20) / 2 - frmLoaiDocGia.getHeight() / 2 - 20);
+            frmLoaiDocGia.setVisible(true);
+        } else {
+            frmLoaiDocGia.setLocation(this.getWidth() / 2 - frmLoaiDocGia.getWidth() / 2, (this.getHeight() - 20) / 2 - frmLoaiDocGia.getHeight() / 2 - 20);
+            frmLoaiDocGia.setVisible(true);
+            frmLoaiDocGia.toFront();
+        }
+    }//GEN-LAST:event_mnuCapNhatActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -592,6 +621,7 @@ public class frmTrangChu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenuItem mnuCapNhat;
     private javax.swing.JMenuItem mnuDangXuat;
     private javax.swing.JMenuItem mnuGiaHan;
     private javax.swing.JMenuItem mnuLoaiDG;

@@ -543,9 +543,12 @@ public class frmTheThuVien extends javax.swing.JInternalFrame {
             if (bllDG.checkTT(cccd)) {
                 int kq = JOptionPane.showConfirmDialog(null, "Độc giả đã tồn tại, bạn có muốn gia hạn thẻ?", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (kq == JOptionPane.YES_OPTION) {
-                    frmGiaHanTheTV frmGiaHan = new frmGiaHanTheTV();
-                    frmGiaHan.setVisible(true);
-                    frmGiaHan.toFront();
+//                    frmGiaHanTheTV frmGiaHan = new frmGiaHanTheTV();
+//                    frmGiaHan.setVisible(true);
+//                    frmGiaHan.toFront();
+                    frmTimKiem frm = new frmTimKiem();
+                    frm.setVisible(true);
+                    frm.toFront();
                 }
             }
         } catch (Exception ex) {
