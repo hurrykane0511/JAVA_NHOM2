@@ -34,7 +34,7 @@ public class frmTrangChu extends javax.swing.JFrame {
     private frmTheThuVien frmTheThuVien = null;
     private frmGiaHanTheTV frmGiaHan = null;
     private frmLoaiDocGia frmLoaiDocGia = null;
-    private frmCapNhatSach1 frmCapNhatSach = null;
+    private frmCapNhatSach frmCapNhatSach = null;
 
     public frmTrangChu() {
         initComponents();
@@ -557,19 +557,19 @@ public class frmTrangChu extends javax.swing.JFrame {
 
     private void mnuCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCapNhatActionPerformed
         // TODO add your handling code here:
-         if (frmCapNhatSach == null || frmCapNhatSach.isClosed()) {
+        if (frmCapNhatSach == null || frmCapNhatSach.isClosed()) {
             try {
-                frmCapNhatSach = new frmLoaiDocGia();
+                frmCapNhatSach = new frmCapNhatSach();
             } catch (Exception ex) {
                 Logger.getLogger(frmTrangChu.class.getName()).log(Level.SEVERE, null, ex);
             }
-            dpMain.add(frmLoaiDocGia);
-            frmLoaiDocGia.setLocation(this.getWidth() / 2 - frmLoaiDocGia.getWidth() / 2, (this.getHeight() - 20) / 2 - frmLoaiDocGia.getHeight() / 2 - 20);
-            frmLoaiDocGia.setVisible(true);
+            dpMain.add(frmCapNhatSach);
+            frmCapNhatSach.setLocation(this.getWidth() / 2 - frmCapNhatSach.getWidth() / 2, (this.getHeight() - 20) / 2 - frmCapNhatSach.getHeight() / 2 - 20);
+            frmCapNhatSach.setVisible(true);
         } else {
-            frmLoaiDocGia.setLocation(this.getWidth() / 2 - frmLoaiDocGia.getWidth() / 2, (this.getHeight() - 20) / 2 - frmLoaiDocGia.getHeight() / 2 - 20);
-            frmLoaiDocGia.setVisible(true);
-            frmLoaiDocGia.toFront();
+            frmCapNhatSach.setLocation(this.getWidth() / 2 - frmCapNhatSach.getWidth() / 2, (this.getHeight() - 20) / 2 - frmCapNhatSach.getHeight() / 2 - 20);
+            frmCapNhatSach.setVisible(true);
+            frmCapNhatSach.toFront();
         }
     }//GEN-LAST:event_mnuCapNhatActionPerformed
 
