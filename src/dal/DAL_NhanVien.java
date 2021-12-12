@@ -24,7 +24,7 @@ public class DAL_NhanVien {
         Connection conn = null;
         try {
             conn = DatabaseUtil.getConnection();
-            Statement st = conn.createStatement();
+            Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             String sql = "select * from staffs";
             rs = st.executeQuery(sql);
         } catch (Exception e) {

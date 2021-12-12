@@ -3,11 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/dthan/OneDrive/Desktop/Code/Java/Tuan13.3/JAVA_NHOM2/src/dal/DAL_TraSach.java</file>
             <file>file:/C:/Users/dthan/OneDrive/Desktop/Code/Java/Tuan13.3/JAVA_NHOM2/src/gui/frmTraSach.java</file>
             <file>file:/C:/Users/dthan/OneDrive/Desktop/Code/Java/Tuan13.3/JAVA_NHOM2/src/gui/frmTrangChu.java</file>
             <file>file:/C:/Users/dthan/OneDrive/Desktop/Code/Java/Tuan13.3/JAVA_NHOM2/src/et/ET_TraSach.java</file>
             <file>file:/C:/Users/dthan/OneDrive/Desktop/Code/Java/Tuan13.3/JAVA_NHOM2/src/bll/BLL_TraSach.java</file>
+=======
+            <file>file:/E:/data/Trí/java/DoAn/ver2/JAVA_NHOM2/src/gui/frmNhapSach.java</file>
+            <file>file:/E:/data/Trí/java/DoAn/ver2/JAVA_NHOM2/src/gui/frmTrangChu.java</file>
+            <file>file:/E:/data/Trí/java/DoAn/ver2/JAVA_NHOM2/src/gui/frmTheThuVien.java</file>
+>>>>>>> 7f2d6abbccdd03c3ad9c384911a0a2a12a84179e
         </group>
     </open-files>
 </project-private>

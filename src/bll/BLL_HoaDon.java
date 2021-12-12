@@ -20,7 +20,9 @@ public class BLL_HoaDon {
     public BLL_HoaDon() throws Exception {
         dal = new DAL_HoaDon();
     }
-    
+    public ResultSet layDS() throws SQLException{
+        return dal.layHoaDon();
+    }
     public boolean themHoaDon(ET_HoaDon et) throws SQLException {
         return dal.themHoaDon(et);
     }
