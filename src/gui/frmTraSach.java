@@ -23,48 +23,47 @@ import javax.swing.table.DefaultTableModel;
  * @author dthan
  */
 public class frmTraSach extends javax.swing.JFrame {
-    
+
     private BLL_TraSachh bll;
     HashMap<String, String> hm_nv = new HashMap<String, String>();
-    
+    private Boolean kq = false;
+
     public frmTraSach() throws Exception {
         initComponents();
         this.setLocationRelativeTo(null);
         bll = new BLL_TraSachh();
-        
+
         hienThi();
         hienThiTraSach();
-        
+
         txtMaSach.setEditable(false);
         txtSoNgayQuaHan.setEditable(false);
         dtpNgayThucTra.setEnabled(false);
         dtpNgayDuKienTra.setEnabled(false);
         txtDocGia.setEditable(false);
         txtMaTheThuVien.setEditable(false);
-        txtTienPhat.setEditable(false);
+        //txtTienPhat.setEditable(false);
 
         // lấy ngày hiện tại 
         Date date = new Date();
         dtpNgayThucTra.setDate(date);
-        
+
         this.bll = new BLL_TraSachh();
         this.hm_nv = bll.hm_NV();
         loadCBNV();
-        
     }
-    
+
     public void loadCBNV() {
-        
+
         cbbNhanVien.removeAllItems();
         Map<String, String> map = new TreeMap<>(hm_nv);
-        
+
         for (Map.Entry<String, String> entry : map.entrySet()) {
             Object value = entry.getValue();
             cbbNhanVien.addItem(value.toString());
         }
-        
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -95,8 +94,6 @@ public class frmTraSach extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txtMaTheThuVien = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        txtTienPhat = new javax.swing.JTextField();
         cbbNhanVien = new javax.swing.JComboBox<>();
         btnMoi = new javax.swing.JButton();
 
@@ -115,16 +112,16 @@ public class frmTraSach extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(520, Short.MAX_VALUE)
+                .addContainerGap(493, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(450, 450, 450))
+                .addGap(477, 477, 477))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, -1));
@@ -199,17 +196,19 @@ public class frmTraSach extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnThoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 478, -1, 32));
+
+        dtpNgayThucTra.setDateFormatString("dd/MM/yyyy");
         jPanel1.add(dtpNgayThucTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 236, 170, 30));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("Tình trạng sách");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 378, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 300, -1, -1));
 
         txtaTinhTrangSach.setColumns(20);
         txtaTinhTrangSach.setRows(5);
         jScrollPane2.setViewportView(txtaTinhTrangSach);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(766, 375, -1, -1));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 300, -1, -1));
 
         txtMaSach.setMinimumSize(new java.awt.Dimension(7, 28));
         txtMaSach.addActionListener(new java.awt.event.ActionListener() {
@@ -232,6 +231,8 @@ public class frmTraSach extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel8.setText("Ngày dự trả");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 186, -1, -1));
+
+        dtpNgayDuKienTra.setDateFormatString("dd/MM/yyyy");
         jPanel1.add(dtpNgayDuKienTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 178, 170, 30));
 
         txtDocGia.setMinimumSize(new java.awt.Dimension(7, 28));
@@ -257,18 +258,6 @@ public class frmTraSach extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel10.setText("Mã thẻ thư viện");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 170, -1, 23));
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel11.setText("Tiền phạt");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 308, -1, -1));
-
-        txtTienPhat.setMinimumSize(new java.awt.Dimension(7, 28));
-        txtTienPhat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTienPhatActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtTienPhat, new org.netbeans.lib.awtextra.AbsoluteConstraints(769, 308, 100, 28));
 
         cbbNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -308,43 +297,37 @@ public class frmTraSach extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDocGiaActionPerformed
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
-        //String a = ((JTextField)dtpNgayTraSach.getDateEditor().getUiComponent()).getText();
-        //String b = ((JTextField)dtpNgayMuonSach.getDateEditor().getUiComponent()).getText();       
-        //txtNhanVien.setText(a);     
+
         try {
             ResultSet rs = bll.timTraSach(txtMaMuonSach.getText());
             if (rs.next() == false) {
                 JOptionPane.showMessageDialog(this, "Không tìm thấy mã mượn sách");
                 txtMaMuonSach.setText("");
-                
                 txtMaSach.setText("");
                 txtDocGia.setText("");
                 txtaTinhTrangSach.setText("");
                 txtMaTheThuVien.setText("");
                 txtSoNgayQuaHan.setText("");
-                txtTienPhat.setText("");
+                kq = false;
                 dtpNgayDuKienTra.setDate(null);
-                
             } else {
                 txtMaMuonSach.setText(rs.getString("id_rental_detail"));
                 dtpNgayDuKienTra.setDate(rs.getDate("return_date"));
                 txtMaSach.setText(rs.getString("id_book"));
                 txtMaTheThuVien.setText(rs.getString("id_lib_card"));
-                
+                kq = true;
                 try {
                     String rs1 = bll.layTenDocGia(txtMaTheThuVien.getText());
                     txtDocGia.setText(rs1);
                 } catch (Exception ex) {
                     Logger.getLogger(frmTraSach.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
                 txtaTinhTrangSach.setText(rs.getString("status"));
             }
         } catch (Exception e) {
-            
         }
         soNgayQuaHan();
-        tienPhat();
+        //tienPhat();
 
     }//GEN-LAST:event_btnTimActionPerformed
 
@@ -367,12 +350,11 @@ public class frmTraSach extends javax.swing.JFrame {
         String tenDocGia = txtDocGia.getText();
         String maThuVien = txtMaTheThuVien.getText();
         String soNgayQuaHan = txtSoNgayQuaHan.getText();
-        String tienPhat = txtTienPhat.getText();
         String maNhanVien = getMaNV();
         String tinhTrangSach = txtaTinhTrangSach.getText();
-        //ET_TraSachh et = new ET_TraSachh(maMuon, ngayDuTra, ngayThucTra, maSach, tenDocGia, maThuVien, soNgayQuaHan, tienPhat, maNhanVien, tinhTrangSach);
-        ET_TraSachh et = new ET_TraSachh(Integer.parseInt(maMuon), ngayDuTra, ngayThucTra, maSach, tenDocGia, maThuVien, Integer.parseInt(soNgayQuaHan), Integer.parseInt(tienPhat), maNhanVien, tinhTrangSach);
-        
+
+        ET_TraSachh et = new ET_TraSachh(Integer.parseInt(maMuon), ngayDuTra, ngayThucTra, maSach, tenDocGia, maThuVien, Integer.parseInt(soNgayQuaHan), maNhanVien, tinhTrangSach);
+
         try {
             if (bll.themTraSach(et)) {
                 JOptionPane.showMessageDialog(rootPane, "Thêm thành công");
@@ -407,36 +389,16 @@ public class frmTraSach extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMaTheThuVienActionPerformed
 
-    private void txtTienPhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTienPhatActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTienPhatActionPerformed
-
     private void cbbNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbNhanVienActionPerformed
-        
+
 
     }//GEN-LAST:event_cbbNhanVienActionPerformed
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
-        
+
 
     }//GEN-LAST:event_btnMoiActionPerformed
-//    public void comboboxMaSach() throws Exception {
-//        bll = new BLL_TraSach();
-//        cbbMaSach.removeAllItems();
-//        ResultSet rs = bll.cbbGetMaSach();
-//        while (rs.next()) {
-//            cbbMaSach.addItem(rs.getString("id_book"));
-//        }
-//    }
 
-//    public void comboboxMaNhanVien() throws Exception {
-//        bll = new BLL_TraSach();
-//        cbbMaNhanVien.removeAllItems();
-//        ResultSet rs = bll.cbbGetMaNV();
-//        while (rs.next()) {
-//            cbbMaNhanVien.addItem(rs.getString("id_staff"));
-//        }
-//    }
     /**
      * @param args the command line arguments
      */
@@ -451,21 +413,21 @@ public class frmTraSach extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                    
+
                 }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(frmTraSach.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(frmTraSach.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(frmTraSach.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(frmTraSach.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -484,7 +446,7 @@ public class frmTraSach extends javax.swing.JFrame {
             public void run() {
                 try {
                     new frmTraSach().setVisible(true);
-                    
+
                 } catch (Exception ex) {
                     Logger.getLogger(frmTraSach.class
                             .getName()).log(Level.SEVERE, null, ex);
@@ -492,7 +454,7 @@ public class frmTraSach extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void hienThi() {
         DefaultTableModel model = (DefaultTableModel) tblTraSach.getModel();
         model.setColumnCount(0);
@@ -510,46 +472,50 @@ public class frmTraSach extends javax.swing.JFrame {
         model.addColumn("Tình trạng sách");
         tblTraSach.setModel(model);
     }
-    
+
     public void hienThiTraSach() throws SQLException {
-        
+
         DefaultTableModel model = (DefaultTableModel) tblTraSach.getModel();
         model.setRowCount(0);
         ResultSet rs = bll.layTraSach();
-        
+
         while (rs.next()) {
-            Object[] col = new Object[11];
-            for (int i = 1; i <= 11; i++) {
+            Object[] col = new Object[10];
+            for (int i = 1; i <= 10; i++) {
                 col[i - 1] = rs.getObject(i);
             }
             model.addRow(col);
         }
     }
-    
+
     public void soNgayQuaHan() {
         SimpleDateFormat fr = new SimpleDateFormat("yyyy-MM-dd");
-        Date ngayMuon = null;
+        Date ngayDuKienTra = null;
         Date ngayTra = null;
-        
+
         try {
-            ngayTra = fr.parse(fr.format(dtpNgayThucTra.getDate()));
-            ngayMuon = fr.parse(fr.format(dtpNgayDuKienTra.getDate()));
+            if (kq) {
+                ngayTra = fr.parse(fr.format(dtpNgayThucTra.getDate()));
+                ngayDuKienTra = fr.parse(fr.format(dtpNgayDuKienTra.getDate()));
+                int datediff = (int) (ngayTra.getTime() - ngayDuKienTra.getTime());
+                int days = datediff / (60 * 60 * 1000) / 24;
+                if (days < 0) {
+                    txtSoNgayQuaHan.setText("0");
+                } else {
+                    txtSoNgayQuaHan.setText(Long.toString(days));
+                }
+            } else {
+                txtSoNgayQuaHan.setText("0");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        long datediff = ngayTra.getTime() - ngayMuon.getTime();
-        long days = datediff / (60 * 60 * 1000) / 24;
-        txtSoNgayQuaHan.setText(Long.toString(days));
-        if (days < 0) {
-            txtSoNgayQuaHan.setText("0");
-        }
-    }
-    
-    public void tienPhat() {
-        int tienPhat = Integer.parseInt(txtSoNgayQuaHan.getText()) * 10000;
-        txtTienPhat.setText(Integer.toString(tienPhat));
     }
 
+//    public void tienPhat() {
+//        int tienPhat = Integer.parseInt(txtSoNgayQuaHan.getText()) * 10000;
+//        txtTienPhat.setText(Integer.toString(tienPhat));
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLuu;
@@ -561,7 +527,6 @@ public class frmTraSach extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser dtpNgayThucTra;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -580,7 +545,6 @@ public class frmTraSach extends javax.swing.JFrame {
     private javax.swing.JTextField txtMaSach;
     private javax.swing.JTextField txtMaTheThuVien;
     private javax.swing.JTextField txtSoNgayQuaHan;
-    private javax.swing.JTextField txtTienPhat;
     private javax.swing.JTextArea txtaTinhTrangSach;
     // End of variables declaration//GEN-END:variables
 }

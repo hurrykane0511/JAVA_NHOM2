@@ -35,8 +35,8 @@ public class DAL_TraSachh{
 
     public Boolean themTraSach(ET_TraSachh et) throws SQLException {
         Statement st = conn.createStatement();
-        String sql = "insert into return_detail(id_rental_detail, expected_return_date, actually_return_date, id_book, reader, id_lib_card, days_overdue, fine, id_staff, status)"
-                + "values(?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into return_detail(id_rental_detail, expected_return_date, actually_return_date, id_book, reader, id_lib_card, days_overdue, id_staff, status)"
+                + "values(?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, et.getMaMuonSach());
@@ -46,9 +46,9 @@ public class DAL_TraSachh{
             pst.setString(5, et.getTenDocGia());
             pst.setString(6, et.getMaThuVien());
             pst.setInt(7, et.getSoNgayQuaHan());
-            pst.setInt(8, et.getTienPhat());
-            pst.setString(9, et.getMaNhanVien());
-            pst.setString(10, et.getTinhTrangSach());
+            //pst.setInt(8, et.getTienPhat());
+            pst.setString(8, et.getMaNhanVien());
+            pst.setString(9, et.getTinhTrangSach());
             return pst.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();

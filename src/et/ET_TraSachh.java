@@ -19,11 +19,10 @@ public class ET_TraSachh {
     private String tenDocGia;
     private String maThuVien;
     private int soNgayQuaHan;
-    private int tienPhat;
     private String maNhanVien;
     private String tinhTrangSach;
 
-    public ET_TraSachh(int maMuonSach, Date ngayDuTra, Date ngayThucTra, String maSach, String tenDocGia, String maThuVien, int soNgayQuaHan, int tienPhat, String maNhanVien, String tinhTrangSach) {
+    public ET_TraSachh(int maMuonSach, Date ngayDuTra, Date ngayThucTra, String maSach, String tenDocGia, String maThuVien, int soNgayQuaHan, String maNhanVien, String tinhTrangSach) {
         this.maMuonSach = maMuonSach;
         this.ngayDuTra = ngayDuTra;
         this.ngayThucTra = ngayThucTra;
@@ -31,7 +30,6 @@ public class ET_TraSachh {
         this.tenDocGia = tenDocGia;
         this.maThuVien = maThuVien;
         this.soNgayQuaHan = soNgayQuaHan;
-        this.tienPhat = tienPhat;
         this.maNhanVien = maNhanVien;
         this.tinhTrangSach = tinhTrangSach;
     }
@@ -92,14 +90,6 @@ public class ET_TraSachh {
         this.soNgayQuaHan = soNgayQuaHan;
     }
 
-    public int getTienPhat() {
-        return tienPhat;
-    }
-
-    public void setTienPhat(int tienPhat) {
-        this.tienPhat = tienPhat;
-    }
-
     public String getMaNhanVien() {
         return maNhanVien;
     }
@@ -116,5 +106,6 @@ public class ET_TraSachh {
         this.tinhTrangSach = tinhTrangSach;
     }
 
+   
   
 }
