@@ -126,4 +126,18 @@ public class DAL_NhaCungCap {
         }
         return ma;
     }
+    public String layTenNCC(String maNCC) throws Exception {
+        Connection conn = null;
+        conn = DatabaseUtil.getConnection();
+        ResultSet rs = null;
+        Statement st = conn.createStatement();
+        String sql = "select * from suppliers where id_supplier ='" + maNCC + "' limit 1";
+        rs = st.executeQuery(sql);
+        String ma = "";
+        while (rs.next()) {
+            ma = (String) rs.getObject(2);
+            break;
+        }
+        return ma;
+    }
 }

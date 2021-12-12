@@ -18,20 +18,23 @@ import javax.swing.JOptionPane;
  * @author PC
  */
 public class DAL_ChiTietHD {
+
     private Connection conn;
 
     public DAL_ChiTietHD() throws Exception {
         conn = DatabaseUtil.getConnection();
     }
+
     public boolean themChiTietHD(ET_ChiTietHD et) throws SQLException {
         Statement st = conn.createStatement();
         String sql = "insert into idv_detail(id_idv_detail,quantity,id_idv,id_book)"
-                + "values('"+et.getMaChiTietHD()+"',"+et.getSoLuong()+",'"+et.getMaHD()+"','"+et.getMaSach()+"')";
+                + "values('" + et.getMaChiTietHD() + "'," + et.getSoLuong() + ",'" + et.getMaHD() + "','" + et.getMaSach() + "')";
         if (st.executeUpdate(sql) > 0) {
             return true;
         }
         return false;
     }
+
     public Boolean checkTonTai(String ma) throws SQLException {
         Connection conn = null;;
         ResultSet rs = null;
@@ -50,6 +53,7 @@ public class DAL_ChiTietHD {
         }
         return (row > 0);
     }
+
     public ResultSet layDS() throws SQLException, Exception {
         Connection conn = null;
         ResultSet rs = null;
@@ -60,6 +64,20 @@ public class DAL_ChiTietHD {
             String sql = "select * from idv_detail ";
             rs = st.executeQuery(sql);
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return rs;
+    }
+
+    public ResultSet timCTHD(String maHD) throws Exception {
+        Connection conn = null;
+        conn = DatabaseUtil.getConnection();
+        ResultSet rs = null;
+        try {
+            Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            String sql = "select * from idv_detail where id_idv = '" + maHD + "'";
+            rs = st.executeQuery(sql);
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
         return rs;

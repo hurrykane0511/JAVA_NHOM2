@@ -123,4 +123,30 @@ public class DAL_Sach {
         }
         return sl;
     }
+    public String layGia(String maSach) throws Exception {
+        Connection conn = null;
+        conn = DatabaseUtil.getConnection();
+        ResultSet rs = null;
+        Statement st = conn.createStatement();
+        String sql = "select * from books where id_book = '" + maSach + "'";
+        rs = st.executeQuery(sql);
+        String sl = "";
+        while (rs.next()) {
+            sl = rs.getObject(4).toString();
+        }
+        return sl;
+    }
+    public String layTen(String maSach) throws Exception {
+        Connection conn = null;
+        conn = DatabaseUtil.getConnection();
+        ResultSet rs = null;
+        Statement st = conn.createStatement();
+        String sql = "select * from books where id_book = '" + maSach + "'";
+        rs = st.executeQuery(sql);
+        String ten = "";
+        while (rs.next()) {
+            ten = rs.getObject(2).toString();
+        }
+        return ten;
+    }
 }

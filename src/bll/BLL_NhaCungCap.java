@@ -38,4 +38,7 @@ public class BLL_NhaCungCap {
     public ResultSet layNCC() throws SQLException {
         return dal.layNCC();
     }
+    public String layTenNCC(String maNCC) throws SQLException, Exception {
+        return dal.layTenNCC(maNCC);
+    }
 }
