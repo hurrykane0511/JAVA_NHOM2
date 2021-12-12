@@ -232,9 +232,9 @@ public class frmNhanVien extends javax.swing.JInternalFrame {
                     reset();
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(frmNhanVien1.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             } catch (Exception ex) {
-                Logger.getLogger(frmNhanVien1.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
         }
     }//GEN-LAST:event_btnThemActionPerformed
@@ -271,7 +271,7 @@ public class frmNhanVien extends javax.swing.JInternalFrame {
                 hienThiNV();
                 reset();
             } catch (SQLException ex) {
-                Logger.getLogger(frmNhanVien1.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
         }
     }//GEN-LAST:event_btnSuaActionPerformed
@@ -300,7 +300,7 @@ public class frmNhanVien extends javax.swing.JInternalFrame {
                 hienThiNV();
                 reset();
             } catch (SQLException ex) {
-                Logger.getLogger(frmNhanVien1.class.getName()).log(Level.SEVERE, null, ex);
+               ex.printStackTrace();
             }
         } else {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn nhân viên");

@@ -394,14 +394,14 @@ public class frmTraSach extends javax.swing.JInternalFrame {
         try {
             hienThiTraSach();
         } catch (SQLException ex) {
-            Logger.getLogger(frmTraSach1.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         int kq = JOptionPane.showConfirmDialog(null, "Bạn có muốn thoát không", "Thông báo", JOptionPane.YES_NO_OPTION);
         if (kq == 0) {
-            System.exit(0);
+            this.dispose();
         }
     }//GEN-LAST:event_btnThoatActionPerformed
 
@@ -433,7 +433,7 @@ public class frmTraSach extends javax.swing.JInternalFrame {
                     String rs1 = bll.layTenDocGia(txtMaTheThuVien.getText());
                     txtDocGia.setText(rs1);
                 } catch (Exception ex) {
-                    Logger.getLogger(frmTraSach1.class.getName()).log(Level.SEVERE, null, ex);
+                  ex.printStackTrace();
                 }
                 txtaTinhTrangSach.setText(rs.getString("status"));
             }

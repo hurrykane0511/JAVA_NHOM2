@@ -3,17 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package gui;
+
 import javax.swing.table.DefaultTableModel;
 import et.ET_NgonNgu;
-import java.util.Date;
 import bll.BLL_NgonNgu;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
 /**
  *
  * @author yushu
@@ -23,8 +23,9 @@ public class frmNgonNgu extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmNgonNgu
      */
-      private BLL_NgonNgu bll;
+    private BLL_NgonNgu bll;
     private int STT = 0;
+
     public frmNgonNgu() throws Exception {
         initComponents();
         bll = new BLL_NgonNgu();
@@ -209,12 +210,11 @@ public class frmNgonNgu extends javax.swing.JInternalFrame {
                         JOptionPane.showMessageDialog(rootPane, "Thêm thành công");
                         reset();
                     }
-
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(frmNhanVien1.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             } catch (Exception ex) {
-                Logger.getLogger(frmNhanVien1.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
         }
     }//GEN-LAST:event_btnThemActionPerformed
@@ -231,7 +231,7 @@ public class frmNgonNgu extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
                 reset();
             } catch (SQLException ex) {
-                Logger.getLogger(frmNgonNgu1.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
                 JOptionPane.showMessageDialog(rootPane, "Sửa không thành công");
             }
         }
@@ -255,7 +255,7 @@ public class frmNgonNgu extends javax.swing.JInternalFrame {
                 }
 
             } catch (SQLException ex) {
-                Logger.getLogger(frmNhanVien1.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
         } else {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn ngôn ngữ");
@@ -274,10 +274,11 @@ public class frmNgonNgu extends javax.swing.JInternalFrame {
         try {
             reset();
         } catch (SQLException ex) {
-            Logger.getLogger(frmNgonNgu1.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }//GEN-LAST:event_btnMoiActionPerformed
-  private void hienThi() {
+    
+    private void hienThi() {
         DefaultTableModel model = (DefaultTableModel) tblNgonNgu.getModel();
         model.setColumnCount(0);
         model.setRowCount(0);

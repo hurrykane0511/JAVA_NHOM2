@@ -315,7 +315,7 @@ public class frmLoaiDocGia extends javax.swing.JInternalFrame {
             // TODO add your handling code here:
             reset();
         } catch (Exception ex) {
-            Logger.getLogger(frmDanhMuc1.class.getName()).log(Level.SEVERE, null, ex);
+           ex.printStackTrace();
         }
     }//GEN-LAST:event_btnMoiActionPerformed
     private void reset() throws Exception {

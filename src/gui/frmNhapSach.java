@@ -474,7 +474,7 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
                                     JOptionPane.showMessageDialog(null, "Thêm không thành công");
                                 }
                             } catch (SQLException ex) {
-                                Logger.getLogger(frmNhapSach1.class.getName()).log(Level.SEVERE, null, ex);
+                                ex.printStackTrace();
                             }
                             hienHoaDon();
                         } else {
@@ -487,7 +487,7 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
                                 }
                                 hienHoaDon();
                             } catch (SQLException ex) {
-                                Logger.getLogger(frmNhapSach1.class.getName()).log(Level.SEVERE, null, ex);
+                               ex.printStackTrace();
                             }
                             ET_HoaDon HDon = new ET_HoaDon(mahd, maNV, maNCC);
                             String maCT = themCTHH();
@@ -501,7 +501,7 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
                     }
                 }
             } catch (Exception ex) {
-                Logger.getLogger(frmNhapSach1.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
         }
     }//GEN-LAST:event_btnthemActionPerformed

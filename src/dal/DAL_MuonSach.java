@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import et.ET_MuonSach;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import static sun.jvm.hotspot.HelloWorld.e;
 
 /**
  *
@@ -28,7 +29,6 @@ public class DAL_MuonSach {
 
     public boolean ChoMuonSach(ET_MuonSach phieu) throws SQLException {
 
-        Statement st = conn.createStatement();
         String sql = "INSERT INTO `qltv`.`rental_detail` (`borrowed_date`, `return_date`, `id_book`, `id_lib_card`, `id_staff`, `status`) VALUES ( ? , ? , ? , ? , ? , ?);";
 
         try {
@@ -40,11 +40,57 @@ public class DAL_MuonSach {
             pst.setString(5, phieu.getManv());
             pst.setString(6, phieu.getTinhTrang());
 
-            return pst.executeUpdate() > 0;
+            if (pst.executeUpdate() > 0) {
+                String sql2 = "update books set quantity = quantity - 1 where id_book = ? ;";
+                try 
+                {
+                    PreparedStatement pst1 = conn.prepareStatement(sql2);
+                    pst1.setString(1, phieu.getMasach());
+                    pst1.executeUpdate();
+                } 
+                catch (SQLException ex)
+                {
+                    JOptionPane.showMessageDialog(null, ex);
+                }
+                
+                return true;
+            }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         }
         return false;
+    }
+
+    public ResultSet GetStatus(String mathe) {
+        ResultSet rs = null;
+        PreparedStatement pst = null;
+        String sql = "select distinct count(dt.status_borow) as 'sum', c.expiration_date 'hethan', rt.quantity from member_card c \n"
+                + "join readers rd on c.id_reader = rd.id_reader \n"
+                + "join reader_type rt on rd.reader_type = rt.type_id \n"
+                + "join rental_detail dt on dt.id_lib_card = c.id_lib_card\n"
+                + "where c.id_lib_card = ? and dt.status_borow like 'Đang mượn'";
+        try {
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, mathe);
+            rs = pst.executeQuery();
+        } catch (SQLException e) {
+
+        }
+        return rs;
+    }
+
+    public ResultSet GetQtyBook(String masach) {
+        ResultSet rs = null;
+        PreparedStatement pst = null;
+        String sql = "select quantity from books where id_book = ? ;";
+        try {
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, masach);
+            rs = pst.executeQuery();
+        } catch (SQLException e) {
+
+        }
+        return rs;
     }
 
     public boolean SuaPhieuMuon(ET_MuonSach phieu, String maphieu) throws SQLException {
@@ -80,6 +126,7 @@ public class DAL_MuonSach {
 
         }
         return rs;
+
     }
 
     public boolean XoaPhieuMuon(String maphieu) throws SQLException {
@@ -103,11 +150,7 @@ public class DAL_MuonSach {
             conn = DatabaseUtil.getConnection();
             Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
-            String sql = "SELECT id_rental_detail as 'Mã phiếu',\n"
-                    + "id_lib_card as 'Mã thẻ', id_staff as 'Mã NV', \n"
-                    + "id_book as 'Mã Sách', status as 'Tình trạng sách',\n"
-                    + "borrowed_date as 'Ngày mượn', return_date as 'Ngày phải trả'\n"
-                    + "FROM qltv.rental_detail order by borrowed_date asc";
+            String sql = "SELECT * FROM qltv.rental_detail order by borrowed_date asc";
             rs = st.executeQuery(sql);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);

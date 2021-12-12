@@ -433,7 +433,7 @@ public class frmTheThuVien extends javax.swing.JInternalFrame {
             cbMaNV.setSelectedItem(bllNV.layTen(model.getValueAt(row, 7).toString()));
 
         } catch (Exception ex) {
-            Logger.getLogger(frmCapNhatSach.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
 
     }//GEN-LAST:event_tblTTVMouseClicked
@@ -522,7 +522,7 @@ public class frmTheThuVien extends javax.swing.JInternalFrame {
                     }
                 }
             } catch (Exception ex) {
-                Logger.getLogger(frmTheThuVien1.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
         }
     }//GEN-LAST:event_btnThemActionPerformed
@@ -532,7 +532,7 @@ public class frmTheThuVien extends javax.swing.JInternalFrame {
             // TODO add your handling code here:
             reset();
         } catch (Exception ex) {
-            Logger.getLogger(frmDanhMuc1.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }//GEN-LAST:event_btnMoiActionPerformed
 

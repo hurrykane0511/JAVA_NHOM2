@@ -217,7 +217,7 @@ public class frmDanhMuc extends javax.swing.JInternalFrame {
             // TODO add your handling code here:
             layMa();
         } catch (Exception ex) {
-            Logger.getLogger(frmDanhMuc1.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }//GEN-LAST:event_btnMoiActionPerformed
 
@@ -307,6 +307,7 @@ public class frmDanhMuc extends javax.swing.JInternalFrame {
         txtMaDM.setText(model.getValueAt(row, 0).toString());
         txtTenDM.setText(model.getValueAt(row, 1).toString());
     }//GEN-LAST:event_tblDanhMucMouseClicked
+    
     private void hienThi() {
         DefaultTableModel model = (DefaultTableModel) tblDanhMuc.getModel();
         model.setRowCount(0);

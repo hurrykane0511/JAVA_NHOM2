@@ -267,9 +267,9 @@ public class frmNXB extends javax.swing.JInternalFrame {
                     hienThiNXB();
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(frmNXB1.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             } catch (Exception ex) {
-                Logger.getLogger(frmNXB1.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
         }
         // TODO add your handling code here:
@@ -291,9 +291,9 @@ public class frmNXB extends javax.swing.JInternalFrame {
                 }
                 hienThiNXB();
             } catch (SQLException ex) {
-                Logger.getLogger(frmNXB1.class.getName()).log(Level.SEVERE, null, ex);
+                 ex.printStackTrace();
             } catch (Exception ex) {
-                Logger.getLogger(frmNXB1.class.getName()).log(Level.SEVERE, null, ex);
+                  ex.printStackTrace();
             }
         }
         // TODO add your handling code here:
@@ -310,9 +310,9 @@ public class frmNXB extends javax.swing.JInternalFrame {
                 }
                 hienThiNXB();
             } catch (SQLException ex) {
-                Logger.getLogger(frmNXB1.class.getName()).log(Level.SEVERE, null, ex);
+                 ex.printStackTrace();
             } catch (Exception ex) {
-                Logger.getLogger(frmNXB1.class.getName()).log(Level.SEVERE, null, ex);
+                 ex.printStackTrace();
             }
         } else {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn NXB");
