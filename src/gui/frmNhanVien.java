@@ -209,13 +209,7 @@ public class frmNhanVien extends javax.swing.JInternalFrame {
         Date ngaySinh = dtpNgSinh.getDate();
         String cCCD = txtCCCD.getText();
         ET_NhanVien et;
-        if (maNV == ""
-                || ho == ""
-                || ten == ""
-                || diaChi == ""
-                || soDT == ""
-                || ngaySinh == null
-                || cCCD == "") {
+        if (maNV.equals("")|| ho.equals("")|| ten.equals("")|| diaChi.equals("")|| soDT.equals("")|| ngaySinh == null|| cCCD.equals("")) {
             JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
         } else {
             try {
@@ -243,7 +237,6 @@ public class frmNhanVien extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int row = tblNhanVien.getSelectedRow();
         String maNV = tblNhanVien.getValueAt(row, 0).toString();
-        JOptionPane.showMessageDialog(null, maNV);
         String ho = txtHoNV.getText();
         String ten = txtTenNV.getText();
         String diaChi = txtDiaChi.getText();
@@ -251,13 +244,7 @@ public class frmNhanVien extends javax.swing.JInternalFrame {
         Date ngaySinh = dtpNgSinh.getDate();
         String cCCD = txtCCCD.getText();
         ET_NhanVien et;
-        if (maNV == ""
-                || ho == ""
-                || ten == ""
-                || diaChi == ""
-                || soDT == ""
-                || ngaySinh == null
-                || cCCD == "") {
+        if (maNV.equals("")|| ho.equals("")|| ten.equals("")|| diaChi.equals("")|| soDT.equals("")|| ngaySinh == null|| cCCD.equals("")) {
             JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
         } else {
             try {

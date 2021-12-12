@@ -22,7 +22,7 @@ public class DAL_TheLoai {
         conn = DatabaseUtil.getConnection();
         ResultSet rs = null;
         Statement st = conn.createStatement();
-        String sql = "select * from categories where title = '"+tenTL+"' limit 1";
+        String sql = "select * from categories where name = '"+tenTL+"' limit 1";
         rs = st.executeQuery(sql);
         String ma = "";
         while (rs.next()) {

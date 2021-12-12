@@ -30,7 +30,8 @@ public class DAL_Sach {
         ResultSet rs = null;
         try {
             con = DatabaseUtil.getConnection();
-            Statement st = con.createStatement();
+            Statement st = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
             String sql = "select * from books";
             rs = st.executeQuery(sql);
         } catch (SQLException ex) {
