@@ -174,12 +174,11 @@ public class frmDangNhap extends javax.swing.JFrame {
                 rs.beforeFirst();
                 if (row > 0) {
                     while (rs.next()) {
-                        JOptionPane.showMessageDialog(rootPane, mk);
-                        JOptionPane.showMessageDialog(rootPane, rs.getObject(3).toString());
                         if (mk.compareTo(rs.getObject(3).toString().trim()) != 0) {
                             JOptionPane.showMessageDialog(null, "Mật khẩu không hợp lệ");
                         } else {
                             if (rs.getObject(4).toString().compareTo("ThuKho") == 0) {
+                                this.dispose();
                                 frmTrangChu frmTC = new frmTrangChu();
                                 frmTC.setVisible(true);
                             }

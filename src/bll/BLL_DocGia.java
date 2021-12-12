@@ -6,6 +6,7 @@
 package bll;
 import dal.DAL_DocGia;
 import et.ET_DocGia;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -23,8 +24,12 @@ public class BLL_DocGia {
      public Boolean checkTT(String cccd) throws SQLException, Exception {
         return dal.checkTT(cccd);
     }
-      public Boolean xoaThe(ET_DocGia et) throws SQLException {
-        return dal.xoaThe(et);
+      public Boolean suaThe(ET_DocGia et) throws SQLException {
+        return dal.suaThe(et);
     }
+      
+      public ResultSet layDS() throws Exception {
+          return dal.layDS();
+      }
 }
 

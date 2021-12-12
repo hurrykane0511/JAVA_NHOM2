@@ -311,7 +311,7 @@ public class frmNhanVien extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int kq = JOptionPane.showConfirmDialog(null, "Bạn có muốn thoát không", "Thông báo", JOptionPane.YES_NO_OPTION);
         if (kq == 0) {
-            System.exit(0);
+           this.dispose();
         }
     }//GEN-LAST:event_btnThoatActionPerformed
 

@@ -27,12 +27,13 @@ public class frmDanhMuc extends javax.swing.JInternalFrame {
     private BLL_DanhMuc bll = new BLL_DanhMuc();
     private int STT = 0;
 
-    public frmDanhMuc() {
+    public frmDanhMuc() throws Exception {
         initComponents();
-         // Kích thước màn hình 
+        reset();
+        // Kích thước màn hình 
         Dimension mainDimension = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension dpDimension = new Dimension();
-        this.setLocation((int)(mainDimension.getWidth() - this.getWidth())/2,(int)(mainDimension.getHeight() - this.getHeight())/2);
+        this.setLocation((int) (mainDimension.getWidth() - this.getWidth()) / 2, (int) (mainDimension.getHeight() - this.getHeight()) / 2);
     }
 
     /**
@@ -230,11 +231,7 @@ public class frmDanhMuc extends javax.swing.JInternalFrame {
                 if (bll.themDM(et)) {
                     JOptionPane.showMessageDialog(null, "Thêm thành công");
                     STT++;
-                    layMa();
-                    //                    String ma = String.format("%02d", STT);
-                    //                    txtMaDM.setText("DM"+ma);
-                    //                    txtTenDM.setText("");
-                    hienThiDM();
+                    reset();
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "Thêm không thành công");
                 }
@@ -257,8 +254,7 @@ public class frmDanhMuc extends javax.swing.JInternalFrame {
                     ET_DanhMuc et = new ET_DanhMuc(maDM, tenDM);
                     if (bll.suaDM(et)) {
                         JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
-                        layMa();
-                        hienThiDM();
+                        reset();
                     } else {
                         JOptionPane.showMessageDialog(rootPane, "Sửa không thành công");
                     }
@@ -282,9 +278,7 @@ public class frmDanhMuc extends javax.swing.JInternalFrame {
                     ET_DanhMuc et = new ET_DanhMuc(maDM, tenDM);
                     if (bll.xoaDM(maDM)) {
                         JOptionPane.showMessageDialog(rootPane, "Xóa thành công");
-                        layMa();
-
-                        hienThiDM();
+                        reset();
                     } else {
                         JOptionPane.showMessageDialog(rootPane, "Xóa không thành công");
                     }
@@ -351,10 +345,15 @@ public class frmDanhMuc extends javax.swing.JInternalFrame {
         }
         String ma = String.format("%02d", STT);
         txtMaDM.setText("DM" + ma);
+    }
+
+    private void reset() throws Exception {
+        layMa();
+        hienThi();
+        hienThiDM();
         txtTenDM.setText("");
         txtTenDM.requestFocus();
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMoi;

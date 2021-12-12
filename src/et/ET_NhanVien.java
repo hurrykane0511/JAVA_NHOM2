@@ -85,4 +85,10 @@ public class ET_NhanVien {
         this.ngaySinh = ngaySinh;
         this.CCCD = CCCD;
     }
+
+    @Override
+    public String toString() {
+        return getHo()+ getTen();
+    }
+    
 }

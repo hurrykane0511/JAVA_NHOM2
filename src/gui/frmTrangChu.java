@@ -32,6 +32,7 @@ public class frmTrangChu extends javax.swing.JFrame {
     private frmTraSach frmTraSach = null;
     private frmDanhMuc frmDanhMuc = null;
     private frmTheThuVien frmTheThuVien = null;
+    private frmGiaHanTheTV frmGiaHan = null;
 
     public frmTrangChu() {
         initComponents();
@@ -68,17 +69,19 @@ public class frmTrangChu extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         mnuQL_NhapSach = new javax.swing.JMenuItem();
         mnuQL_NhanVien = new javax.swing.JMenuItem();
-        mnuQL_TheTV = new javax.swing.JMenuItem();
         mnuQL_DanhMuc = new javax.swing.JMenuItem();
         mnuQL_NgonNgu = new javax.swing.JMenuItem();
         mnuQL_NXB = new javax.swing.JMenuItem();
         mnuNCC = new javax.swing.JMenuItem();
+        mnuTaiKhoan = new javax.swing.JMenuItem();
+        mnuTheTV = new javax.swing.JMenu();
+        mnuQL_TheTV = new javax.swing.JMenuItem();
+        mnuGiaHan = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         mnuMuonSach = new javax.swing.JMenuItem();
         mnuTraSach = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         mnuTimKiemSach = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -92,7 +95,7 @@ public class frmTrangChu extends javax.swing.JFrame {
         );
         dpMainLayout.setVerticalGroup(
             dpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 574, Short.MAX_VALUE)
+            .addGap(0, 575, Short.MAX_VALUE)
         );
 
         menuBar.setAlignmentX(1.5F);
@@ -145,15 +148,6 @@ public class frmTrangChu extends javax.swing.JFrame {
         });
         jMenu2.add(mnuQL_NhanVien);
 
-        mnuQL_TheTV.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        mnuQL_TheTV.setText("Thẻ thư viện");
-        mnuQL_TheTV.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuQL_TheTVActionPerformed(evt);
-            }
-        });
-        jMenu2.add(mnuQL_TheTV);
-
         mnuQL_DanhMuc.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         mnuQL_DanhMuc.setText("Danh mục");
         mnuQL_DanhMuc.addActionListener(new java.awt.event.ActionListener() {
@@ -195,7 +189,39 @@ public class frmTrangChu extends javax.swing.JFrame {
         });
         jMenu2.add(mnuNCC);
 
+        mnuTaiKhoan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mnuTaiKhoan.setText("Tài khoản");
+        mnuTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuTaiKhoanActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnuTaiKhoan);
+
         menuBar.add(jMenu2);
+
+        mnuTheTV.setText("Thẻ thư viện");
+        mnuTheTV.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        mnuQL_TheTV.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mnuQL_TheTV.setText("Thêm thẻ thư viện");
+        mnuQL_TheTV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuQL_TheTVActionPerformed(evt);
+            }
+        });
+        mnuTheTV.add(mnuQL_TheTV);
+
+        mnuGiaHan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mnuGiaHan.setText("Gia hạn thẻ TV");
+        mnuGiaHan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuGiaHanActionPerformed(evt);
+            }
+        });
+        mnuTheTV.add(mnuGiaHan);
+
+        menuBar.add(mnuTheTV);
 
         jMenu3.setText("Mượn-trả sách");
         jMenu3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -233,10 +259,6 @@ public class frmTrangChu extends javax.swing.JFrame {
         jMenu4.add(mnuTimKiemSach);
 
         menuBar.add(jMenu4);
-
-        jMenu5.setText("Báo cáo");
-        jMenu5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        menuBar.add(jMenu5);
 
         jMenu6.setText("Trợ giúp");
         jMenu6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -337,7 +359,7 @@ public class frmTrangChu extends javax.swing.JFrame {
             }
             dpMain.add(frmNhanVien);
             frmNhanVien.setLocation(this.getWidth() / 2 - frmNhanVien.getWidth() / 2, (this.getHeight() - 20) / 2 - frmNhanVien.getHeight() / 2 - 20);
-            frmNgonNgu.setVisible(true);
+            frmNhanVien.setVisible(true);
         } else {
             frmNhanVien.setLocation(this.getWidth() / 2 - frmNhanVien.getWidth() / 2, (this.getHeight() - 20) / 2 - frmNhanVien.getHeight() / 2 - 20);
             frmNhanVien.setVisible(true);
@@ -453,6 +475,42 @@ public class frmTrangChu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mnuTimKiemSachActionPerformed
 
+    private void mnuTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuTaiKhoanActionPerformed
+        // TODO add your handling code here:
+        if (frmTaiKhoan == null || frmTaiKhoan.isClosed()) {
+            try {
+                frmTaiKhoan = new frmTaiKhoan();
+            } catch (Exception ex) {
+                Logger.getLogger(frmTrangChu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            dpMain.add(frmTaiKhoan);
+            frmTaiKhoan.setLocation(this.getWidth() / 2 - frmTaiKhoan.getWidth() / 2, (this.getHeight() - 20) / 2 - frmTaiKhoan.getHeight() / 2 - 20);
+            frmTaiKhoan.setVisible(true);
+        } else {
+            frmTaiKhoan.setLocation(this.getWidth() / 2 - frmTaiKhoan.getWidth() / 2, (this.getHeight() - 20) / 2 - frmTaiKhoan.getHeight() / 2 - 20);
+            frmTaiKhoan.setVisible(true);
+            frmTaiKhoan.toFront();
+        }
+    }//GEN-LAST:event_mnuTaiKhoanActionPerformed
+
+    private void mnuGiaHanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuGiaHanActionPerformed
+        // TODO add your handling code here:
+        if (frmGiaHan == null || frmGiaHan.isClosed()) {
+            try {
+                frmGiaHan = new frmGiaHanTheTV();
+            } catch (Exception ex) {
+                Logger.getLogger(frmTrangChu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            dpMain.add(frmGiaHan);
+            frmGiaHan.setLocation(this.getWidth() / 2 - frmGiaHan.getWidth() / 2, (this.getHeight() - 20) / 2 - frmGiaHan.getHeight() / 2 - 20);
+            frmGiaHan.setVisible(true);
+        } else {
+            frmGiaHan.setLocation(this.getWidth() / 2 - frmGiaHan.getWidth() / 2, (this.getHeight() - 20) / 2 - frmGiaHan.getHeight() / 2 - 20);
+            frmGiaHan.setVisible(true);
+            frmGiaHan.toFront();
+        }
+    }//GEN-LAST:event_mnuGiaHanActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -499,10 +557,10 @@ public class frmTrangChu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem mnuDangXuat;
+    private javax.swing.JMenuItem mnuGiaHan;
     private javax.swing.JMenuItem mnuMuonSach;
     private javax.swing.JMenuItem mnuNCC;
     private javax.swing.JMenuItem mnuQL_DanhMuc;
@@ -511,6 +569,8 @@ public class frmTrangChu extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuQL_NhanVien;
     private javax.swing.JMenuItem mnuQL_NhapSach;
     private javax.swing.JMenuItem mnuQL_TheTV;
+    private javax.swing.JMenuItem mnuTaiKhoan;
+    private javax.swing.JMenu mnuTheTV;
     private javax.swing.JMenuItem mnuThoat;
     private javax.swing.JMenuItem mnuTimKiemSach;
     private javax.swing.JMenuItem mnuTraSach;
