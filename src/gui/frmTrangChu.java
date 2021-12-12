@@ -33,6 +33,7 @@ public class frmTrangChu extends javax.swing.JFrame {
     private frmDanhMuc frmDanhMuc = null;
     private frmTheThuVien frmTheThuVien = null;
     private frmGiaHanTheTV frmGiaHan = null;
+    private frmLoaiDocGia frmLoaiDocGia = null;
 
     public frmTrangChu() {
         initComponents();
@@ -74,6 +75,7 @@ public class frmTrangChu extends javax.swing.JFrame {
         mnuQL_NXB = new javax.swing.JMenuItem();
         mnuNCC = new javax.swing.JMenuItem();
         mnuTaiKhoan = new javax.swing.JMenuItem();
+        mnuLoaiDG = new javax.swing.JMenuItem();
         mnuTheTV = new javax.swing.JMenu();
         mnuQL_TheTV = new javax.swing.JMenuItem();
         mnuGiaHan = new javax.swing.JMenuItem();
@@ -198,6 +200,15 @@ public class frmTrangChu extends javax.swing.JFrame {
         });
         jMenu2.add(mnuTaiKhoan);
 
+        mnuLoaiDG.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mnuLoaiDG.setText("Loại độc giả");
+        mnuLoaiDG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuLoaiDGActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnuLoaiDG);
+
         menuBar.add(jMenu2);
 
         mnuTheTV.setText("Thẻ thư viện");
@@ -283,10 +294,14 @@ public class frmTrangChu extends javax.swing.JFrame {
     private void mnuQL_DanhMucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuQL_DanhMucActionPerformed
         // TODO add your handling code here:
         if (frmDanhMuc == null || frmDanhMuc.isClosed()) {
-            frmDanhMuc = new frmDanhMuc();
-            dpMain.add(frmDanhMuc);
-            frmDanhMuc.setLocation(this.getWidth() / 2 - frmDanhMuc.getWidth() / 2, (this.getHeight() - 20) / 2 - frmDanhMuc.getHeight() / 2 - 20);
-            frmDanhMuc.setVisible(true);
+            try {
+                frmDanhMuc = new frmDanhMuc();
+                dpMain.add(frmDanhMuc);
+                frmDanhMuc.setLocation(this.getWidth() / 2 - frmDanhMuc.getWidth() / 2, (this.getHeight() - 20) / 2 - frmDanhMuc.getHeight() / 2 - 20);
+                frmDanhMuc.setVisible(true);
+            } catch (Exception ex) {
+                Logger.getLogger(frmTrangChu.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             frmDanhMuc.setLocation(this.getWidth() / 2 - frmDanhMuc.getWidth() / 2, (this.getHeight() - 20) / 2 - frmDanhMuc.getHeight() / 2 - 20);
             frmDanhMuc.setVisible(true);
@@ -311,12 +326,12 @@ public class frmTrangChu extends javax.swing.JFrame {
 
     private void mnuQL_NhapSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuQL_NhapSachActionPerformed
         // TODO add your handling code here:
-    if (frmNhapSach == null || frmNhapSach.isClosed()) {
-        try {
-            frmNhapSach = new frmNhapSach();
-        } catch (Exception ex) {
-            Logger.getLogger(frmTrangChu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        if (frmNhapSach == null || frmNhapSach.isClosed()) {
+            try {
+                frmNhapSach = new frmNhapSach();
+            } catch (Exception ex) {
+                Logger.getLogger(frmTrangChu.class.getName()).log(Level.SEVERE, null, ex);
+            }
             dpMain.add(frmNhapSach);
             frmNhapSach.setLocation(this.getWidth() / 2 - frmNhapSach.getWidth() / 2, (this.getHeight() - 20) / 2 - frmNhapSach.getHeight() / 2 - 20);
             frmNhapSach.setVisible(true);
@@ -351,7 +366,7 @@ public class frmTrangChu extends javax.swing.JFrame {
 
     private void mnuQL_NhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuQL_NhanVienActionPerformed
         // TODO add your handling code here:
-         if (frmNhanVien == null || frmNhanVien.isClosed()) {
+        if (frmNhanVien == null || frmNhanVien.isClosed()) {
             try {
                 frmNhanVien = new frmNhanVien();
             } catch (Exception ex) {
@@ -369,7 +384,7 @@ public class frmTrangChu extends javax.swing.JFrame {
 
     private void mnuQL_TheTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuQL_TheTVActionPerformed
         // TODO add your handling code here:
-         if (frmTheThuVien == null || frmTheThuVien.isClosed()) {
+        if (frmTheThuVien == null || frmTheThuVien.isClosed()) {
             try {
                 frmTheThuVien = new frmTheThuVien();
             } catch (Exception ex) {
@@ -387,7 +402,7 @@ public class frmTrangChu extends javax.swing.JFrame {
 
     private void mnuQL_NXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuQL_NXBActionPerformed
         // TODO add your handling code here:
-         if (frmNXB == null || frmNXB.isClosed()) {
+        if (frmNXB == null || frmNXB.isClosed()) {
             try {
                 frmNXB = new frmNXB();
             } catch (Exception ex) {
@@ -441,20 +456,20 @@ public class frmTrangChu extends javax.swing.JFrame {
 
     private void mnuTraSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuTraSachActionPerformed
         // TODO add your handling code here:
-//         if (frmTraSach == null || frmTraSach.isClosed()) {
-//            try {
-//                frmTraSach = new frmTraSach();
-//            } catch (Exception ex) {
-//                Logger.getLogger(frmTrangChu.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            dpMain.add(frmTraSach);
-//            frmTraSach.setLocation(this.getWidth() / 2 - frmTraSach.getWidth() / 2, (this.getHeight() - 20) / 2 - frmTraSach.getHeight() / 2 - 20);
-//            frmTraSach.setVisible(true);
-//        } else {
-//            frmTraSach.setLocation(this.getWidth() / 2 - frmTraSach.getWidth() / 2, (this.getHeight() - 20) / 2 - frmTraSach.getHeight() / 2 - 20);
-//            frmTraSach.setVisible(true);
-//            frmTraSach.toFront();
-//        }
+        if (frmTraSach == null || frmTraSach.isClosed()) {
+            try {
+                frmTraSach = new frmTraSach();
+            } catch (Exception ex) {
+                Logger.getLogger(frmTrangChu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            dpMain.add(frmTraSach);
+            frmTraSach.setLocation(this.getWidth() / 2 - frmTraSach.getWidth() / 2, (this.getHeight() - 20) / 2 - frmTraSach.getHeight() / 2 - 20);
+            frmTraSach.setVisible(true);
+        } else {
+            frmTraSach.setLocation(this.getWidth() / 2 - frmTraSach.getWidth() / 2, (this.getHeight() - 20) / 2 - frmTraSach.getHeight() / 2 - 20);
+            frmTraSach.setVisible(true);
+            frmTraSach.toFront();
+        }
     }//GEN-LAST:event_mnuTraSachActionPerformed
 
     private void mnuTimKiemSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuTimKiemSachActionPerformed
@@ -511,6 +526,24 @@ public class frmTrangChu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mnuGiaHanActionPerformed
 
+    private void mnuLoaiDGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuLoaiDGActionPerformed
+        // TODO add your handling code here:
+        if (frmLoaiDocGia == null || frmLoaiDocGia.isClosed()) {
+            try {
+                frmLoaiDocGia = new frmLoaiDocGia();
+            } catch (Exception ex) {
+                Logger.getLogger(frmTrangChu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            dpMain.add(frmLoaiDocGia);
+            frmLoaiDocGia.setLocation(this.getWidth() / 2 - frmLoaiDocGia.getWidth() / 2, (this.getHeight() - 20) / 2 - frmLoaiDocGia.getHeight() / 2 - 20);
+            frmLoaiDocGia.setVisible(true);
+        } else {
+            frmLoaiDocGia.setLocation(this.getWidth() / 2 - frmLoaiDocGia.getWidth() / 2, (this.getHeight() - 20) / 2 - frmLoaiDocGia.getHeight() / 2 - 20);
+            frmLoaiDocGia.setVisible(true);
+            frmLoaiDocGia.toFront();
+        }
+    }//GEN-LAST:event_mnuLoaiDGActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -561,6 +594,7 @@ public class frmTrangChu extends javax.swing.JFrame {
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem mnuDangXuat;
     private javax.swing.JMenuItem mnuGiaHan;
+    private javax.swing.JMenuItem mnuLoaiDG;
     private javax.swing.JMenuItem mnuMuonSach;
     private javax.swing.JMenuItem mnuNCC;
     private javax.swing.JMenuItem mnuQL_DanhMuc;

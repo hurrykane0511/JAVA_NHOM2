@@ -23,6 +23,19 @@ public class DAL_HoaDon {
     public DAL_HoaDon() throws Exception {
         conn = DatabaseUtil.getConnection();
     }
+    public ResultSet layHoaDon() throws SQLException {
+        ResultSet rs = null;
+        Connection conn = null;
+        try {
+            conn = DatabaseUtil.getConnection();
+            Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            String sql = "select * from inv_deli_voucher";
+            rs = st.executeQuery(sql);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return rs;
+    }
     public boolean themHoaDon(ET_HoaDon et) throws SQLException {
         Statement st = conn.createStatement();
         String sql = "insert into inv_deli_voucher(id_idv,id_staff,id_supplier)"

@@ -88,7 +88,13 @@ public class ET_NhanVien {
 
     @Override
     public String toString() {
-        return getHo()+ getTen();
+        return getHo()+ " "+getTen();
     }
     
+
+    public ET_NhanVien(String maNhanVien, String ten) {
+        this.maNhanVien = maNhanVien;
+        this.ten = ten;
+    }
+
 }

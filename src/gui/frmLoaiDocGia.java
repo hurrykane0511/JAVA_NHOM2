@@ -12,6 +12,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import bll.BLL_LoaiDocGia;
+import et.ET_LoaiDocGia;
 
 /**
  *
@@ -22,24 +24,28 @@ public class frmLoaiDocGia extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmLoaiDocGia
      */
-    public frmLoaiDocGia() {
+    private BLL_LoaiDocGia bll;
+
+    public frmLoaiDocGia() throws Exception {
         initComponents();
+        bll = new BLL_LoaiDocGia();
+        reset();
     }
 
     public void hienThi() {
-        DefaultTableModel model = (DefaultTableModel) tbNCC.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblLoaiDocGia.getModel();
         model.setColumnCount(0);
         model.setRowCount(0);
-        model.addColumn("Mã NCC");
-        model.addColumn("Tên NCC");
-        model.addColumn("Địa chỉ");
-        model.addColumn("Số ĐT");
-        tbNCC.setModel(model);
+        model.addColumn("Mã Loại");
+        model.addColumn("Tên loại");
+        model.addColumn("SL sách giới hạn");
+        model.addColumn("Phí");
+        tblLoaiDocGia.setModel(model);
     }
 
-    public void hienThiNCC() throws SQLException {
-        ResultSet rs = bll.layNCC();
-        DefaultTableModel model = (DefaultTableModel) tbNCC.getModel();
+    public void hienThiLoaiDG() throws SQLException, Exception {
+        ResultSet rs = bll.layDS();
+        DefaultTableModel model = (DefaultTableModel) tblLoaiDocGia.getModel();
         model.setNumRows(0);
         while (rs.next()) {
             Object[] col = new Object[4];
@@ -50,25 +56,17 @@ public class frmLoaiDocGia extends javax.swing.JInternalFrame {
         }
     }
 
-    public void layMa() throws Exception {
-        ResultSet rs = bll.layNCC();
-        rs.last();
-        // JOptionPane.showMessageDialog(null, rs.getRow());
-        int row = rs.getRow();
-        if (row == 0) {
-            STT = 1;
-        } else {
-            rs.beforeFirst();
-            while (rs.next()) {
-                STT = Integer.parseInt(rs.getObject(1).toString().substring(3)) + 1;
+    public boolean checkSo(String so) {
+        if (so.length() == 0) {
+            return false;
+        }
+        char[] c = so.toCharArray();
+        for (int i = 0; i < c.length; i++) {
+            if (!Character.isDigit(c[i])) {
+                return false;
             }
         }
-        String ma = String.format("%02d", STT);
-        txtMaNCC.setText("NCC" + ma);
-        txtTenNCC.setText("");
-        txtDiaChi.setText("");
-        txtSDT.setText("");
-        txtTenNCC.requestFocus();
+        return true;
     }
 
     /**
@@ -82,18 +80,18 @@ public class frmLoaiDocGia extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        txtMaNCC = new javax.swing.JTextField();
+        txtTenLoai = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        txtTenNCC = new javax.swing.JTextField();
+        Phí = new javax.swing.JLabel();
+        txtPhi = new javax.swing.JTextField();
         btnThem = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         btnThoat = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbNCC = new javax.swing.JTable();
+        tblLoaiDocGia = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
-        txtDiaChi = new javax.swing.JTextField();
+        txtSL = new javax.swing.JTextField();
         btnMoi = new javax.swing.JButton();
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -102,19 +100,19 @@ public class frmLoaiDocGia extends javax.swing.JInternalFrame {
         jLabel5.setText("Tên loại độc giả");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
-        txtMaNCC.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel1.add(txtMaNCC, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 76, 176, -1));
+        txtTenLoai.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanel1.add(txtTenLoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 76, 176, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("LOẠI ĐỘC GIẢ");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel6.setText("Tên NCC:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+        Phí.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        Phí.setText("Phí");
+        jPanel1.add(Phí, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
-        txtTenNCC.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel1.add(txtTenNCC, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 176, -1));
+        txtPhi.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanel1.add(txtPhi, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 176, -1));
 
         btnThem.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_add_26px.png"))); // NOI18N
@@ -156,8 +154,8 @@ public class frmLoaiDocGia extends javax.swing.JInternalFrame {
         });
         jPanel1.add(btnThoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 190, -1, -1));
 
-        tbNCC.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        tbNCC.setModel(new javax.swing.table.DefaultTableModel(
+        tblLoaiDocGia.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        tblLoaiDocGia.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -168,12 +166,12 @@ public class frmLoaiDocGia extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbNCC.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblLoaiDocGia.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbNCCMouseClicked(evt);
+                tblLoaiDocGiaMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tbNCC);
+        jScrollPane2.setViewportView(tblLoaiDocGia);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 690, 180));
 
@@ -181,8 +179,8 @@ public class frmLoaiDocGia extends javax.swing.JInternalFrame {
         jLabel7.setText("Số lượng tối đa:");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, -1, -1));
 
-        txtDiaChi.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel1.add(txtDiaChi, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 182, -1));
+        txtSL.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanel1.add(txtSL, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 182, -1));
 
         btnMoi.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_new_26px_4.png"))); // NOI18N
@@ -192,7 +190,7 @@ public class frmLoaiDocGia extends javax.swing.JInternalFrame {
                 btnMoiActionPerformed(evt);
             }
         });
-        jPanel1.add(btnMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 186, 100, -1));
+        jPanel1.add(btnMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 100, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -210,94 +208,86 @@ public class frmLoaiDocGia extends javax.swing.JInternalFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        String maNCC = txtMaNCC.getText();
-        String tenNCC = txtTenNCC.getText();
-        String diaChi = txtDiaChi.getText();
-        String soDT = txtSDT.getText();
-        if (maNCC.compareTo("") == 0
-                || tenNCC.compareTo("") == 0
-                || diaChi.compareTo("") == 0
-                || soDT.compareTo("") == 0) {
-            JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
-        } else {
-            ET_NhaCungCap et = new ET_NhaCungCap(maNCC, tenNCC, diaChi, soDT);
-            try {
-                if (bll.checkTT(maNCC)) {
-                    JOptionPane.showMessageDialog(null, "Đã tồn tại Nha Cung Cap");
-                } else {
-                    if (bll.themNCC(et)) {
-                        JOptionPane.showMessageDialog(rootPane, "Thành công");
-                        STT++;
-                        layMa();
-                        hienThiNCC();
-                    } else {
-                        JOptionPane.showMessageDialog(rootPane, "Không thành công");
+
+        if (txtTenLoai.getText().compareTo("") != 0) {
+            if (checkSo(txtSL.getText())) {
+                if (checkSo(txtPhi.getText())) {
+                    String tenLoai = txtTenLoai.getText();
+                    int phi = Integer.parseInt(txtPhi.getText());
+                    int sl = Integer.parseInt(txtSL.getText());
+                    ET_LoaiDocGia et = new ET_LoaiDocGia(0, tenLoai, sl, phi);
+                    try {
+                        if (bll.themLoai(et)) {
+                            JOptionPane.showMessageDialog(rootPane, "Thành công");
+                            reset();
+                        } else {
+                            JOptionPane.showMessageDialog(rootPane, "Không thành công");
+                        }
+                    } catch (Exception ex) {
+                        Logger.getLogger(frmLoaiDocGia.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
+                } else {
+                    JOptionPane.showMessageDialog(null, "Phí không hợp lệ");
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(frmNCC1.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex) {
-                Logger.getLogger(frmNCC1.class.getName()).log(Level.SEVERE, null, ex);
+            } else {
+                JOptionPane.showMessageDialog(null, "Số lượng không hợp lệ");
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
         }
+
+
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-        int dong = tbNCC.getSelectedRow();
-        String maNCC = tbNCC.getValueAt(dong, 0).toString();
-        String tenNCC = txtTenNCC.getText();
-        String diaChi = txtDiaChi.getText();
-        String soDT = txtSDT.getText();
-        ET_NhaCungCap et;
-        if (dong != -1) {
-            if (maNCC.compareTo("") == 0
-                    || tenNCC.compareTo("") == 0
-                    || diaChi.compareTo("") == 0
-                    || soDT.compareTo("") == 0) {
-                JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
-            } else {
-
-                try {
-                    et = new ET_NhaCungCap(maNCC, tenNCC, diaChi, soDT);
-                    if (bll.suaNCC(et)) {
-                        JOptionPane.showMessageDialog(rootPane, "Thành công");
-                        layMa();
-                        hienThiNCC();
-                    } else {
-                        JOptionPane.showMessageDialog(rootPane, "Không thành công");
+        if (txtTenLoai.getText().compareTo("") != 0) {
+            if (checkSo(txtSL.getText())) {
+                if (checkSo(txtPhi.getText())) {
+                    int row = tblLoaiDocGia.getSelectedRow();
+                    int maLoai = Integer.parseInt(tblLoaiDocGia.getValueAt(row, 0).toString());
+                    String tenLoai = txtTenLoai.getText();
+                    int phi = Integer.parseInt(txtPhi.getText());
+                    int sl = Integer.parseInt(txtSL.getText());
+                    ET_LoaiDocGia et = new ET_LoaiDocGia(maLoai, tenLoai, sl, phi);
+                    try {
+                        if (bll.suaLoai(et)) {
+                            JOptionPane.showMessageDialog(rootPane, "Sửa Thành công");
+                            reset();
+                        } else {
+                            JOptionPane.showMessageDialog(rootPane, "Sửa không thành công");
+                        }
+                    } catch (Exception ex) {
+                        Logger.getLogger(frmLoaiDocGia.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Phí không hợp lệ");
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "Số lượng không hợp lệ");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Vui lòng chọn nhà cung cấp");
+            JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
         }
+
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
 
-        int row = tbNCC.getSelectedRow();
+        int row = tblLoaiDocGia.getSelectedRow();
         if (row != -1) {
             try {
-                String maNCC = txtMaNCC.getText();
-                String tenNCC = txtTenNCC.getText().compareTo("") > 0 ? txtTenNCC.getText() : "";
-                String diaChi = txtDiaChi.getText().compareTo("") > 0 ? txtDiaChi.getText() : "";
-                String soDT = txtSDT.getText().compareTo("") > 0 ? txtSDT.getText() : "";
-                if (maNCC != "" && tenNCC != "" && diaChi != "" && soDT != "") {
-                    ET_NhaCungCap et = new ET_NhaCungCap(maNCC, tenNCC, diaChi, soDT);
-
-                    if (bll.xoaNCC(maNCC)) {
-                        JOptionPane.showMessageDialog(rootPane, "Thành công");
-                        layMa();
-                        hienThiNCC();
-                    } else {
-                        JOptionPane.showMessageDialog(rootPane, "Không thành công");
-                    }
+                int maLoai = Integer.parseInt(tblLoaiDocGia.getValueAt(row, 0).toString());
+                if (bll.xoaLoai(maLoai)) {
+                    JOptionPane.showMessageDialog(rootPane, "Xóa thành công");
+                    reset();
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Xóa không thành công");
                 }
+
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -308,30 +298,36 @@ public class frmLoaiDocGia extends javax.swing.JInternalFrame {
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_btnThoatActionPerformed
 
-    private void tbNCCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNCCMouseClicked
+    private void tblLoaiDocGiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLoaiDocGiaMouseClicked
         // TODO add your handling code here:
-        int row = tbNCC.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel) tbNCC.getModel();
-        txtMaNCC.setText(model.getValueAt(row, 0).toString());
-        txtTenNCC.setText(model.getValueAt(row, 1).toString());
-        txtDiaChi.setText(model.getValueAt(row, 2).toString());
-        txtSDT.setText(model.getValueAt(row, 3).toString());
-    }//GEN-LAST:event_tbNCCMouseClicked
+        int row = tblLoaiDocGia.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) tblLoaiDocGia.getModel();
+        txtTenLoai.setText(model.getValueAt(row, 1).toString());
+        txtSL.setText(model.getValueAt(row, 2).toString());
+        txtPhi.setText(model.getValueAt(row, 3).toString());
+    }//GEN-LAST:event_tblLoaiDocGiaMouseClicked
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
         try {
             // TODO add your handling code here:
-            layMa();
+            reset();
         } catch (Exception ex) {
             Logger.getLogger(frmDanhMuc1.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnMoiActionPerformed
-
+    private void reset() throws Exception {
+        txtTenLoai.setText("");
+        txtSL.setText("");
+        txtPhi.setText("");
+        hienThi();
+        hienThiLoaiDG();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Phí;
     private javax.swing.JButton btnMoi;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
@@ -339,13 +335,12 @@ public class frmLoaiDocGia extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnXoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tbNCC;
-    private javax.swing.JTextField txtDiaChi;
-    private javax.swing.JTextField txtMaNCC;
-    private javax.swing.JTextField txtTenNCC;
+    private javax.swing.JTable tblLoaiDocGia;
+    private javax.swing.JTextField txtPhi;
+    private javax.swing.JTextField txtSL;
+    private javax.swing.JTextField txtTenLoai;
     // End of variables declaration//GEN-END:variables
 }

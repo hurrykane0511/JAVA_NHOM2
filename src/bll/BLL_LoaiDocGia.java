@@ -6,6 +6,7 @@ package bll;
 
 import java.sql.ResultSet;
 import dal.DAL_LoaiDocGia;
+import et.ET_LoaiDocGia;
 /**
  *
  * @author yushu
@@ -18,5 +19,17 @@ private DAL_LoaiDocGia dal ;
     
     public ResultSet layDS() throws Exception {
         return dal.layDS();
+    }
+    
+    public Boolean themLoai(ET_LoaiDocGia et) throws Exception {
+        return dal.themLoai(et);
+    }
+    
+     public Boolean xoaLoai(int maLoai) throws Exception {
+        return dal.xoaLoai(maLoai);
+    }
+     
+      public Boolean suaLoai(ET_LoaiDocGia et) throws Exception {
+        return dal.suaLoai(et);
     }
 }

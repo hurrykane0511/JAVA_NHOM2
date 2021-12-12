@@ -20,7 +20,7 @@ public class DatabaseUtil {
 
     public static Connection getConnection() throws Exception {
         if (c == null) {
-            Class.forName("com.mysql.jdbc.Driver");// 
+            Class.forName("com.mysql.cj.jdbc.Driver");// 
             c = DriverManager.getConnection(db_url, username, password);
         }
         return c;

@@ -31,4 +31,7 @@ public class BLL_ChiTietHD {
     public ResultSet layDS() throws SQLException, Exception {
         return dal.layDS();
     }
+    public ResultSet layTimCTHD(String maHD) throws SQLException, Exception {
+        return dal.timCTHD(maHD);
+    }
 }
