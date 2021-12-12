@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package gui;
+
 import bll.BLL_NXB;
 import et.ET_NXB;
 import java.sql.ResultSet;
@@ -21,13 +22,17 @@ public class frmNXB extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmNXB
      */
-     private BLL_NXB bll;
+    private BLL_NXB bll;
+    private int STT = 0;
+
     public frmNXB() throws Exception {
         initComponents();
         this.setTitle("Nhà Xuất Bản");
+        txtMa.setEditable(false);
         bll = new BLL_NXB();
         hienThi();
         hienThiNXB();
+        reset();
     }
 
     /**
@@ -55,6 +60,7 @@ public class frmNXB extends javax.swing.JInternalFrame {
         txtTen = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        btnNew = new javax.swing.JButton();
 
         jPanel2.setBackground(new java.awt.Color(155, 177, 250));
         jPanel2.setPreferredSize(new java.awt.Dimension(700, 452));
@@ -155,13 +161,22 @@ public class frmNXB extends javax.swing.JInternalFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
+        btnNew.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_new_26px_4.png"))); // NOI18N
+        btnNew.setText("Mới");
+        btnNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel8)
@@ -170,16 +185,20 @@ public class frmNXB extends javax.swing.JInternalFrame {
                         .addGap(42, 42, 42)
                         .addComponent(jLabel6)
                         .addGap(41, 41, 41)
-                        .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnThem)
-                        .addGap(40, 40, 40)
+                        .addGap(27, 27, 27)
                         .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
+                        .addGap(35, 35, 35)
                         .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
-                        .addComponent(btnThoat)))
-                .addContainerGap(65, Short.MAX_VALUE))
+                        .addGap(45, 45, 45)
+                        .addComponent(btnThoat)
+                        .addGap(40, 40, 40))))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
@@ -209,8 +228,9 @@ public class frmNXB extends javax.swing.JInternalFrame {
                     .addComponent(btnSua)
                     .addComponent(btnThoat)
                     .addComponent(btnXoa)
-                    .addComponent(btnThem))
-                .addContainerGap(216, Short.MAX_VALUE))
+                    .addComponent(btnThem)
+                    .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(214, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addContainerGap(131, Short.MAX_VALUE)
@@ -261,6 +281,8 @@ public class frmNXB extends javax.swing.JInternalFrame {
                 } else {
                     if (bll.themNXB(et)) {
                         JOptionPane.showMessageDialog(rootPane, "Thành công");
+                        hienThiNXB();
+                        reset();
                     } else {
                         JOptionPane.showMessageDialog(rootPane, "Không thành công");
                     }
@@ -286,36 +308,39 @@ public class frmNXB extends javax.swing.JInternalFrame {
             try {
                 if (bll.suaNXB(et)) {
                     JOptionPane.showMessageDialog(rootPane, "Thành công");
+                    reset();
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "Không thành công");
                 }
                 hienThiNXB();
             } catch (SQLException ex) {
-                 ex.printStackTrace();
+                ex.printStackTrace();
             } catch (Exception ex) {
-                  ex.printStackTrace();
+                ex.printStackTrace();
             }
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        String maNXB = txtMa.getText();
-        if (maNXB.compareTo("") == 0) {
+
+        int row2 = tblDS.getSelectedRow();
+        if (row2 >= 0) {
+            String ma = txtMa.getText();
             try {
-                if (bll.xoaNXB(maNXB)) {
-                    JOptionPane.showMessageDialog(rootPane, "Thành công");
+                if (bll.xoaNXB(ma)) {
+                    JOptionPane.showMessageDialog(rootPane, "Xoá thành công");
                 } else {
-                    JOptionPane.showMessageDialog(rootPane, "Không thành công");
+                    JOptionPane.showMessageDialog(rootPane, "Xóa không thành công");
                 }
+                hienThi();
                 hienThiNXB();
-            } catch (SQLException ex) {
-                 ex.printStackTrace();
+                reset();
             } catch (Exception ex) {
-                 ex.printStackTrace();
+                Logger.getLogger(frmNXB.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Vui lòng chọn NXB");
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn nhân viên");
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_btnXoaActionPerformed
@@ -333,7 +358,17 @@ public class frmNXB extends javax.swing.JInternalFrame {
         txtDiaChi.setText(model.getValueAt(row, 2).toString());
         // TODO add your handling code here:
     }//GEN-LAST:event_tblDSMouseClicked
-public void hienThi() {
+
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+        try {
+            reset();
+            txtDiaChi.setText("");
+            txtTen.setText("");// TODO add your handling code here:
+        } catch (Exception ex) {
+            Logger.getLogger(frmNXB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnNewActionPerformed
+    public void hienThi() {
         DefaultTableModel model = (DefaultTableModel) tblDS.getModel();
         model.setColumnCount(0);
         model.setRowCount(0);
@@ -357,7 +392,24 @@ public void hienThi() {
         }
     }
 
+    public void reset() throws SQLException, Exception {
+        ResultSet rs = bll.layDSSTT();
+        rs.last();
+        int row = rs.getRow();
+        if (row == 0) {
+            STT = 1;
+        } else {
+            rs.beforeFirst();
+            while (rs.next()) {
+                STT = Integer.parseInt(rs.getObject(1).toString().substring(3)) + 1;
+            }
+        }
+        String ma = String.format("%02d", STT);
+        txtMa.setText("NXB" + ma);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnNew;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnThoat;
@@ -376,5 +428,4 @@ public void hienThi() {
     private javax.swing.JTextField txtTen;
     // End of variables declaration//GEN-END:variables
 
-    
 }

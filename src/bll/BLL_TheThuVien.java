@@ -9,6 +9,7 @@ import dal.DAL_TheThuVien;
 import et.ET_TheThuVien;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 /**
  *
@@ -38,7 +39,12 @@ public class BLL_TheThuVien {
         return dal.checkTonTai(ma);
     }
     
-      public Boolean giaHan(String ma) throws SQLException, Exception {
-        return dal.giaHanTheThuVien(ma);
+    
+    public ResultSet layTheTheoMaThe(String maThe) throws SQLException {
+        return dal.layTheTheoMaThe(maThe);
+    }
+    
+      public Boolean giaHan(String ma, Date ngHH) throws SQLException, Exception {
+        return dal.giaHanTheThuVien(ma, ngHH);
     }
 }

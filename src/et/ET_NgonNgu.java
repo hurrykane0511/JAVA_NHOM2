@@ -9,8 +9,8 @@ package et;
  * @author dthan
  */
 public class ET_NgonNgu {
-    private String maNgonNgu;
-    private String tenNgonNgu;
+    private String maNgonNgu; // mã ngôn ngữ
+    private String tenNgonNgu; // tên ngôn ngữ
 
     public ET_NgonNgu(String maNgonNgu, String tenNgonNgu) {
         this.maNgonNgu = maNgonNgu;

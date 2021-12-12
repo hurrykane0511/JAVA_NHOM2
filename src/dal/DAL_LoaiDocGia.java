@@ -39,7 +39,7 @@ public class DAL_LoaiDocGia {
         try {
             conn = DatabaseUtil.getConnection();
             Statement st = conn.createStatement();
-             String sql = "insert into reader_type(name, limited_quantity, lib_fee)"
+             String sql = "insert into reader_type(name, quantity, lib_fee)"
                     + " values('"+et.getTenLoai()+"',"+et.getsLSachMuon()+", "+et.getPhi()+")";
             if (st.executeUpdate(sql) > 0) {
                 kq = true;
@@ -57,7 +57,7 @@ public class DAL_LoaiDocGia {
             Statement st = conn.createStatement();
             String sql = "update reader_type "
                     + "set name = '"+et.getTenLoai()+"', "
-                    + "limited_quantity ="+et.getsLSachMuon() +", "
+                    + "quantity ="+et.getsLSachMuon() +", "
                     + "lib_fee = "+et.getPhi()+" "
                     + "where type_id = "+et.getMaLoai()+"";
             if (st.executeUpdate(sql) > 0) {

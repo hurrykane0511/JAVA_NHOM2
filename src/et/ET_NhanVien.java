@@ -12,13 +12,13 @@ import java.util.Date;
  */
 public class ET_NhanVien {
 
-    private String maNhanVien;
-    private String ten;
-    private String ho;
-    private String diaChi;
-    private String soDT;
-    private Date ngaySinh;
-    private String CCCD;
+    private String maNhanVien; // mã nhân viên
+    private String ten;// tên nhân viên
+    private String ho; // họ nhân viên
+    private String diaChi; // địa chỉ
+    private String soDT; // số điện thoại
+    private Date ngaySinh; // ngày sinh
+    private String CCCD;// căn cước công dân
 
     public String getMaNhanVien() {
         return maNhanVien;
@@ -88,9 +88,8 @@ public class ET_NhanVien {
 
     @Override
     public String toString() {
-        return getHo()+ " "+getTen();
+        return getHo() + " " + getTen();
     }
-    
 
     public ET_NhanVien(String maNhanVien, String ten) {
         this.maNhanVien = maNhanVien;

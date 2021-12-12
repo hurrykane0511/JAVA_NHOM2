@@ -36,6 +36,21 @@ public class DAL_TheThuVien {
         return rs;
     }
     
+     public ResultSet layTheTheoMaThe(String maTheTV) throws SQLException {
+        ResultSet rs = null;
+        Connection conn = null;
+        try {
+            conn = DatabaseUtil.getConnection();
+             Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+            String sql = "SELECT * from member_card WHERE id_lib_card = '"+maTheTV+"'";
+            rs = st.executeQuery(sql);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return rs;
+    }
+    
      public ResultSet layDSTheTV() throws SQLException {
         ResultSet rs = null;
         Connection conn = null;
@@ -86,14 +101,14 @@ public class DAL_TheThuVien {
         return (row > 0);
     }
 
-  public Boolean giaHanTheThuVien(String maThe) throws SQLException, Exception {
+  public Boolean giaHanTheThuVien(String maThe, java.util.Date ngHH) throws SQLException, Exception {
         Boolean kq = false;
         Connection conn = null;
         try {
             conn = DatabaseUtil.getConnection();
             Statement st = conn.createStatement();
             long millis = System.currentTimeMillis();
-            String sql = "UPDATE member_card SET expiration_date = '"+new java.sql.Date(millis)+"' WHERE id_lib_card = '"+maThe+"'";
+            String sql = "UPDATE member_card SET expiration_date = '"+new java.sql.Date(ngHH.getTime())+"' WHERE id_lib_card = '"+maThe+"'";
             if (st.executeUpdate(sql) > 0) {
                 kq = true;
             }

@@ -11,17 +11,40 @@ import java.util.Date;
  *
  * @author LENOVO
  */
-public class ET_Sach {
-    private String maSach;
-    private String tenSach;
-    private int soLuong;
-    private int gia;
-    private int namXB;
-    private int soTrang;
-    private String maTD;
-    private String maNXB;
-    private String theLoai;
-    private String ngonNgu;
+public class ET_Sach { 
+    private String maSach;// mã sách
+    private String tenSach; // tên sách
+    private int soLuong; // số lượng
+    private int gia; // giá
+    private int namXB; // năm sản xuất
+    private int soTrang;// số trang
+    private String maTD; // mã tác giả
+    private String maNXB; // mã nhà xuất bản
+    private String theLoai; // thể loại
+    private String ngonNgu; // ngôn ngữ
+    private int sLuongThuc; // số lượng
+
+    public int getsLuongThuc() {
+        return sLuongThuc;
+    }
+
+    public void setsLuongThuc(int sLuongThuc) {
+        this.sLuongThuc = sLuongThuc;
+    }
+
+    public ET_Sach(String maSach, String tenSach, int soLuong, int gia, int namXB, int soTrang, String maTD, String maNXB, String theLoai, String ngonNgu, int sLuongThuc) {
+        this.maSach = maSach;
+        this.tenSach = tenSach;
+        this.soLuong = soLuong;
+        this.gia = gia;
+        this.namXB = namXB;
+        this.soTrang = soTrang;
+        this.maTD = maTD;
+        this.maNXB = maNXB;
+        this.theLoai = theLoai;
+        this.ngonNgu = ngonNgu;
+        this.sLuongThuc = sLuongThuc;
+    }
     public String getMaSach() {
         return maSach;
     }

@@ -10,10 +10,10 @@ package et;
  * @author LENOVO
  */
 public class ET_NhaCungCap {
-    private String maNCC;
-    private String tenNCC;
-    private String diaChiNCC;
-    private String sdtNCC;
+    private String maNCC; // mã nhà cung cấp
+    private String tenNCC; // tên nhà cung cấp
+    private String diaChiNCC; // địa chỉ
+    private String sdtNCC; // số điện thoại
 
     public ET_NhaCungCap() {
         this.maNCC = "";

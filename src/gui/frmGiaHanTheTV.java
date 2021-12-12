@@ -6,7 +6,11 @@ package gui;
 
 import javax.swing.JOptionPane;
 import bll.BLL_TheThuVien;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -50,10 +54,10 @@ public class frmGiaHanTheTV extends javax.swing.JInternalFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Mã thẻ:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, -1, -1));
 
         txtMaThe.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jPanel1.add(txtMaThe, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 230, 30));
+        jPanel1.add(txtMaThe, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 230, 30));
 
         btnSua.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_edit_26px.png"))); // NOI18N
@@ -63,7 +67,7 @@ public class frmGiaHanTheTV extends javax.swing.JInternalFrame {
                 btnSuaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, 176, -1));
+        jPanel1.add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 176, -1));
 
         btnThoat.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_shutdown_26px.png"))); // NOI18N
@@ -73,7 +77,7 @@ public class frmGiaHanTheTV extends javax.swing.JInternalFrame {
                 btnThoatActionPerformed(evt);
             }
         });
-        jPanel1.add(btnThoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 154, -1));
+        jPanel1.add(btnThoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, 170, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,7 +89,7 @@ public class frmGiaHanTheTV extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
         );
 
         pack();
@@ -96,12 +100,40 @@ public class frmGiaHanTheTV extends javax.swing.JInternalFrame {
         if (txtMaThe.getText().compareTo("") > 0) {
             try {
                 if (bll.checkTT(txtMaThe.getText())) {
-                    JOptionPane.showMessageDialog(rootPane, txtMaThe);
-                    if (bll.giaHan(txtMaThe.getText())) {
-                        JOptionPane.showConfirmDialog(null, "Gia hạn thành công");
-                    } else {
-                        JOptionPane.showMessageDialog(rootPane, "Gia hạn không thành công");
+                    ResultSet rs = bll.layTheTheoMaThe(txtMaThe.getText());
+                    Date ngHHCu;
+                    Date ngGiaHan = new Date();
+                    while (rs.next()) {
+                        if (rs.getString(1).toString().compareTo(txtMaThe.getText()) == 0) {
+                            String ngHH = rs.getString(5).toString();
+                            ngHHCu = new SimpleDateFormat("yyyy-MM-dd").parse(ngHH);
+                            Calendar cal = Calendar.getInstance();
+                            Calendar cal2 = Calendar.getInstance();
+                            cal.setTime(ngHHCu);
+                            cal.add(Calendar.YEAR, 1);
+                            ngGiaHan = cal.getTime();
+                            //    ngGiaHan = new SimpleDateFormat("yyyy-MM-dd").parse(cal.getTime());
+                            cal.setTime(ngGiaHan);
+                            cal2.setTime(new Date());
+                            long datediff = (cal.getTime().getTime() - cal2.getTime().getTime());
+                            long days = datediff / (60 * 60 * 1000) / 24;
+                            JOptionPane.showMessageDialog(rootPane, days+"ngay");
+                            
+                            if (days > 30) {
+                                JOptionPane.showMessageDialog(rootPane, "Thẻ còn hạn trên 1 tháng, vui lòng gia hạn sau");
+                            } else {
+                                if (bll.giaHan(txtMaThe.getText(), ngGiaHan)) {
+                                    JOptionPane.showMessageDialog(null, "Gia hạn thành công");
+                                    txtMaThe.setText("");
+                                    txtMaThe.requestFocus();
+                                } else {
+                                    JOptionPane.showMessageDialog(rootPane, "Gia hạn không thành công");
+                                }
+                            }
+                            break;
+                        }
                     }
+
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "Không tồn tại mã thư viện mày");
                 }

@@ -98,13 +98,22 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
         tbSach.setModel(model);
     }
 
-    public void hienThiSach() throws SQLException {
+    public void hienThiSach() throws SQLException, Exception {
         ResultSet rs = bll.layDSSach();
         DefaultTableModel model = (DefaultTableModel) tbSach.getModel();
         model.setRowCount(0);
         while (rs.next()) {
             Object[] col = new Object[7];
             for (int i = 1; i <= 7; i++) {
+                if(i==3){
+                    col[i - 1] =bllTL.layTen(rs.getObject(i).toString());
+                }else if(i==4){
+                    col[i - 1] =bllNN.layTen(rs.getObject(i).toString());
+                }else if(i==5){
+                    col[i - 1] =bllTG.layTen(rs.getObject(i).toString());
+                }else if(i==6){
+                    col[i - 1] =bllNXB.layTen(rs.getObject(i).toString());
+                }else
                 col[i - 1] = rs.getObject(i);
             }
             model.addRow(col);
@@ -359,28 +368,29 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
         txtMasach.setText(model.getValueAt(row, 0).toString());
         txtTensach.setText(model.getValueAt(row, 1).toString());
         try {
-            cbTheLoai.setSelectedItem(bllTL.layTen(model.getValueAt(row, 2).toString()));
+            cbTheLoai.setSelectedItem(model.getValueAt(row, 2).toString());
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         try {
-            cbNgonNgu.setSelectedItem(bllNN.layTen(model.getValueAt(row, 3).toString()));
+            cbNgonNgu.setSelectedItem(model.getValueAt(row, 3).toString());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         try {
-            cbTacGia.setSelectedItem(bllTG.layTen(model.getValueAt(row, 4).toString()));
+            cbTacGia.setSelectedItem(model.getValueAt(row, 4).toString());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         try {
-            cbNXB.setSelectedItem(bllNXB.layTen(model.getValueAt(row, 5).toString()));
+            cbNXB.setSelectedItem(model.getValueAt(row, 5).toString());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         txtNamXB.setText(model.getValueAt(row, 6).toString());
     }//GEN-LAST:event_tbSachMouseClicked
+
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
@@ -393,25 +403,25 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
             try {
                 theLoai = bllTL.layMa(cbTheLoai.getSelectedItem().toString());
             } catch (Exception ex) {
-                Logger.getLogger(frmCapNhatSach1.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
             String ngonNgu = null;
             try {
                 ngonNgu = bllNN.layMa(cbNgonNgu.getSelectedItem().toString());
             } catch (Exception ex) {
-                Logger.getLogger(frmCapNhatSach1.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
             String tacGia = null;
             try {
                 tacGia = bllTG.layMa(cbTacGia.getSelectedItem().toString());
             } catch (Exception ex) {
-                Logger.getLogger(frmCapNhatSach1.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
             String NXB = null;
             try {
                 NXB = bllNXB.layMa(cbNXB.getSelectedItem().toString());;
             } catch (Exception ex) {
-                Logger.getLogger(frmCapNhatSach1.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
             int namXB = Integer.parseInt(txtNamXB.getText());
 
@@ -433,6 +443,8 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
 
                 } catch (SQLException ex) {
                     Logger.getLogger(frmNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex) {
+                    Logger.getLogger(frmCapNhatSach.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         } else {

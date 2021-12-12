@@ -30,7 +30,8 @@ public class DAL_Sach {
         ResultSet rs = null;
         try {
             con = DatabaseUtil.getConnection();
-            Statement st = con.createStatement();
+            Statement st = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
             String sql = "select * from books";
             rs = st.executeQuery(sql);
         } catch (SQLException ex) {
@@ -53,8 +54,8 @@ public class DAL_Sach {
         Connection con = null;
         con = DatabaseUtil.getConnection();
         Statement st = con.createStatement();
-        String sql = "insert into books(id_book,title,quantity,price,release_year,total_page,id_author,id_publisher,id_category,id_language)"
-                + "values('" + et.getMaSach() + "','" + et.getTenSach() + "','" + et.getSoLuong() + "','" + et.getGia() + "','" + et.getNamXB() + "','" + et.getSoTrang() + "','" + et.getMaTD() + "','" + et.getMaNXB() + "','" + et.getTheLoai() + "','" + et.getNgonNgu() + "')";
+        String sql = "insert into books(id_book,title,quantity,price,release_year,total_page,id_author,id_publisher,id_category,id_language,reality_quantity)"
+                + "values('" + et.getMaSach() + "','" + et.getTenSach() + "','" + et.getSoLuong() + "','" + et.getGia() + "','" + et.getNamXB() + "','" + et.getSoTrang() + "','" + et.getMaTD() + "','" + et.getMaNXB() + "','" + et.getTheLoai() + "','" + et.getNgonNgu() + "',"+et.getsLuongThuc()+")";
         if (st.executeUpdate(sql) > 0) {
             return true;
         }
@@ -66,7 +67,7 @@ public class DAL_Sach {
         con = DatabaseUtil.getConnection();
         Statement st = con.createStatement();
         String sql = "UPDATE books"
-                + " SET title ='" + et.getTenSach() + "', quantity ='" + et.getSoLuong() + "', price ='" + et.getGia() + "', release_year ='" + et.getNamXB() + "', total_page ='" + et.getSoTrang() + "', id_author ='" + et.getMaTD() + "', id_publisher ='" + et.getMaNXB() + "', id_category ='" + et.getTheLoai() + "', id_language ='" + et.getNgonNgu() + "'"
+                + " SET title ='" + et.getTenSach() + "', quantity ='" + et.getSoLuong() + "', price ='" + et.getGia() + "', release_year ='" + et.getNamXB() + "', total_page ='" + et.getSoTrang() + "', id_author ='" + et.getMaTD() + "', id_publisher ='" + et.getMaNXB() + "', id_category ='" + et.getTheLoai() + "', id_language ='" + et.getNgonNgu() + "', reality_quantity="+et.getsLuongThuc()
                 + " WHERE id_book='" + et.getMaSach() + "'";
         if (st.executeUpdate(sql) > 0) {
             return true;
@@ -120,6 +121,19 @@ public class DAL_Sach {
         String sl = "";
         while (rs.next()) {
             sl = rs.getObject(3).toString();
+        }
+        return sl;
+    }
+    public String laySLSachThucTe(String maSach) throws Exception {
+        Connection conn = null;
+        conn = DatabaseUtil.getConnection();
+        ResultSet rs = null;
+        Statement st = conn.createStatement();
+        String sql = "select * from books where id_book = '" + maSach + "'";
+        rs = st.executeQuery(sql);
+        String sl = "";
+        while (rs.next()) {
+            sl = rs.getObject(12).toString();
         }
         return sl;
     }

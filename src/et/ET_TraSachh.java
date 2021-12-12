@@ -12,15 +12,15 @@ import java.sql.Date;
  */
 public class ET_TraSachh {
 
-    private int maMuonSach;
-    private java.sql.Date ngayDuTra;
-    private java.sql.Date ngayThucTra;
-    private String maSach;
-    private String tenDocGia;
-    private String maThuVien;
-    private int soNgayQuaHan;
-    private String maNhanVien;
-    private String tinhTrangSach;
+    private int maMuonSach; // mã sách mượn
+    private java.sql.Date ngayDuTra; // ngày dự trả
+    private java.sql.Date ngayThucTra; // ngày thực trả
+    private String maSach; // mã sách
+    private String tenDocGia; // tên độc giả
+    private String maThuVien; // mã thư viện
+    private int soNgayQuaHan; // số ngày quá hạn
+    private String maNhanVien; // mã nhân viên
+    private String tinhTrangSach; // tình trạng sách
 
     public ET_TraSachh(int maMuonSach, Date ngayDuTra, Date ngayThucTra, String maSach, String tenDocGia, String maThuVien, int soNgayQuaHan, String maNhanVien, String tinhTrangSach) {
         this.maMuonSach = maMuonSach;

@@ -25,4 +25,8 @@ public class DatabaseUtil {
         }
         return c;
     }
+
+    public static Connection getConnection(int TYPE_SCROLL_INSENSITIVE, int CONCUR_READ_ONLY) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

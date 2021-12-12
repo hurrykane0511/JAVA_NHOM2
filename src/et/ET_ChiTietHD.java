@@ -11,6 +11,11 @@ package et;
  */
 public class ET_ChiTietHD {
 
+    private String maChiTietHD; // mã chi tiết hóa đơn
+    private int soLuong; // số lượng
+    private String maHD; // mã hóa đơn
+    private String maSach; // mã sách
+
     public ET_ChiTietHD(String maChiTietHD, int soLuong, String maHD, String maSach) {
         this.maChiTietHD = maChiTietHD;
         this.soLuong = soLuong;
@@ -49,8 +54,5 @@ public class ET_ChiTietHD {
     public void setMaSach(String maSach) {
         this.maSach = maSach;
     }
-    private String maChiTietHD;
-    private int soLuong;
-    private String maHD;
-    private String maSach;
+
 }

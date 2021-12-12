@@ -9,10 +9,10 @@ package et;
  * @author yushu
  */
 public class ET_LoaiDocGia {
-    private int maLoai;
-    private String tenLoai;
-    private int sLSachMuon;
-    private int phi;
+    private int maLoai; // mã loại
+    private String tenLoai; // tên loại
+    private int sLSachMuon; // số lượng sách mượn
+    private int phi; // phí
 
     public ET_LoaiDocGia(int maLoai, String tenLoai, int sLSachMuon, int phi) {
         this.maLoai = maLoai;

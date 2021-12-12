@@ -10,8 +10,9 @@ package et;
  * @author LENOVO
  */
 public class ET_TacGia {
-     private String maTG;
-    private String tenTG;
+
+    private String maTG; // mã tác giả
+    private String tenTG; // tên tác giả
 
     public ET_TacGia() {
     }

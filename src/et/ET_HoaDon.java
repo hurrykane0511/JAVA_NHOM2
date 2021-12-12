@@ -13,12 +13,18 @@ import java.util.Date;
  */
 public class ET_HoaDon {
 
+    private String maHD; // mã hóa đơn
+    private String maNV; // mã nhân viên
+    private Date ngayNhap; // ngày nhập
+    private String maNCC; // mã nhà cung cấp
+
     public ET_HoaDon(String maHD, String maNV, Date ngayNhap, String maNCC) {
         this.maHD = maHD;
         this.maNV = maNV;
         this.ngayNhap = ngayNhap;
         this.maNCC = maNCC;
     }
+
     public ET_HoaDon(String maHD, String maNV, String maNCC) {
         this.maHD = maHD;
         this.maNV = maNV;
@@ -56,8 +62,5 @@ public class ET_HoaDon {
     public void setMaNCC(String maNCC) {
         this.maNCC = maNCC;
     }
-    private String  maHD;
-    private String maNV;
-    private Date ngayNhap;
-    private String maNCC;
+
 }

@@ -14,6 +14,13 @@ import java.util.Date;
  */
 public class ET_MuonSach {
 
+    String masach; // mã sách
+    String mathe; // mã thẻ
+    String manv; // mã nhân viên
+    java.sql.Date ngaymuon; // ngày mượn
+    java.sql.Date ngaytra; // ngày trả
+    String tinhTrang; // tình trạng
+
     public String getMasach() {
         return masach;
     }
@@ -34,21 +41,12 @@ public class ET_MuonSach {
         return ngaytra;
     }
 
-  
-
-    String masach;
-    String mathe;
-    String manv;
-    java.sql.Date ngaymuon;
-    java.sql.Date ngaytra;
-    String tinhTrang;
-
     public String getTinhTrang() {
         return tinhTrang;
     }
 
     public ET_MuonSach(String masach, String mathe, String manv, Date ngaymuon, int soNgayMuon, String tinhTrang) {
-        
+
         this.masach = masach;
         this.mathe = mathe;
         this.manv = manv;
@@ -59,6 +57,6 @@ public class ET_MuonSach {
         java.util.Date utilDate = c.getTime();
         this.ngaytra = new java.sql.Date(utilDate.getTime());
         this.tinhTrang = tinhTrang;
-        
+
     }
 }

@@ -12,14 +12,15 @@ import java.util.Date;
  * @author LENOVO
  */
 public class ET_DocGia {
-    private String maDocGia;
-    private String ho;
-     private String ten;
-    private Date ngaySinh;
-    private String  gioiTinh;
-    private String cccd;
-     private String diaChi;
-    private int loaiDG;
+
+    private String maDocGia; // mã độc giả
+    private String ho; // họ độc giả
+    private String ten; // tên độc giả
+    private Date ngaySinh; // ngày sinh
+    private String gioiTinh; // giới tính
+    private String cccd;// căn cước công dân
+    private String diaChi; // địa chỉ
+    private int loaiDG; // loại độc giả
 
     public String getMaDocGia() {
         return maDocGia;
@@ -96,7 +97,4 @@ public class ET_DocGia {
         this.loaiDG = loaiDG;
     }
 
-    
-   
-     
 }

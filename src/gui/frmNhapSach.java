@@ -21,7 +21,6 @@ import et.ET_NhanVien;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -66,6 +65,8 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
         AutoCompleteDecorator.decorate(cboNXB);
         AutoCompleteDecorator.decorate(cboNCC);
         AutoCompleteDecorator.decorate(cboNV);
+        txtMaHD.setEditable(false);
+        resetMa();
         comboboxDM();
         comboboxNN();
         comboboxNXB();
@@ -461,7 +462,8 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
                         }
                         if (bll.checkTonTai(maSach) == true) {
                             int tong = bll.laySLSach(txtMaSach.getText()) + Integer.parseInt(txtSoLuong.getText());
-                            ET_Sach et = new ET_Sach(maSach, ten, tong, Integer.parseInt(gia), Integer.parseInt(nxb), Integer.parseInt(st), maTD, maNXB, maDM, maNN);
+                            int tongTT = bll.laySLSachThucTe(txtMaSach.getText()) + Integer.parseInt(txtSoLuong.getText());
+                            ET_Sach et = new ET_Sach(maSach, ten, tong, Integer.parseInt(gia), Integer.parseInt(nxb), Integer.parseInt(st), maTD, maNXB, maDM, maNN, tongTT);
                             ET_HoaDon HDon = new ET_HoaDon(mahd, maNV, maNCC);
                             String maCT = themCTHH();
                             ET_ChiTietHD CT = new ET_ChiTietHD(maCT, Integer.parseInt(sl), mahd, maSach);
@@ -476,9 +478,10 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
                             } catch (SQLException ex) {
                                 ex.printStackTrace();
                             }
+                            resetMa();
                             hienHoaDon();
                         } else {
-                            ET_Sach et = new ET_Sach(maSach, ten, Integer.parseInt(sl), Integer.parseInt(gia), Integer.parseInt(nxb), Integer.parseInt(st), maTD, maNXB, maDM, maNN);
+                            ET_Sach et = new ET_Sach(maSach, ten, Integer.parseInt(sl), Integer.parseInt(gia), Integer.parseInt(nxb), Integer.parseInt(st), maTD, maNXB, maDM, maNN, Integer.parseInt(sl));
                             try {
                                 if (bll.themSach(et)) {
                                     JOptionPane.showMessageDialog(rootPane, "Thêm thành công");
@@ -487,13 +490,14 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
                                 }
                                 hienHoaDon();
                             } catch (SQLException ex) {
-                               ex.printStackTrace();
+                                ex.printStackTrace();
                             }
                             ET_HoaDon HDon = new ET_HoaDon(mahd, maNV, maNCC);
                             String maCT = themCTHH();
                             ET_ChiTietHD CT = new ET_ChiTietHD(maCT, Integer.parseInt(sl), mahd, maSach);
                             bllHD.themHoaDon(HDon);
                             bllCTHD.themChiTietHD(CT);
+                            resetMa();
                             hienHoaDon();
                         }
                     } else {
@@ -509,7 +513,7 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         int kq = JOptionPane.showConfirmDialog(null, "Bạn có muốn thoát không", "Thông báo", JOptionPane.YES_NO_OPTION);
         if (kq == 0) {
-            System.exit(0);
+            this.dispose();
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_btnThoatActionPerformed
@@ -539,7 +543,8 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
         tblDS.setModel(model);
 
     }
-    public void reset() {
+
+    public void reset() throws Exception, Exception, Exception {
         txtGia.setText("");
         txtMaHD.setText("");
         txtMaSach.setText("");
@@ -553,6 +558,22 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
         cboNN.setSelectedIndex(0);
         cboNV.setSelectedIndex(0);
         cboNXB.setSelectedIndex(0);
+    }
+    public void resetMa() throws SQLException {
+        ResultSet rs = bllHD.layDS();
+        rs.last();
+        int row = rs.getRow();
+        if (row == 0) {
+            STT = 1;
+        } else {
+            rs.beforeFirst();
+            while (rs.next()) {
+                STT = Integer.parseInt(rs.getObject(1).toString().substring(2)) + 1;
+            }
+        }
+        String ma = String.format("%02d", STT);
+        txtMaHD.setText("HD" + ma);
+        hienThi();
     }
     public void comboboxDM() throws Exception {
         bllDM = new BLL_DanhMuc();

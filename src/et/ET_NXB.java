@@ -10,8 +10,8 @@ package et;
  * @author PC
  */
 public class ET_NXB {
-    private String maNXB;
-    private String tenNXb;
+    private String maNXB; // mã nhà xuất bản
+    private String tenNXb; // tên nhà xuât bản
 
     public ET_NXB(String maNXB, String tenNXb) {
         this.maNXB = maNXB;

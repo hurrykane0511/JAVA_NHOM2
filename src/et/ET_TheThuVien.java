@@ -12,11 +12,11 @@ import java.util.Date;
  * @author LENOVO
  */
 public class ET_TheThuVien {
-    private String maThe;
-    private String maDocGia; 
-    private String maNhanVien;
-    private Date ngayTao;
-    private Date ngayHetHan;
+    private String maThe; // mã thẻ thư viện
+    private String maDocGia;  // mã độc giả
+    private String maNhanVien; // mã nhân viên
+    private Date ngayTao; // ngày tạo
+    private Date ngayHetHan; // ngày hết hạn
 
     public ET_TheThuVien(String maThe, String maDocGia, String maNhanVien, Date ngayTao, Date ngayHetHan) {
         this.maThe = maThe;

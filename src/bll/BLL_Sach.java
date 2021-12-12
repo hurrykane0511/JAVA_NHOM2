@@ -37,6 +37,9 @@ public class BLL_Sach {
     public int laySLSach(String ma) throws SQLException, Exception{
         return  Integer.parseInt(dal.laySLSach(ma));
     }
+     public int laySLSachThucTe(String ma) throws SQLException, Exception{
+        return  Integer.parseInt(dal.laySLSachThucTe(ma));
+    }
     public String layTen(String ma) throws Exception{
         return dal.layTen(ma);
     }

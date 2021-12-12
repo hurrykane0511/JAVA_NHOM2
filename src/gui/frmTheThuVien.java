@@ -487,12 +487,8 @@ public class frmTheThuVien extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "Thẻ đã tồn tại");
                 } else {
                     if (bllDG.checkTT(CCCD) == true) {
-                        int kq = JOptionPane.showConfirmDialog(null, "Độc giả đã tồn tại, bạn có muốn gia hạn thẻ?", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                        if (kq == JOptionPane.YES_OPTION) {
-                            frmGiaHanTheTV frmGiaHan = new frmGiaHanTheTV();
-                            frmGiaHan.setVisible(true);
-                            frmGiaHan.toFront();
-                        }
+                        JOptionPane.showMessageDialog(null, "Độc giả đã tồn tại, vui lòng gia gia hạn thẻ?");
+
                     } else {
                         // Đối tượng loại độc giả
                         ET_LoaiDocGia etLoaiDG = (ET_LoaiDocGia) cboLoaiDocGia.getSelectedItem();
@@ -541,15 +537,7 @@ public class frmTheThuVien extends javax.swing.JInternalFrame {
         String cccd = txtCCCD.getText();
         try {
             if (bllDG.checkTT(cccd)) {
-                int kq = JOptionPane.showConfirmDialog(null, "Độc giả đã tồn tại, bạn có muốn gia hạn thẻ?", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (kq == JOptionPane.YES_OPTION) {
-//                    frmGiaHanTheTV frmGiaHan = new frmGiaHanTheTV();
-//                    frmGiaHan.setVisible(true);
-//                    frmGiaHan.toFront();
-                    frmTimKiem frm = new frmTimKiem();
-                    frm.setVisible(true);
-                    frm.toFront();
-                }
+                JOptionPane.showMessageDialog(null, "Độc giả đã tồn tại, vui lòng gia gia hạn thẻ?");
             }
         } catch (Exception ex) {
             Logger.getLogger(frmTheThuVien.class.getName()).log(Level.SEVERE, null, ex);

@@ -10,8 +10,8 @@ package et;
  * @author LENOVO
  */
 public class ET_TheLoai {
-    private String maTL;
-    private String tenTL;
+    private String maTL; // mã thể loại
+    private String tenTL; // tên thẻ loại
 
     public String getMaTL() {
         return maTL;

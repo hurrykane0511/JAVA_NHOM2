@@ -9,8 +9,8 @@ package et;
  * @author yushu
  */
 public class ET_DanhMuc {
-    private String maDanhMuc;
-    private String tenDanhMuc;
+    private String maDanhMuc; // mã danh mục
+    private String tenDanhMuc; // tên danh mục
 
     public ET_DanhMuc(String maDanhMuc, String tenDanhMuc) {
         this.maDanhMuc = maDanhMuc;

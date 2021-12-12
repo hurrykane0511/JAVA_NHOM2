@@ -11,11 +11,11 @@ package et;
 public class ET_TaiKhoan {
 
 //    private int maTK;
-    private String maTK;
-    private String tenDN;
-    private String matKhau;
-    private String loaiTK;
-    private String maNV;
+    private String maTK; // mã tài khoản
+    private String tenDN;  // tên đăng nhập
+    private String matKhau; // mật khẩu
+    private String loaiTK; // loại tài khoản
+    private String maNV; // mã nhân viên
 
     public String getMaTK() {
         return maTK;
