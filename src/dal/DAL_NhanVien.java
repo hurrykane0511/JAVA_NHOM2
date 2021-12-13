@@ -69,6 +69,25 @@ public class DAL_NhanVien {
         }
         return (row > 0);
     }
+    
+    public Boolean checkTonTaiCCCD(String cccd) throws SQLException {
+        Connection conn = null;;
+        ResultSet rs = null;
+        int row = 0;
+        try {
+            conn = DatabaseUtil.getConnection();
+            Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+            String sql = "Select * from staffs where pid = '" + cccd + "'";
+            rs = st.executeQuery(sql);
+            rs.last();
+            row = rs.getRow();
+            rs.beforeFirst();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return (row > 0);
+    }
 
     public Boolean xoaNhanVien(ET_NhanVien et) throws SQLException {
         Boolean kq = false;

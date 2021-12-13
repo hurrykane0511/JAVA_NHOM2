@@ -340,7 +340,7 @@ public class frmNXB extends javax.swing.JInternalFrame {
                 Logger.getLogger(frmNXB.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Vui lòng chọn nhân viên");
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn nhà xuât bản");
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_btnXoaActionPerformed

@@ -36,6 +36,11 @@ public class BLL_NhanVien {
      public Boolean checkTT(String ma) throws SQLException {
         return dal.checkTonTai(ma);
     }
+     
+      public Boolean checkCCCD(String cccd) throws SQLException {
+        return dal.checkTonTaiCCCD(cccd);
+    }
+      
       public String layMa(String ten) throws Exception {
         return dal.layMaNV(ten);
     }

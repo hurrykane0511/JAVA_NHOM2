@@ -29,6 +29,7 @@ public class frmNhanVien extends javax.swing.JInternalFrame {
     public frmNhanVien() throws Exception {
         initComponents();
         bll = new BLL_NhanVien();
+        // hiển thị nhân viên lên table
         hienThi();
         hienThiNV();
     }
@@ -283,29 +284,33 @@ public class frmNhanVien extends javax.swing.JInternalFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        String maNV = txtMaNV.getText();
-        String ho = txtHoNV.getText();
-        String ten = txtTenNV.getText();
-        String diaChi = txtDiaChi.getText();
-        String soDT = txtSDT.getText();
-        Date ngaySinh = dtpNgSinh.getDate();
-        String cCCD = txtCCCD.getText();
+        String maNV = txtMaNV.getText(); // mã nhaanv viên
+        String ho = txtHoNV.getText(); // họ 
+        String ten = txtTenNV.getText(); // tên
+        String diaChi = txtDiaChi.getText(); // địa chỉ
+        String soDT = txtSDT.getText(); // số điện thoại
+        Date ngaySinh = dtpNgSinh.getDate(); // ngày sinh
+        String cCCD = txtCCCD.getText(); // căn cước công dân
         ET_NhanVien et;
-        if (maNV.equals("")|| ho.equals("")|| ten.equals("")|| diaChi.equals("")|| soDT.equals("")|| ngaySinh == null|| cCCD.equals("")) {
+        if (maNV.equals("") || ho.equals("") || ten.equals("") || diaChi.equals("") || soDT.equals("") || ngaySinh == null || cCCD.equals("")) {
             JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
         } else {
             try {
                 if (bll.checkTT(maNV)) {
                     JOptionPane.showMessageDialog(null, "Đã tồn tại NV");
                 } else {
-                    et = new ET_NhanVien(maNV, ho, ten, diaChi, soDT, ngaySinh, cCCD);
-                    if (bll.themNV(et)) {
-                        JOptionPane.showMessageDialog(rootPane, "Thêm thành công");
+                    if (bll.checkCCCD(cCCD)) {
+                        JOptionPane.showMessageDialog(rootPane, maNV);
                     } else {
-                        JOptionPane.showMessageDialog(rootPane, "Thêm không thành công");
+                        et = new ET_NhanVien(maNV, ho, ten, diaChi, soDT, ngaySinh, cCCD);
+                        if (bll.themNV(et)) {
+                            JOptionPane.showMessageDialog(rootPane, "Thêm thành công");
+                        } else {
+                            JOptionPane.showMessageDialog(rootPane, "Thêm không thành công");
+                        }
+                        hienThiNV();
+                        reset();
                     }
-                    hienThiNV();
-                    reset();
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -318,47 +323,53 @@ public class frmNhanVien extends javax.swing.JInternalFrame {
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
         int row = tblNhanVien.getSelectedRow();
-        String maNV = tblNhanVien.getValueAt(row, 0).toString();
-        String ho = txtHoNV.getText();
-        String ten = txtTenNV.getText();
-        String diaChi = txtDiaChi.getText();
-        String soDT = txtSDT.getText();
-        Date ngaySinh = dtpNgSinh.getDate();
-        String cCCD = txtCCCD.getText();
-        ET_NhanVien et;
-        if (maNV.equals("")|| ho.equals("")|| ten.equals("")|| diaChi.equals("")|| soDT.equals("")|| ngaySinh == null|| cCCD.equals("")) {
-            JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
-        } else {
-            try {
-                et = new ET_NhanVien(maNV, ho, ten, diaChi, soDT, ngaySinh, cCCD);
+        if (row >= 0) {
+            String maNV = tblNhanVien.getValueAt(row, 0).toString();
+            String ho = txtHoNV.getText();
+            String ten = txtTenNV.getText();
+            String diaChi = txtDiaChi.getText();
+            String soDT = txtSDT.getText();
+            Date ngaySinh = dtpNgSinh.getDate();
+            String cCCD = txtCCCD.getText();
+            ET_NhanVien et;
+            if (maNV.equals("") || ho.equals("") || ten.equals("") || diaChi.equals("") || soDT.equals("") || ngaySinh == null || cCCD.equals("")) {
+                JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
+            } else {
+                try {
+                    et = new ET_NhanVien(maNV, ten, ho, diaChi, soDT, ngaySinh, cCCD);
 
-                if (bll.suaNV(et)) {
-                    JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
-                } else {
-                    JOptionPane.showMessageDialog(rootPane, "Sửa không thành công");
+                    if (bll.suaNV(et)) {
+                        JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
+                        hienThiNV();
+                        reset();
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "Sửa không thành công");
+
+                    }
+
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
                 }
-                hienThiNV();
-                reset();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn nhân viên để sửa");
         }
+
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
         int row1 = tblNhanVien.getSelectedRow();
-        String maNV = tblNhanVien.getValueAt(row1, 0).toString();
-        String ho = txtHoNV.getText();
-        String ten = txtTenNV.getText();
-        String diaChi = txtDiaChi.getText();
-        String soDT = txtSDT.getText();
-        Date ngaySinh = dtpNgSinh.getDate();
-        String cCCD = txtCCCD.getText();
-        ET_NhanVien et;
+        if (row1 >= 0) {
+            String maNV = tblNhanVien.getValueAt(row1, 0).toString();
+            String ho = txtHoNV.getText();
+            String ten = txtTenNV.getText();
+            String diaChi = txtDiaChi.getText();
+            String soDT = txtSDT.getText();
+            Date ngaySinh = dtpNgSinh.getDate();
+            String cCCD = txtCCCD.getText();
+            ET_NhanVien et;
 
-        int row2 = tblNhanVien.getSelectedRow();
-        if (row2 >= 0) {
             et = new ET_NhanVien(maNV, ho, ten, diaChi, soDT, ngaySinh, cCCD);
             try {
                 if (bll.xoaNV(et)) {
@@ -369,7 +380,7 @@ public class frmNhanVien extends javax.swing.JInternalFrame {
                 hienThiNV();
                 reset();
             } catch (SQLException ex) {
-               ex.printStackTrace();
+                ex.printStackTrace();
             }
         } else {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn nhân viên");
@@ -380,7 +391,7 @@ public class frmNhanVien extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int kq = JOptionPane.showConfirmDialog(null, "Bạn có muốn thoát không", "Thông báo", JOptionPane.YES_NO_OPTION);
         if (kq == 0) {
-           this.dispose();
+            this.dispose();
         }
     }//GEN-LAST:event_btnThoatActionPerformed
 
@@ -410,7 +421,9 @@ public class frmNhanVien extends javax.swing.JInternalFrame {
         model.addColumn("CCCD");
         tblNhanVien.setModel(model);
     }
-
+ 
+    
+    // hiển thi nhân viên lên table
     public void hienThiNV() throws SQLException {
         ResultSet rs = bll.layNV();
         DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
@@ -425,6 +438,7 @@ public class frmNhanVien extends javax.swing.JInternalFrame {
         // rs.close();
     }
 
+    // reset các fields
     public void reset() {
         txtMaNV.setText("");
         txtTenNV.setText("");
@@ -434,6 +448,20 @@ public class frmNhanVien extends javax.swing.JInternalFrame {
         dtpNgSinh.setDate(new Date());
         txtCCCD.setText("");
         txtMaNV.setText("");
+    }
+
+    // check số cccd
+    public boolean checkSo(String so) {
+        if (so.length() == 0) {
+            return false;
+        }
+        char[] c = so.toCharArray();
+        for (int i = 0; i < c.length; i++) {
+            if (!Character.isDigit(c[i])) {
+                return false;
+            }
+        }
+        return true;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

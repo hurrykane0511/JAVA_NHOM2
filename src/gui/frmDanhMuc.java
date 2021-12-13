@@ -29,6 +29,7 @@ public class frmDanhMuc extends javax.swing.JInternalFrame {
 
     public frmDanhMuc() throws Exception {
         initComponents();
+        // Hiển thị danh sách lên table
         reset();
         // Kích thước màn hình 
         Dimension mainDimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -224,13 +225,12 @@ public class frmDanhMuc extends javax.swing.JInternalFrame {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
         try {
-            String maDM = txtMaDM.getText();
+            String maDM = txtMaDM.getText(); // mã danh mục
             if (txtTenDM.getText().compareTo("") > 0) {
-                String tenDM = txtTenDM.getText();
+                String tenDM = txtTenDM.getText(); // tên danh mục
                 ET_DanhMuc et = new ET_DanhMuc(maDM, tenDM);
                 if (bll.themDM(et)) {
                     JOptionPane.showMessageDialog(null, "Thêm thành công");
-                    STT++;
                     reset();
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "Thêm không thành công");
@@ -248,7 +248,7 @@ public class frmDanhMuc extends javax.swing.JInternalFrame {
         int row = tblDanhMuc.getSelectedRow();
         if (row != -1) {
             try {
-                String maDM = txtMaDM.getText();
+                String maDM = txtMaDM.getText(); // mã danh mục
                 if (txtTenDM.getText().compareTo("") > 0) {
                     String tenDM = txtTenDM.getText();
                     ET_DanhMuc et = new ET_DanhMuc(maDM, tenDM);
@@ -269,7 +269,7 @@ public class frmDanhMuc extends javax.swing.JInternalFrame {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
-        int row = tblDanhMuc.getSelectedRow();
+        int row = tblDanhMuc.getSelectedRow(); // lấy hàng đang được chọn
         if (row != -1) {
             try {
                 String maDM = txtMaDM.getText();
@@ -307,7 +307,8 @@ public class frmDanhMuc extends javax.swing.JInternalFrame {
         txtMaDM.setText(model.getValueAt(row, 0).toString());
         txtTenDM.setText(model.getValueAt(row, 1).toString());
     }//GEN-LAST:event_tblDanhMucMouseClicked
-    
+
+    // Hiển thi cột cho table
     private void hienThi() {
         DefaultTableModel model = (DefaultTableModel) tblDanhMuc.getModel();
         model.setRowCount(0);
@@ -317,6 +318,7 @@ public class frmDanhMuc extends javax.swing.JInternalFrame {
         tblDanhMuc.setModel(model);
     }
 
+    // hiển thị danh mục lên table
     private void hienThiDM() throws Exception {
         DefaultTableModel model = (DefaultTableModel) tblDanhMuc.getModel();
         model.setRowCount(0);
@@ -331,7 +333,9 @@ public class frmDanhMuc extends javax.swing.JInternalFrame {
         tblDanhMuc.setModel(model);
     }
 
+    // lấy mã tự động
     public void layMa() throws Exception {
+        STT = 0;
         ResultSet rs = bll.layDM();
         rs.last();
         // JOptionPane.showMessageDialog(null, rs.getRow());
@@ -348,6 +352,7 @@ public class frmDanhMuc extends javax.swing.JInternalFrame {
         txtMaDM.setText("DM" + ma);
     }
 
+    // reset các fields
     private void reset() throws Exception {
         layMa();
         hienThi();

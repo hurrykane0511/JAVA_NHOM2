@@ -18,6 +18,8 @@ import javax.swing.JOptionPane;
  * @author yushu
  */
 public class DAL_LoaiDocGia {
+
+    // lấy danh sách loại độc giả
     public ResultSet layDS() throws SQLException, Exception {
         Connection conn = null;
         ResultSet rs = null;
@@ -32,50 +34,16 @@ public class DAL_LoaiDocGia {
         }
         return rs;
     }
-    
-     public Boolean themLoai(ET_LoaiDocGia et) throws SQLException, Exception {
+
+    // thêm loại độc giả
+    public Boolean themLoai(ET_LoaiDocGia et) throws SQLException, Exception {
         Connection conn = null;
         Boolean kq = false;
         try {
             conn = DatabaseUtil.getConnection();
             Statement st = conn.createStatement();
-             String sql = "insert into reader_type(name, quantity, lib_fee)"
-                    + " values('"+et.getTenLoai()+"',"+et.getsLSachMuon()+", "+et.getPhi()+")";
-            if (st.executeUpdate(sql) > 0) {
-                kq = true;
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-        return kq;
-    }
-    public Boolean suaLoai(ET_LoaiDocGia et) throws SQLException, Exception {
-        Connection conn = null;
-        Boolean kq = false;
-        try {
-            conn = DatabaseUtil.getConnection();
-            Statement st = conn.createStatement();
-            String sql = "update reader_type "
-                    + "set name = '"+et.getTenLoai()+"', "
-                    + "quantity ="+et.getsLSachMuon() +", "
-                    + "lib_fee = "+et.getPhi()+" "
-                    + "where type_id = "+et.getMaLoai()+"";
-            if (st.executeUpdate(sql) > 0) {
-                kq = true;
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-        return kq;
-    }
-    
-    public Boolean xoaLoai(int maLoai) throws SQLException, Exception {
-        Connection conn = null;
-        Boolean kq = false;
-        try {
-            conn = DatabaseUtil.getConnection();
-            Statement st = conn.createStatement();
-            String sql = "delete from reader_type where type_id = "+maLoai+"";
+            String sql = "insert into reader_type(name, quantity, lib_fee)"
+                    + " values('" + et.getTenLoai() + "'," + et.getsLSachMuon() + ", " + et.getPhi() + ")";
             if (st.executeUpdate(sql) > 0) {
                 kq = true;
             }
@@ -85,7 +53,42 @@ public class DAL_LoaiDocGia {
         return kq;
     }
 
-    public Boolean xoaLoai(ET_LoaiDocGia et) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    // sửa loại độc giả
+    public Boolean suaLoai(ET_LoaiDocGia et) throws SQLException, Exception {
+        Connection conn = null;
+        Boolean kq = false;
+        try {
+            conn = DatabaseUtil.getConnection();
+            Statement st = conn.createStatement();
+            String sql = "update reader_type "
+                    + "set name = '" + et.getTenLoai() + "', "
+                    + "quantity =" + et.getsLSachMuon() + ", "
+                    + "lib_fee = " + et.getPhi() + " "
+                    + "where type_id = " + et.getMaLoai() + "";
+            if (st.executeUpdate(sql) > 0) {
+                kq = true;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return kq;
     }
+
+    // xóa loại độc giả
+    public Boolean xoaLoai(int maLoai) throws SQLException, Exception {
+        Connection conn = null;
+        Boolean kq = false;
+        try {
+            conn = DatabaseUtil.getConnection();
+            Statement st = conn.createStatement();
+            String sql = "delete from reader_type where type_id = " + maLoai + "";
+            if (st.executeUpdate(sql) > 0) {
+                kq = true;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return kq;
+    }
+
 }

@@ -104,10 +104,11 @@ public class frmGiaHanTheTV extends javax.swing.JInternalFrame {
                         .addGap(10, 10, 10)
                         .addComponent(jLabel5))
                     .addComponent(txtMaThe, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(118, 118, 118)
+                .addGap(108, 108, 108)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSua)
-                    .addComponent(btnThoat)))
+                    .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -118,7 +119,9 @@ public class frmGiaHanTheTV extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -128,10 +131,11 @@ public class frmGiaHanTheTV extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if (txtMaThe.getText().compareTo("") > 0) {
             try {
-                if (bll.checkTT(txtMaThe.getText())) {
+                if (bll.checkTT(txtMaThe.getText())) { // check thẻ tồn tại
                     ResultSet rs = bll.layTheTheoMaThe(txtMaThe.getText());
                     Date ngHHCu;
                     Date ngGiaHan = new Date();
+                    // check ngày gia hạn cũ còn hạn hay không
                     while (rs.next()) {
                         if (rs.getString(1).toString().compareTo(txtMaThe.getText()) == 0) {
                             String ngHH = rs.getString(5).toString();
@@ -141,13 +145,11 @@ public class frmGiaHanTheTV extends javax.swing.JInternalFrame {
                             cal.setTime(ngHHCu);
                             cal.add(Calendar.YEAR, 1);
                             ngGiaHan = cal.getTime();
-                            //    ngGiaHan = new SimpleDateFormat("yyyy-MM-dd").parse(cal.getTime());
                             cal.setTime(ngGiaHan);
                             cal2.setTime(new Date());
                             long datediff = (cal.getTime().getTime() - cal2.getTime().getTime());
                             long days = datediff / (60 * 60 * 1000) / 24;
                             JOptionPane.showMessageDialog(rootPane, days + "ngay");
-
                             if (days > 30) {
                                 JOptionPane.showMessageDialog(rootPane, "Thẻ còn hạn trên 1 tháng, vui lòng gia hạn sau");
                             } else {
@@ -162,7 +164,6 @@ public class frmGiaHanTheTV extends javax.swing.JInternalFrame {
                             break;
                         }
                     }
-
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "Không tồn tại mã thư viện mày");
                 }
