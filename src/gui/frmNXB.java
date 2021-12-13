@@ -27,7 +27,7 @@ public class frmNXB extends javax.swing.JInternalFrame {
 
     public frmNXB() throws Exception {
         initComponents();
-        this.setTitle("Nhà Xuất Bản");
+        this.setTitle("Quản lý Nhà Xuất Bản");
         txtMa.setEditable(false);
         bll = new BLL_NXB();
         hienThi();
@@ -346,7 +346,7 @@ public class frmNXB extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
-        System.exit(0);
+        this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_btnThoatActionPerformed
 

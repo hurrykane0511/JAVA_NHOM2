@@ -29,6 +29,7 @@ public class frmLoaiDocGia extends javax.swing.JInternalFrame {
     public frmLoaiDocGia() throws Exception {
         initComponents();
         bll = new BLL_LoaiDocGia();
+        this.setTitle("Quản lý Loại độc giả");
         reset();
     }
 

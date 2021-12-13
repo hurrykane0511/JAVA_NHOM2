@@ -67,6 +67,7 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
         AutoCompleteDecorator.decorate(cboNV);
         txtMaHD.setEditable(false);
         resetMa();
+        this.setTitle("Quản lý nhập sách");
         comboboxDM();
         comboboxNN();
         comboboxNXB();

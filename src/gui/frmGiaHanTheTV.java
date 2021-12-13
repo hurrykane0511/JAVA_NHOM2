@@ -27,6 +27,7 @@ public class frmGiaHanTheTV extends javax.swing.JInternalFrame {
 
     public frmGiaHanTheTV() throws Exception {
         initComponents();
+        this.setTitle("Gia hạn thẻ thư viện");
         bll = new BLL_TheThuVien();
     }
 
@@ -145,14 +146,14 @@ public class frmGiaHanTheTV extends javax.swing.JInternalFrame {
                             cal.setTime(ngHHCu);
                             cal.add(Calendar.YEAR, 1);
                             ngGiaHan = cal.getTime();
-                            cal.setTime(ngGiaHan);
+                            cal.setTime(ngHHCu);
                             cal2.setTime(new Date());
                             long datediff = (cal.getTime().getTime() - cal2.getTime().getTime());
                             long days = datediff / (60 * 60 * 1000) / 24;
-                            JOptionPane.showMessageDialog(rootPane, days + "ngay");
                             if (days > 30) {
                                 JOptionPane.showMessageDialog(rootPane, "Thẻ còn hạn trên 1 tháng, vui lòng gia hạn sau");
                             } else {
+                                
                                 if (bll.giaHan(txtMaThe.getText(), ngGiaHan)) {
                                     JOptionPane.showMessageDialog(null, "Gia hạn thành công");
                                     txtMaThe.setText("");

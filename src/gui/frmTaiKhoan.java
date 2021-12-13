@@ -24,7 +24,7 @@ public class frmTaiKhoan extends javax.swing.JInternalFrame {
     private int STT;
     public frmTaiKhoan() throws Exception {
         initComponents();
-         this.setTitle("Tài khoản");
+         this.setTitle("Quản lý Tài khoản");
         bll = new BLL_TaiKhoan();
         txtMaTK.setEditable(false);
         layMa();

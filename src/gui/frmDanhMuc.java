@@ -31,6 +31,8 @@ public class frmDanhMuc extends javax.swing.JInternalFrame {
         initComponents();
         // Hiển thị danh sách lên table
         reset();
+        this.setTitle("Quản lý Danh mục");
+        txtMaDM.setEditable(false);
         // Kích thước màn hình 
         Dimension mainDimension = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension dpDimension = new Dimension();
@@ -217,6 +219,7 @@ public class frmDanhMuc extends javax.swing.JInternalFrame {
         try {
             // TODO add your handling code here:
             layMa();
+            reset();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

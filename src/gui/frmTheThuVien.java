@@ -41,6 +41,7 @@ public class frmTheThuVien extends javax.swing.JInternalFrame {
 
     public frmTheThuVien() throws Exception {
         initComponents();
+        this.setTitle("Quản lý thẻ thư viện");
         bllThe = new BLL_TheThuVien();
         bllNV = new BLL_NhanVien();
         bllDG = new BLL_DocGia();

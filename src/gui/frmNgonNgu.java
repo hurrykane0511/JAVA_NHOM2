@@ -28,6 +28,7 @@ public class frmNgonNgu extends javax.swing.JInternalFrame {
 
     public frmNgonNgu() throws Exception {
         initComponents();
+        this.setTitle("Quản lý ngôn ngữ");
         bll = new BLL_NgonNgu();
         reset();
         txtMaNgonNgu.setEditable(false);

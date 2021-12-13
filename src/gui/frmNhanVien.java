@@ -28,6 +28,7 @@ public class frmNhanVien extends javax.swing.JInternalFrame {
 
     public frmNhanVien() throws Exception {
         initComponents();
+        this.setTitle("Quản lý nhân viên");
         bll = new BLL_NhanVien();
         // hiển thị nhân viên lên table
         hienThi();

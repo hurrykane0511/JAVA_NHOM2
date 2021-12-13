@@ -27,6 +27,7 @@ public class frmNCC extends javax.swing.JInternalFrame {
 
     public frmNCC() throws Exception {
         initComponents();
+        this.setTitle("Quản lý Nhà cung cấp");
         bll = new BLL_NhaCungCap();
         txtMaNCC.setEditable(false);
         txtTenNCC.requestFocus();

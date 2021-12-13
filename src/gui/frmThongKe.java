@@ -15,6 +15,7 @@ public class frmThongKe extends javax.swing.JInternalFrame {
      */
     public frmThongKe() {
         initComponents();
+        this.setTitle("Thống kê");
     }
 
     /**

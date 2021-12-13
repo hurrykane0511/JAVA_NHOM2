@@ -16,6 +16,7 @@ public class frmChonTCDN extends javax.swing.JFrame {
     public frmChonTCDN() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setTitle("Chọn tư cách đăng nhập");
     }
 
     /**

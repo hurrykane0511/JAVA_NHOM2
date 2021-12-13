@@ -26,6 +26,7 @@ public class frmTimKiem extends javax.swing.JInternalFrame {
 
     public frmTimKiem() throws Exception {
         initComponents();
+        this.setTitle("Thống kê");
         this.bll_tim = new BLL_TimSach();
         LoadCB();
     }
@@ -176,7 +177,14 @@ public class frmTimKiem extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnThoatActionPerformed
     //Hàm set nội dung combobox
     void LoadCB() {
-        bll_tim.setCB(cbtimkiem);
+        HashMap<String, String> hm = new HashMap<>();
+        hm.put("Mã sách", "where b.id_book = ? ");
+        hm.put("Tên sách", "where b.title like concat('%', ? , '%')");
+        hm.put("Thể loại", "where ctg.name Like concat('%', ? , '%')");
+        hm.put("Tác giả", "where a.author_name like concat('%', ? , '%')");
+        hm.put("Nhà XB", "where p.name like concat('%', ? , '%')");
+        hm.put("Ngôn ngữ", "where lan.name like concat('%', ? , '%')");
+        bll_tim.setCB(cbtimkiem, hm);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -33,6 +33,7 @@ public class frmTraSach extends javax.swing.JInternalFrame {
 
     public frmTraSach() throws Exception {
         initComponents();
+        this.setTitle("Trả sách");
         bll = new BLL_TraSachh();
 
         hienThi();

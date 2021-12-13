@@ -23,6 +23,7 @@ public class frmDangNhap extends javax.swing.JFrame {
 
     public frmDangNhap() {
         initComponents();
+        this.setTitle("Đăng nhập");
         this.setLocationRelativeTo(null);
 
     }

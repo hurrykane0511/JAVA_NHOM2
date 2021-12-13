@@ -40,6 +40,7 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
     public frmCapNhatSach() throws Exception {
         initComponents();
         bll = new Bll_CapNhatSach();
+        this.setTitle("Cập nhật sách");
         //hiện thị combobox ngôn ngữ
         comboboxNN();
         //hiện thị combobox nhà xuất bản
