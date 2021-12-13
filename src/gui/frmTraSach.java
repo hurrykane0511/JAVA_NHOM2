@@ -292,7 +292,7 @@ public class frmTraSach extends javax.swing.JInternalFrame {
         });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel9.setText("Tên đọc giả");
+        jLabel9.setText("Tên độc giả");
 
         txtMaTheThuVien.setMinimumSize(new java.awt.Dimension(7, 28));
         txtMaTheThuVien.addActionListener(new java.awt.event.ActionListener() {
@@ -541,7 +541,15 @@ public class frmTraSach extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbbNhanVienActionPerformed
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
-
+        txtMaSach.setText("");
+        dtpNgayDuKienTra.setDate(new Date());
+        dtpNgayThucTra.setDate(new Date());
+        txtMaSach.setText("");
+        cbbNhanVien.setSelectedIndex(0);
+        txtMaTheThuVien.setText("");
+        txtDocGia.setText("");
+        txtSoNgayQuaHan.setText("");
+        txtaTinhTrangSach.setText("");
     }//GEN-LAST:event_btnMoiActionPerformed
 
 

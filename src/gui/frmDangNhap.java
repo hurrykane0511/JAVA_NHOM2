@@ -24,7 +24,7 @@ public class frmDangNhap extends javax.swing.JFrame {
     public frmDangNhap() {
         initComponents();
         this.setLocationRelativeTo(null);
-       
+
     }
 
     /**
@@ -162,8 +162,8 @@ public class frmDangNhap extends javax.swing.JFrame {
 
     private void btnDNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDNActionPerformed
         // TODO add your handling code here:
-        String tenDN = txtTenDN.getText();
-        String mk = String.valueOf(txtMK.getPassword());
+        String tenDN = txtTenDN.getText(); // tên đăng nhập
+        String mk = String.valueOf(txtMK.getPassword()); // mật khẩu
         if (tenDN.length() == 0 || mk.length() == 0) {
             JOptionPane.showMessageDialog(null, "Tên đăng nhập/ Mật khẩu không được để trống");
         } else {
@@ -174,14 +174,13 @@ public class frmDangNhap extends javax.swing.JFrame {
                 rs.beforeFirst();
                 if (row > 0) {
                     while (rs.next()) {
+                        // kiểm tra mật khẩu 
                         if (mk.compareTo(rs.getObject(3).toString().trim()) != 0) {
                             JOptionPane.showMessageDialog(null, "Mật khẩu không hợp lệ");
                         } else {
-                            if (rs.getObject(4).toString().compareTo("ThuKho") == 0) {
-                                this.dispose();
-                                frmTrangChu frmTC = new frmTrangChu();
-                                frmTC.setVisible(true);
-                            }
+                            this.dispose();
+                            frmTrangChu frmTC = new frmTrangChu();
+                            frmTC.setVisible(true);
                         }
                     }
                 } else {
@@ -196,11 +195,6 @@ public class frmDangNhap extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDNActionPerformed
 
     private void btnQuayVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayVeActionPerformed
-        // TODO add your handling code here:
-//        int kq = JOptionPane.showConfirmDialog(null, "Bạn có muốn thoát không", "Thông báo", JOptionPane.YES_NO_OPTION);
-//        if (kq == 0) {
-//            System.exit(0);
-//        }
         this.dispose();
         frmChonTCDN frm = new frmChonTCDN();
         frm.setVisible(true);
