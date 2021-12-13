@@ -40,14 +40,20 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
     public frmCapNhatSach() throws Exception {
         initComponents();
         bll = new Bll_CapNhatSach();
+        //hiện thị combobox ngôn ngữ
         comboboxNN();
+        //hiện thị combobox nhà xuất bản
         comboboxNXB();
+        //hiện thị combobox thể loại
         comboboxTL();
+        //hiện thị combobox tác giả
         comboboxTG();
+        //hiện thị danh sách đã có lên table
         hienThi();
         hienThiSach();
     }
 
+    //load combobox nhà xuất bản
     public void comboboxNXB() throws Exception {
         bllNXB = new BLL_NXB();
         cbNXB.removeAllItems();
@@ -57,6 +63,7 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
         }
     }
 
+    //load combobox ngôn ngữ
     public void comboboxNN() throws Exception {
         bllNN = new BLL_NgonNgu();
         cbNgonNgu.removeAllItems();
@@ -66,6 +73,7 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
         }
     }
 
+    //load combobox thể loại
     public void comboboxTL() throws Exception {
         bllTL = new BLL_TheLoai();
         cbTheLoai.removeAllItems();
@@ -74,7 +82,8 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
             cbTheLoai.addItem(rs.getString("name"));
         }
     }
-
+    
+    //load combobox tác giả
     public void comboboxTG() throws Exception {
         bllTG = new BLL_TacGia();
         cbTacGia.removeAllItems();
@@ -84,6 +93,7 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
         }
     }
 
+    //hiển thị các column lên table
     public void hienThi() {
         DefaultTableModel model = (DefaultTableModel) tbSach.getModel();
         model.setColumnCount(0);
@@ -95,9 +105,11 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
         model.addColumn("Tác giả");
         model.addColumn("Nhà xuất bản");
         model.addColumn("Năm xuất bản");
+        txtMasach.setEditable(false);
         tbSach.setModel(model);
     }
 
+    // load danh sách sách lên table
     public void hienThiSach() throws SQLException, Exception {
         ResultSet rs = bll.layDSSach();
         DefaultTableModel model = (DefaultTableModel) tbSach.getModel();
@@ -447,7 +459,7 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Vui lòng chọn nhân viên");
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn sách");
         }
     }//GEN-LAST:event_btnSuaActionPerformed
 

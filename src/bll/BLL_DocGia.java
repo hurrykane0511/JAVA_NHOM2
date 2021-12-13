@@ -24,8 +24,8 @@ public class BLL_DocGia {
      public Boolean checkTT(String cccd) throws SQLException, Exception {
         return dal.checkTT(cccd);
     }
-      public Boolean suaThe(ET_DocGia et) throws SQLException {
-        return dal.suaThe(et);
+      public Boolean suaDocGia(ET_DocGia et) throws SQLException {
+        return dal.suaDocGia(et);
     }
       
       public ResultSet layDS() throws Exception {

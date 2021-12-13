@@ -178,7 +178,8 @@ public class frmTheThuVien extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(380, 380, 380)
-                .addComponent(jLabel1))
+                .addComponent(jLabel1)
+                .addContainerGap(366, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -350,7 +351,7 @@ public class frmTheThuVien extends javax.swing.JInternalFrame {
                 .addComponent(jLabel13)
                 .addGap(82, 82, 82)
                 .addComponent(cboLoaiDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         dtNgayLapLayout.setVerticalGroup(
             dtNgayLapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

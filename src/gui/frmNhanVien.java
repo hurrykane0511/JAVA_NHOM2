@@ -29,6 +29,7 @@ public class frmNhanVien extends javax.swing.JInternalFrame {
     public frmNhanVien() throws Exception {
         initComponents();
         bll = new BLL_NhanVien();
+        // hiển thị nhân viên lên table
         hienThi();
         hienThiNV();
     }
@@ -283,13 +284,13 @@ public class frmNhanVien extends javax.swing.JInternalFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        String maNV = txtMaNV.getText();
-        String ho = txtHoNV.getText();
-        String ten = txtTenNV.getText();
-        String diaChi = txtDiaChi.getText();
-        String soDT = txtSDT.getText();
-        Date ngaySinh = dtpNgSinh.getDate();
-        String cCCD = txtCCCD.getText();
+        String maNV = txtMaNV.getText(); // mã nhaanv viên
+        String ho = txtHoNV.getText(); // họ 
+        String ten = txtTenNV.getText(); // tên
+        String diaChi = txtDiaChi.getText(); // địa chỉ
+        String soDT = txtSDT.getText(); // số điện thoại
+        Date ngaySinh = dtpNgSinh.getDate(); // ngày sinh
+        String cCCD = txtCCCD.getText(); // căn cước công dân
         ET_NhanVien et;
         if (maNV.equals("") || ho.equals("") || ten.equals("") || diaChi.equals("") || soDT.equals("") || ngaySinh == null || cCCD.equals("")) {
             JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
@@ -420,7 +421,9 @@ public class frmNhanVien extends javax.swing.JInternalFrame {
         model.addColumn("CCCD");
         tblNhanVien.setModel(model);
     }
-
+ 
+    
+    // hiển thi nhân viên lên table
     public void hienThiNV() throws SQLException {
         ResultSet rs = bll.layNV();
         DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
@@ -435,6 +438,7 @@ public class frmNhanVien extends javax.swing.JInternalFrame {
         // rs.close();
     }
 
+    // reset các fields
     public void reset() {
         txtMaNV.setText("");
         txtTenNV.setText("");
@@ -446,6 +450,7 @@ public class frmNhanVien extends javax.swing.JInternalFrame {
         txtMaNV.setText("");
     }
 
+    // check số cccd
     public boolean checkSo(String so) {
         if (so.length() == 0) {
             return false;

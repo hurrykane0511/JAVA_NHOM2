@@ -42,6 +42,7 @@ public class BLL_TimSach {
 
     public void TimSach(String searchBy, String kw, JTable tb) throws Exception {
         ResultSet rs = dal_timsach.layDSSach(searchBy, kw);
+        
         while (rs.next()) {
             String id = rs.getString("id_book");
             String tt = rs.getString("title");

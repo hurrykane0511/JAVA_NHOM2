@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dal;
+
 import et.ET_DanhMuc;
 import et.ET_TaiKhoan;
 import java.sql.Connection;
@@ -17,8 +18,9 @@ import javax.swing.JOptionPane;
  * @author yushu
  */
 public class DAL_DanhMuc {
-    
-     public ResultSet layDS() throws SQLException, Exception {
+
+    // lấy danh sách
+    public ResultSet layDS() throws SQLException, Exception {
         Connection conn = null;
         ResultSet rs = null;
         try {
@@ -32,12 +34,14 @@ public class DAL_DanhMuc {
         }
         return rs;
     }
-     public String layMaDM(String tenDM) throws Exception {
+
+    // lấy mã danh mục
+    public String layMaDM(String tenDM) throws Exception {
         Connection conn = null;
         conn = DatabaseUtil.getConnection();
         ResultSet rs = null;
         Statement st = conn.createStatement();
-        String sql = "select * from categories where name = '"+tenDM+"'";
+        String sql = "select * from categories where name = '" + tenDM + "'";
         rs = st.executeQuery(sql);
         String ma = "";
         while (rs.next()) {
@@ -45,12 +49,14 @@ public class DAL_DanhMuc {
         }
         return ma;
     }
-     public String layTenDM(String maDM) throws Exception {
+
+    // lấy tên danh mục
+    public String layTenDM(String maDM) throws Exception {
         Connection conn = null;
         conn = DatabaseUtil.getConnection();
         ResultSet rs = null;
         Statement st = conn.createStatement();
-        String sql = "select * from categories where id_category = '"+maDM+"'";
+        String sql = "select * from categories where id_category = '" + maDM + "'";
         rs = st.executeQuery(sql);
         String ma = "";
         while (rs.next()) {
@@ -58,8 +64,10 @@ public class DAL_DanhMuc {
         }
         return ma;
     }
+
+    // check tồn tại mã danh mục
     public Boolean checkTT(String maDM) throws SQLException, Exception {
-         Connection conn = null;;
+        Connection conn = null;;
         ResultSet rs = null;
         int row = 0;
         try {
@@ -78,15 +86,15 @@ public class DAL_DanhMuc {
         return (row > 0);
     }
 
-
+    // thêm danh mục
     public Boolean themDM(ET_DanhMuc et) throws SQLException, Exception {
         Connection conn = null;
         Boolean kq = false;
         try {
             conn = DatabaseUtil.getConnection();
             Statement st = conn.createStatement();
-             String sql = "insert into categories(id_category, name)"
-                    + " values('"+et.getMaDanhMuc()+"','"+et.getTenDanhMuc()+"')";
+            String sql = "insert into categories(id_category, name)"
+                    + " values('" + et.getMaDanhMuc() + "','" + et.getTenDanhMuc() + "')";
             if (st.executeUpdate(sql) > 0) {
                 kq = true;
             }
@@ -95,6 +103,8 @@ public class DAL_DanhMuc {
         }
         return kq;
     }
+
+    // sửa danh mục
     public Boolean suaDM(ET_DanhMuc et) throws SQLException, Exception {
         Connection conn = null;
         Boolean kq = false;
@@ -102,8 +112,8 @@ public class DAL_DanhMuc {
             conn = DatabaseUtil.getConnection();
             Statement st = conn.createStatement();
             String sql = "update categories "
-                    + "set name = '"+et.getTenDanhMuc()+"' "
-                    + "where id_category = '"+et.getMaDanhMuc()+"'";
+                    + "set name = '" + et.getTenDanhMuc() + "' "
+                    + "where id_category = '" + et.getMaDanhMuc() + "'";
             if (st.executeUpdate(sql) > 0) {
                 kq = true;
             }
@@ -112,14 +122,15 @@ public class DAL_DanhMuc {
         }
         return kq;
     }
-    
+
+    // xóa danh mục
     public Boolean xoaDM(String maDM) throws SQLException, Exception {
         Connection conn = null;
         Boolean kq = false;
         try {
             conn = DatabaseUtil.getConnection();
             Statement st = conn.createStatement();
-            String sql = "delete from categories where id_category = '"+maDM+"'";
+            String sql = "delete from categories where id_category = '" + maDM + "'";
             if (st.executeUpdate(sql) > 0) {
                 kq = true;
             }
@@ -128,14 +139,15 @@ public class DAL_DanhMuc {
         }
         return kq;
     }
-    
+
+    // check danh mục
     public ResultSet checkDM(String maDM) throws Exception {
         Connection conn = null;
         ResultSet rs = null;
         try {
             conn = DatabaseUtil.getConnection();
             Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            String sql = "select * from users where username = '"+maDM+"'";
+            String sql = "select * from users where username = '" + maDM + "'";
             rs = st.executeQuery(sql);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);

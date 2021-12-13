@@ -75,8 +75,8 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
         hienThi();
         hienHoaDon();
     }
-
     public String themTD(String Ten) throws Exception {
+        //Tự động thêm tác giả
         ResultSet rs = bllTD.layDS();
         rs.last();
         int row = rs.getRow();
@@ -96,6 +96,7 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
     }
 
     public String themCTHH() throws Exception {
+        //Lấy mã Chi tiết hoá đơn
         ResultSet rs = bllCTHD.layDS();
         rs.last();
         int row = rs.getRow();
@@ -344,8 +345,8 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
                                         .addComponent(jLabel12)))
                                 .addGap(41, 41, 41)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtSoLuong, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                    .addComponent(cboNV, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
+                                    .addComponent(txtSoLuong)
+                                    .addComponent(cboNV, 0, 150, Short.MAX_VALUE)))))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(130, 130, 130)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -404,14 +405,14 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
                     .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 950, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 966, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -425,17 +426,28 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
 
     private void btnthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemActionPerformed
         // TODO add your handling code here:
-        String gia = txtGia.getText();
+        int gia=-1;
+        int sl=-1;
+        int st =-1;
+        int nxb=-1;
+        try{
+            gia=Integer.parseInt(txtGia.getText());
+            sl=Integer.parseInt(txtSoLuong.getText());
+            st=Integer.parseInt(txtSoTrang.getText());
+            nxb=Integer.parseInt(txtNamXB.getText());
+        }catch(NumberFormatException e){
+            
+        } 
         String ten = txtTenSach.getText();
         String mahd = txtMaHD.getText();
         String maSach = txtMaSach.getText();
-        String nxb = txtNamXB.getText();
-        String sl = txtSoLuong.getText();
-        String st = txtSoTrang.getText();
         String maTD = txtTacGia.getText();
-        if (maTD.compareTo("") == 0 || gia.compareTo("") == 0 || ten.compareTo("") == 0 || mahd.compareTo("") == 0 || maSach.compareTo("") == 0 || nxb.compareTo("") == 0 || sl.compareTo("") == 0 || st.compareTo("") == 0) {
+        //Kiểm tra dữ liệu nhập
+        if (maTD.compareTo("") == 0 || ten.compareTo("") == 0 || mahd.compareTo("") == 0 || maSach.compareTo("") == 0) {
             JOptionPane.showMessageDialog(null, "Vui lòng nhập đủ thông tin");
-        } else {
+        } else if(nxb<0||gia<0||st<0||sl<0){
+            JOptionPane.showMessageDialog(null, "Dữ liệu không hợp lệ");
+        }else{
             try {
                 String tenDM = cboDM.getSelectedItem().toString();
                 String tenNXB = cboNXB.getSelectedItem().toString();
@@ -459,11 +471,13 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
                         if (bll.checkTonTai(maSach) == true) {
                             int tong = bll.laySLSach(txtMaSach.getText()) + Integer.parseInt(txtSoLuong.getText());
                             int tongTT = bll.laySLSachThucTe(txtMaSach.getText()) + Integer.parseInt(txtSoLuong.getText());
-                            ET_Sach et = new ET_Sach(maSach, ten, tong, Integer.parseInt(gia), Integer.parseInt(nxb), Integer.parseInt(st), maTD, maNXB, maDM, maNN, tongTT);
+                            ET_Sach et = new ET_Sach(maSach, ten, tong, gia, nxb, st, maTD, maNXB, maDM, maNN, tongTT);
                             ET_HoaDon HDon = new ET_HoaDon(mahd, maNV, maNCC);
                             String maCT = themCTHH();
-                            ET_ChiTietHD CT = new ET_ChiTietHD(maCT, Integer.parseInt(sl), mahd, maSach);
+                            ET_ChiTietHD CT = new ET_ChiTietHD(maCT, st, mahd, maSach);
+                            //thêm Hoá đơn
                             bllHD.themHoaDon(HDon);
+                            //Thêm chi tiết hoá đơn
                             bllCTHD.themChiTietHD(CT);
                             try {
                                 if (bll.suaSach(et)) {
@@ -474,10 +488,12 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
                             } catch (SQLException ex) {
                                 ex.printStackTrace();
                             }
+                            //Lấy mã Hàng hoá mới
                             resetMa();
+                            //Lấy danh sách hoá đơn
                             hienHoaDon();
                         } else {
-                            ET_Sach et = new ET_Sach(maSach, ten, Integer.parseInt(sl), Integer.parseInt(gia), Integer.parseInt(nxb), Integer.parseInt(st), maTD, maNXB, maDM, maNN, Integer.parseInt(sl));
+                            ET_Sach et = new ET_Sach(maSach, ten, sl, gia, nxb, st, maTD, maNXB, maDM, maNN, st);
                             try {
                                 if (bll.themSach(et)) {
                                     JOptionPane.showMessageDialog(rootPane, "Thêm thành công");
@@ -490,8 +506,10 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
                             }
                             ET_HoaDon HDon = new ET_HoaDon(mahd, maNV, maNCC);
                             String maCT = themCTHH();
-                            ET_ChiTietHD CT = new ET_ChiTietHD(maCT, Integer.parseInt(sl), mahd, maSach);
+                            ET_ChiTietHD CT = new ET_ChiTietHD(maCT, st, mahd, maSach);
+                            //thêm Hoá đơn
                             bllHD.themHoaDon(HDon);
+                            // thêm chi tiết hoá đơn
                             bllCTHD.themChiTietHD(CT);
                             resetMa();
                             hienHoaDon();
@@ -520,7 +538,9 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
 
     private void btnNewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewMouseClicked
         try {
+            resetMa();
             reset();
+            hienHoaDon();
         } catch (Exception ex) {
             Logger.getLogger(frmNhapSach.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -542,7 +562,6 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
 
     public void reset() throws Exception, Exception, Exception {
         txtGia.setText("");
-        txtMaHD.setText("");
         txtMaSach.setText("");
         txtNamXB.setText("");
         txtSoLuong.setText("");
@@ -555,6 +574,7 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
         cboNV.setSelectedIndex(0);
         cboNXB.setSelectedIndex(0);
     }
+    //Lấy mã Hoá đơn
     public void resetMa() throws SQLException {
         ResultSet rs = bllHD.layDS();
         rs.last();
@@ -571,6 +591,7 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
         txtMaHD.setText("HD" + ma);
         hienThi();
     }
+    //Lấy dữ liệu lên combobox
     public void comboboxDM() throws Exception {
         bllDM = new BLL_DanhMuc();
         cboDM.removeAllItems();
@@ -579,7 +600,7 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
             cboDM.addItem(rs.getString("name"));
         }
     }
-
+    //Lấy dữ liệu lên combobox
     public void comboboxNXB() throws Exception {
         bllNXB = new BLL_NXB();
         cboNXB.removeAllItems();
@@ -588,7 +609,7 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
             cboNXB.addItem(rs.getString("name"));
         }
     }
-
+    //Lấy dữ liệu lên combobox
     public void comboboxNN() throws Exception {
         bllNN = new BLL_NgonNgu();
         cboNN.removeAllItems();
@@ -597,7 +618,7 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
             cboNN.addItem(rs.getString("name"));
         }
     }
-
+    //Lấy dữ liệu lên combobox
     public void comboboxNCC() throws Exception {
         bllNCC = new BLL_NhaCungCap();
         cboNCC.removeAllItems();
@@ -606,7 +627,7 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
             cboNCC.addItem(rs.getString("supplier_name"));
         }
     }
-
+    //Lấy dữ liệu lên combobox
     public void comboboxNV() throws SQLException {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         ResultSet rs = bllNV.layNV();
@@ -617,7 +638,7 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
         }
         cboNV.setModel(model);
     }
-
+    //Lấy Danh sách hoá đơn lên table
     public void hienHoaDon() throws SQLException, Exception {
         ResultSet rs = bllHD.layDS();
         DefaultTableModel model = (DefaultTableModel) tblDS.getModel();

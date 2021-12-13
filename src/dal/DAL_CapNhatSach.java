@@ -17,6 +17,8 @@ import javax.swing.JOptionPane;
  * @author LENOVO
  */
 public class DAL_CapNhatSach {
+    
+    //lấy danh sách sách
     public ResultSet layDSSach() throws SQLException {
         ResultSet rs = null;
         Connection conn = null;
@@ -30,6 +32,8 @@ public class DAL_CapNhatSach {
         }
         return rs;
     }
+    
+    //sửa sách
     public Boolean suaSach(ET_Sach et) throws SQLException {
         Boolean kq = false;
         Connection conn = null;

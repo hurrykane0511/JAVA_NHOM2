@@ -41,14 +41,14 @@ public class frmTimKiem extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         btnTim = new javax.swing.JButton();
-        btnTim1 = new javax.swing.JButton();
+        btnThoat = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         cbtimkiem = new javax.swing.JComboBox<>();
         txtNhapTT = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TbSach = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 255));
@@ -62,12 +62,12 @@ public class frmTimKiem extends javax.swing.JInternalFrame {
             }
         });
 
-        btnTim1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        btnTim1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_shutdown_26px.png"))); // NOI18N
-        btnTim1.setText("THOÁT");
-        btnTim1.addActionListener(new java.awt.event.ActionListener() {
+        btnThoat.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_shutdown_26px.png"))); // NOI18N
+        btnThoat.setText("THOÁT");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTim1ActionPerformed(evt);
+                btnThoatActionPerformed(evt);
             }
         });
 
@@ -88,8 +88,8 @@ public class frmTimKiem extends javax.swing.JInternalFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_abc_26px_1.png"))); // NOI18N
         jLabel3.setText("  Nhập thông tin:");
 
-        jTable1.setBackground(new java.awt.Color(255, 204, 204));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TbSach.setBackground(new java.awt.Color(255, 204, 204));
+        TbSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -97,8 +97,8 @@ public class frmTimKiem extends javax.swing.JInternalFrame {
                 "Mã sách", "Tên sách", "Thể loại", "Tác giả", "Nhà XB", "Ngôn ngữ", "Số Trang", "Giá tiền"
             }
         ));
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jTable1);
+        TbSach.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(TbSach);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -116,7 +116,7 @@ public class frmTimKiem extends javax.swing.JInternalFrame {
                     .addComponent(cbtimkiem, 0, 275, Short.MAX_VALUE))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnTim1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnThoat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnTim, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1)
@@ -136,7 +136,7 @@ public class frmTimKiem extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtNhapTT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTim1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnThoat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -156,31 +156,33 @@ public class frmTimKiem extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
-        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        //Trigger tim sach
+        DefaultTableModel dtm = (DefaultTableModel) TbSach.getModel();
         dtm.setRowCount(0);
         try {
-            // TODO add your handling code here:
-            bll_tim.TimSach(hm.get(cbtimkiem.getSelectedItem()), txtNhapTT.getText(), jTable1);
-
+            bll_tim.TimSach(hm.get(cbtimkiem.getSelectedItem()), txtNhapTT.getText(), TbSach);
         } catch (Exception ex) {
             Logger.getLogger(frmTimKiem.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnTimActionPerformed
 
-    private void btnTim1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTim1ActionPerformed
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         // TODO add your handling code here:
+        //Trigger tim sach
         int kq = JOptionPane.showConfirmDialog(null, "Bạn có muốn thoát không", "Thông báo", JOptionPane.YES_NO_OPTION);
         if (kq == 0) {
             this.dispose();
         }
-    }//GEN-LAST:event_btnTim1ActionPerformed
+    }//GEN-LAST:event_btnThoatActionPerformed
+    //Hàm set nội dung combobox
     void LoadCB() {
         bll_tim.setCB(cbtimkiem);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TbSach;
+    private javax.swing.JButton btnThoat;
     private javax.swing.JButton btnTim;
-    private javax.swing.JButton btnTim1;
     private javax.swing.JComboBox<String> cbtimkiem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -188,7 +190,6 @@ public class frmTimKiem extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtNhapTT;
     // End of variables declaration//GEN-END:variables
 }

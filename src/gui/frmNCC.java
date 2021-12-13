@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package gui;
+
 import bll.BLL_NhaCungCap;
 import et.ET_NhaCungCap;
 import java.sql.ResultSet;
@@ -11,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author yushu
@@ -20,18 +22,23 @@ public class frmNCC extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmNCC
      */
-     private BLL_NhaCungCap bll;
+    private BLL_NhaCungCap bll;
     private int STT = 0;
+
     public frmNCC() throws Exception {
         initComponents();
-         bll = new BLL_NhaCungCap();
+        bll = new BLL_NhaCungCap();
         txtMaNCC.setEditable(false);
         txtTenNCC.requestFocus();
+        //lấy mã nhà cung cấp tự động
         layMa();
+        //hiển thị danh sách nhà cung cấp
         hienThi();
         hienThiNCC();
     }
- public void hienThi() {
+
+    //hiển thị table
+    public void hienThi() {
         DefaultTableModel model = (DefaultTableModel) tbNCC.getModel();
         model.setColumnCount(0);
         model.setRowCount(0);
@@ -42,6 +49,7 @@ public class frmNCC extends javax.swing.JInternalFrame {
         tbNCC.setModel(model);
     }
 
+    //load danh sách nhà cung cấp
     public void hienThiNCC() throws SQLException {
         ResultSet rs = bll.layNCC();
         DefaultTableModel model = (DefaultTableModel) tbNCC.getModel();
@@ -55,6 +63,7 @@ public class frmNCC extends javax.swing.JInternalFrame {
         }
     }
 
+    //hàm lấy mã tự động tăng
     public void layMa() throws Exception {
         ResultSet rs = bll.layNCC();
         rs.last();
@@ -75,6 +84,7 @@ public class frmNCC extends javax.swing.JInternalFrame {
         txtSDT.setText("");
         txtTenNCC.requestFocus();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -292,9 +302,9 @@ public class frmNCC extends javax.swing.JInternalFrame {
         String diaChi = txtDiaChi.getText();
         String soDT = txtSDT.getText();
         if (maNCC.compareTo("") == 0
-            || tenNCC.compareTo("") == 0
-            || diaChi.compareTo("") == 0
-            || soDT.compareTo("") == 0) {
+                || tenNCC.compareTo("") == 0
+                || diaChi.compareTo("") == 0
+                || soDT.compareTo("") == 0) {
             JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
         } else {
             ET_NhaCungCap et = new ET_NhaCungCap(maNCC, tenNCC, diaChi, soDT);
@@ -330,9 +340,9 @@ public class frmNCC extends javax.swing.JInternalFrame {
         ET_NhaCungCap et;
         if (dong != -1) {
             if (maNCC.compareTo("") == 0
-                || tenNCC.compareTo("") == 0
-                || diaChi.compareTo("") == 0
-                || soDT.compareTo("") == 0) {
+                    || tenNCC.compareTo("") == 0
+                    || diaChi.compareTo("") == 0
+                    || soDT.compareTo("") == 0) {
                 JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
             } else {
 
@@ -386,7 +396,7 @@ public class frmNCC extends javax.swing.JInternalFrame {
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         // TODO add your handling code here:
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void tbNCCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNCCMouseClicked
@@ -404,7 +414,7 @@ public class frmNCC extends javax.swing.JInternalFrame {
             // TODO add your handling code here:
             layMa();
         } catch (Exception ex) {
-           ex.printStackTrace();
+            ex.printStackTrace();
         }
     }//GEN-LAST:event_btnMoiActionPerformed
 

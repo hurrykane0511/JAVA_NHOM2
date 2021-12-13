@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class DAL_DocGia {
 
+    // thêm độc giả
     public Boolean themDocGia(ET_DocGia et) throws SQLException, Exception {
         Boolean kq = false;
         Connection conn = null;
@@ -37,6 +38,7 @@ public class DAL_DocGia {
         return kq;
     }
 
+    // check tồn tại độc giả
     public Boolean checkTT(String cccd) throws SQLException, Exception {
         Connection conn = null;;
         ResultSet rs = null;
@@ -57,6 +59,7 @@ public class DAL_DocGia {
         return (row > 0);
     }
 
+    // lấy danh sách độc giả
     public ResultSet layDS() throws SQLException, Exception {
         Connection conn = null;;
         ResultSet rs = null;
@@ -74,7 +77,8 @@ public class DAL_DocGia {
         return rs;
     }
 
-    public Boolean suaThe(ET_DocGia et) throws SQLException {
+    // sửa độc giả
+    public Boolean suaDocGia(ET_DocGia et) throws SQLException {
         Boolean kq = false;
         Connection conn = null;
         try {
