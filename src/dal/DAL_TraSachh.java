@@ -15,12 +15,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author dthan
  */
-public class DAL_TraSachh{
+public class DAL_TraSachh {
+
     private Connection conn;
 
     public DAL_TraSachh() throws Exception {
@@ -49,16 +49,44 @@ public class DAL_TraSachh{
             //pst.setInt(8, et.getTienPhat());
             pst.setString(8, et.getMaNhanVien());
             pst.setString(9, et.getTinhTrangSach());
-            return pst.executeUpdate() > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
+            if (pst.executeUpdate() > 0) {
+
+                updateQuty(et.getMaSach());
+                updatePhieu(et.getMaMuonSach());
+
+            }
+
+        } catch (SQLException ex) {
+
         }
         return false;
     }
 
+    void updateQuty(String masach) {
+        String sql = "update books set reality_quantity = reality_quantity + 1 where id_book = ? ;";
+        try {
+            PreparedStatement pst1 = conn.prepareStatement(sql);
+            pst1.setString(1, masach);
+            pst1.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    void updatePhieu(int maphieu) {
+        String sql = "update rental_detail set status_borow = 'Đã trả' where id_rental_detail = ? ;";
+        try {
+            PreparedStatement pst1 = conn.prepareStatement(sql);
+            pst1.setInt(1, maphieu);
+            pst1.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public ResultSet timTraSach(String ma) throws SQLException {
         Statement st = conn.createStatement();
-        String sql = "select * from rental_detail where id_rental_detail = '" + ma + "' ";
+        String sql = "select * from rental_detail where id_rental_detail = '" + ma + "' and status_borow = 'Đang mượn'";
         ResultSet rs = null;
         try {
             PreparedStatement pst = conn.prepareStatement(sql);

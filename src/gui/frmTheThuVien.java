@@ -168,11 +168,24 @@ public class frmTheThuVien extends javax.swing.JInternalFrame {
         dtNgayLap.setBackground(new java.awt.Color(155, 177, 255));
 
         jPanel2.setBackground(new java.awt.Color(84, 101, 225));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("THẺ THƯ VIỆN");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(380, 380, 380)
+                .addComponent(jLabel1))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1))
+        );
 
         txtMaThe.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
@@ -337,7 +350,7 @@ public class frmTheThuVien extends javax.swing.JInternalFrame {
                 .addComponent(jLabel13)
                 .addGap(82, 82, 82)
                 .addComponent(cboLoaiDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 944, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         dtNgayLapLayout.setVerticalGroup(
             dtNgayLapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

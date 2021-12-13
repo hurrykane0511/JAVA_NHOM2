@@ -397,7 +397,6 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
         int row = tbSach.getSelectedRow();
         if (row >= 0) {
             String maSach = tbSach.getValueAt(row, 0).toString();
-            JOptionPane.showMessageDialog(null, maSach);
             String tenSach = txtTensach.getText();
             String theLoai = null;
             try {

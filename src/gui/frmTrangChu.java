@@ -322,10 +322,14 @@ public class frmTrangChu extends javax.swing.JFrame {
 
     private void mnuThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuThoatActionPerformed
         // TODO add your handling code here:
-        int kq = JOptionPane.showConfirmDialog(null, "Bạn có muốn thoát không?", "Thông báo", JOptionPane.YES_NO_OPTION);
-        if (kq == 0) {
-            this.dispose();
-        }
+//        int kq = JOptionPane.showConfirmDialog(null, "Bạn có muốn thoát không?", "Thông báo", JOptionPane.YES_NO_OPTION);
+//        if (kq == 0) {
+//            this.dispose();
+//        }
+        this.dispose();
+        frmChonTCDN frm = new frmChonTCDN();
+        frm.setVisible(true);
+
     }//GEN-LAST:event_mnuThoatActionPerformed
 
     private void mnuDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuDangXuatActionPerformed
