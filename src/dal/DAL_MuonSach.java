@@ -13,7 +13,10 @@ import javax.swing.JOptionPane;
 import et.ET_MuonSach;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+<<<<<<< HEAD
 //import static sun.jvm.hotspot.HelloWorld.e;
+=======
+>>>>>>> 54f1fb5813bef4660ce5c9075705bf392d890712
 
 /**
  *
@@ -27,6 +30,7 @@ public class DAL_MuonSach {
         conn = DatabaseUtil.getConnection();
     }
 
+//    Hàm Insert Mã phiếp mới
     public boolean ChoMuonSach(ET_MuonSach phieu) throws SQLException {
 
         String sql = "INSERT INTO `qltv`.`rental_detail` (`borrowed_date`, `return_date`, `id_book`, `id_lib_card`, `id_staff`, `status`) VALUES ( ? , ? , ? , ? , ? , ?);";
@@ -60,7 +64,7 @@ public class DAL_MuonSach {
         }
         return false;
     }
-
+//    Hàm kiếm số sách đang mượn có vượt qua số lần được mượn của loại tài khỏan
     public ResultSet GetStatus(String mathe) {
         ResultSet rs = null;
         PreparedStatement pst = null;
@@ -78,7 +82,7 @@ public class DAL_MuonSach {
         }
         return rs;
     }
-
+// Hàm lấy số lượng sách hiện có
     public ResultSet GetQtyBook(String masach) {
         ResultSet rs = null;
         PreparedStatement pst = null;
@@ -92,7 +96,7 @@ public class DAL_MuonSach {
         }
         return rs;
     }
-
+//    Hàm lây tên độc giả
     public ResultSet LayDG(String madg) throws SQLException, Exception {
 
         ResultSet rs = null;
@@ -108,7 +112,7 @@ public class DAL_MuonSach {
         return rs;
 
     }
-
+//Hàm Lấy danh sách phiếu
     public ResultSet LayDSPhieu() throws SQLException, Exception {
         Connection conn = null;
         ResultSet rs = null;
@@ -123,7 +127,7 @@ public class DAL_MuonSach {
         }
         return rs;
     }
-
+//Hàm Lấy danh sách phiếu danh sách nhân viên
     public ResultSet layDSNhanVien() throws SQLException, Exception {
         Connection conn = null;
         ResultSet rs = null;

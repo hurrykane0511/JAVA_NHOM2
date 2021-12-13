@@ -45,7 +45,8 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
         loadCBNV();
         LoadDSPM();
     }
-
+    
+    //Hàm set textfield rống
     public void clearTextFields(Container container) {
         for (Component c : container.getComponents()) {
             if (c instanceof JTextField) {
@@ -62,8 +63,8 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
         ngayMuonJDate.setDate(date);
     }
 
+    //Hàm load combobox
     public void loadCBNV() {
-
         cbNhanVien.removeAllItems();
         Map<String, String> map = new TreeMap<>(hm_nv);
 
@@ -71,9 +72,9 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
             Object value = entry.getValue();
             cbNhanVien.addItem(value.toString());
         }
-
     }
-
+    
+    //Hàm lấy mã nhân viên
     public String getMaNV() {
         for (Entry<String, String> entry : hm_nv.entrySet()) {
             if (entry.getValue().equals(cbNhanVien.getSelectedItem())) {
@@ -82,7 +83,8 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
         }
         return "";
     }
-
+    
+    //Hàm Load lại danh sách
     public void LoadDSPM() throws Exception {
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         dtm.setRowCount(0);
