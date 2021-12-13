@@ -24,16 +24,8 @@ public class BLL_TimSach {
         this.dal_timsach = new DAL_TimSach();
     }
 
-    public void setCB(JComboBox cbb) {
+    public void setCB(JComboBox cbb, HashMap<String, String> hm) {
         cbb.removeAllItems();
-        HashMap<String, String> hm = new HashMap<>();
-        hm.put("Mã sách", "where b.id_book = ? ");
-        hm.put("Tên sách", "where b.title like concat('%', ? , '%')");
-        hm.put("Thể loại", "where ctg.name Like concat('%', ? , '%')");
-        hm.put("Tác giả", "where a.author_name like concat('%', ? , '%')");
-        hm.put("Nhà XB", "where p.name like concat('%', ? , '%')");
-        hm.put("Ngôn ngữ", "where lan.name like concat('%', ? , '%')");
-
         for (Map.Entry<String, String> entry : hm.entrySet()) {
             Object key = entry.getKey();
             cbb.addItem(key.toString());
@@ -41,7 +33,9 @@ public class BLL_TimSach {
     }
 
     public void TimSach(String searchBy, String kw, JTable tb) throws Exception {
+
         ResultSet rs = dal_timsach.layDSSach(searchBy, kw);
+        
         while (rs.next()) {
             String id = rs.getString("id_book");
             String tt = rs.getString("title");

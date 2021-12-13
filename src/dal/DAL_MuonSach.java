@@ -13,10 +13,7 @@ import javax.swing.JOptionPane;
 import et.ET_MuonSach;
 import java.sql.Date;
 import java.sql.PreparedStatement;
-<<<<<<< HEAD
-//import static sun.jvm.hotspot.HelloWorld.e;
-=======
->>>>>>> 54f1fb5813bef4660ce5c9075705bf392d890712
+
 
 /**
  *

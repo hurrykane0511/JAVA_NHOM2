@@ -32,6 +32,7 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
     HashMap<String, String> hm_nv;
     BLL_MuonSach bll_muonsach;
 
+    //Contructor form Mượn sách
     public frmMuonSach() throws Exception {
         initComponents();
 
@@ -45,7 +46,7 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
         loadCBNV();
         LoadDSPM();
     }
-    
+
     //Hàm set textfield rống
     public void clearTextFields(Container container) {
         for (Component c : container.getComponents()) {
@@ -73,7 +74,7 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
             cbNhanVien.addItem(value.toString());
         }
     }
-    
+
     //Hàm lấy mã nhân viên
     public String getMaNV() {
         for (Entry<String, String> entry : hm_nv.entrySet()) {
@@ -83,7 +84,7 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
         }
         return "";
     }
-    
+
     //Hàm Load lại danh sách
     public void LoadDSPM() throws Exception {
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
@@ -326,7 +327,7 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //Hàm thêm sư kiện lost focus load tên đọc giả
     private void txtMaDocGiaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMaDocGiaFocusLost
         try {
             // TODO add your handling code here:
@@ -347,6 +348,7 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbNhanVienActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+      
         try {
             // TODO add your handling code here:
             if (!bll_muonsach.HetHan(txtMaDocGia.getText())) {
