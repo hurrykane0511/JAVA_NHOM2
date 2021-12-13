@@ -101,7 +101,7 @@
                   <EmptySpace min="82" pref="82" max="-2" attributes="0"/>
                   <Component id="cboLoaiDocGia" min="-2" pref="180" max="-2" attributes="0"/>
               </Group>
-              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+              <Component id="jPanel2" alignment="1" min="-2" max="-2" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -187,6 +187,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="380" pref="380" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="366" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

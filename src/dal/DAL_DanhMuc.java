@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class DAL_DanhMuc {
     
+    
      public ResultSet layDS() throws SQLException, Exception {
         Connection conn = null;
         ResultSet rs = null;
@@ -32,6 +33,7 @@ public class DAL_DanhMuc {
         }
         return rs;
     }
+     
      public String layMaDM(String tenDM) throws Exception {
         Connection conn = null;
         conn = DatabaseUtil.getConnection();
@@ -45,6 +47,7 @@ public class DAL_DanhMuc {
         }
         return ma;
     }
+     
      public String layTenDM(String maDM) throws Exception {
         Connection conn = null;
         conn = DatabaseUtil.getConnection();
@@ -58,6 +61,7 @@ public class DAL_DanhMuc {
         }
         return ma;
     }
+     
     public Boolean checkTT(String maDM) throws SQLException, Exception {
          Connection conn = null;;
         ResultSet rs = null;

@@ -20,6 +20,7 @@ import javax.swing.JTable;
  */
 public class DAL_NhaCungCap {
     
+    //lấy danh sách nhà cung cấp
      public ResultSet layNCC() throws SQLException {
         ResultSet rs = null;
         Connection conn = null;
@@ -34,6 +35,8 @@ public class DAL_NhaCungCap {
         }
         return rs;
     }
+     
+     // thêm nhà cung cấp
       public Boolean themNCC(ET_NhaCungCap et) throws SQLException, Exception {
         Boolean kq = false;
         Connection conn = null;
@@ -50,6 +53,7 @@ public class DAL_NhaCungCap {
         }
         return kq;
     }
+      //kiểm tra tồn tại
       public Boolean checkTonTai(String ma) throws SQLException {
         Connection conn = null;;
         ResultSet rs = null;
@@ -68,6 +72,8 @@ public class DAL_NhaCungCap {
         }
         return (row > 0);
     }
+      
+      //xóa nhà cung cấp
       public Boolean xoaNCC(String maNCC) throws SQLException {
         Boolean kq = false;
         Connection conn = null;
@@ -83,6 +89,8 @@ public class DAL_NhaCungCap {
         }
         return kq;
     }
+      
+      //sửa nhà cung cấp
        public Boolean suaNCC(ET_NhaCungCap et) throws SQLException {
         Boolean kq = false;
         Connection conn = null;
@@ -102,16 +110,8 @@ public class DAL_NhaCungCap {
         }
         return kq;
     }
-//     public static boolean ShowTextField() {
-//         int i = -1;
-//         try {
-//             Connection con = DatabaseUtil.getConnection();
-//             Statement st = con.createStatement();
-//             
-//         } catch (Exception e) {
-//              JOptionPane.showMessageDialog(null, e,"Thong Bao Lo",1);
-//         }
-//         return (i != -1);
+      
+       //lấy mã nhà cung cấp từ tên
     public String layMaNCC(String tenNCC) throws Exception {
         Connection conn = null;
         conn = DatabaseUtil.getConnection();
@@ -126,6 +126,8 @@ public class DAL_NhaCungCap {
         }
         return ma;
     }
+    
+    //lấy tên nhà cung cấp từ mã
     public String layTenNCC(String maNCC) throws Exception {
         Connection conn = null;
         conn = DatabaseUtil.getConnection();
