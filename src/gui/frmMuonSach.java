@@ -31,7 +31,8 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
      */
     HashMap<String, String> hm_nv;
     BLL_MuonSach bll_muonsach;
-    
+
+    //Contructor form Mượn sách
     public frmMuonSach() throws Exception {
         initComponents();
         this.setTitle("Quản lý Mượn sách");
@@ -326,7 +327,7 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //Hàm thêm sư kiện lost focus load tên đọc giả
     private void txtMaDocGiaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMaDocGiaFocusLost
         try {
             // TODO add your handling code here:
@@ -347,6 +348,7 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbNhanVienActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+      
         try {
             // TODO add your handling code here:
             if (!bll_muonsach.HetHan(txtMaDocGia.getText())) {

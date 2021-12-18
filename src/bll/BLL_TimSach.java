@@ -24,7 +24,8 @@ public class BLL_TimSach {
         this.dal_timsach = new DAL_TimSach();
     }
 
-    public void setCB(JComboBox cbb, HashMap<String,String> hm) {
+    public void setCB(JComboBox cbb, HashMap<String, String> hm) {
+
         cbb.removeAllItems();
         for (Map.Entry<String, String> entry : hm.entrySet()) {
             Object key = entry.getKey();
@@ -33,8 +34,9 @@ public class BLL_TimSach {
     }
 
     public void TimSach(String searchBy, String kw, JTable tb) throws Exception {
+
         ResultSet rs = dal_timsach.layDSSach(searchBy, kw);
-        
+
         while (rs.next()) {
             String id = rs.getString("id_book");
             String tt = rs.getString("title");

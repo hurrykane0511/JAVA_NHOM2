@@ -175,15 +175,21 @@ public class frmTimKiem extends javax.swing.JInternalFrame {
             this.dispose();
         }
     }//GEN-LAST:event_btnThoatActionPerformed
-    //Hàm set nội dung combobox
+    
+//Hàm set nội dung combobox
     void LoadCB() {
-        HashMap<String, String> hm = new HashMap<>();
+
+
+        
+
         hm.put("Mã sách", "where b.id_book = ? ");
         hm.put("Tên sách", "where b.title like concat('%', ? , '%')");
         hm.put("Thể loại", "where ctg.name Like concat('%', ? , '%')");
         hm.put("Tác giả", "where a.author_name like concat('%', ? , '%')");
         hm.put("Nhà XB", "where p.name like concat('%', ? , '%')");
         hm.put("Ngôn ngữ", "where lan.name like concat('%', ? , '%')");
+
+
         bll_tim.setCB(cbtimkiem, hm);
     }
 
