@@ -552,6 +552,7 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
         model.setRowCount(0);
         model.addColumn("Mã Hoá Đơn");
         model.addColumn("Nhân Viên Nhập");
+        model.addColumn("Mã Sách");
         model.addColumn("Tên Sách");
         model.addColumn("Số Lượng");
         model.addColumn("Giá");
@@ -647,19 +648,21 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
         while (rs.next()) {
             ResultSet CTHD = bllCTHD.layTimCTHD(rs.getObject(1).toString());
             while (CTHD.next()) {
-                Object[] col = new Object[7];
-                for (int i = 1; i <= 7; i++) {
+                Object[] col = new Object[8];
+                for (int i = 1; i <= 8; i++) {
                     if (i == 1) {
                         col[i - 1] = rs.getObject(1).toString();
                     } else if (i == 2) {
                         col[i - 1] = bllNV.layTen(rs.getObject(2).toString());
                     } else if (i == 3) {
+                         col[i - 1] = CTHD.getObject(4).toString();
+                    }else if (i == 4) {
                         col[i - 1] = bll.layTen(CTHD.getObject(4).toString());
-                    } else if (i == 4) {
-                        col[i - 1] = CTHD.getObject(2);
                     } else if (i == 5) {
+                        col[i - 1] = CTHD.getObject(2);
+                    } else if (i == 6) {
                         col[i - 1] = bll.layGia(CTHD.getObject(4).toString());
-                    } else if (i == 7) {
+                    } else if (i == 8) {
                         col[i - 1] = bllNCC.layTenNCC(rs.getObject(4).toString());
                     } else {
                         col[i - 1] = rs.getObject(3).toString();
