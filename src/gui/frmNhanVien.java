@@ -78,6 +78,11 @@ public class frmNhanVien extends javax.swing.JInternalFrame {
         jLabel6.setText("Họ NV:");
 
         txtCCCD.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtCCCD.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCCCDKeyPressed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel7.setText("Tên NV:");
@@ -135,6 +140,11 @@ public class frmNhanVien extends javax.swing.JInternalFrame {
         txtDiaChi.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         txtSDT.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtSDT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSDTKeyPressed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel5.setText("Ngày sinh:");
@@ -409,6 +419,26 @@ public class frmNhanVien extends javax.swing.JInternalFrame {
         txtCCCD.setText(model.getValueAt(row, 6).toString());
         //JOptionPane.showMessageDialog(rootPane, model.getValueAt(row, 6).toString());
     }//GEN-LAST:event_tblNhanVienMouseClicked
+
+    private void txtCCCDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCCCDKeyPressed
+        char c =evt.getKeyChar();
+        if(Character.isLetter(c)){
+        txtCCCD.setEditable(false);
+        JOptionPane.showMessageDialog(null, "Chỉ nhập số");
+        }else{
+            txtCCCD.setEditable(true);
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_txtCCCDKeyPressed
+
+    private void txtSDTKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSDTKeyPressed
+        char c =evt.getKeyChar();
+        if(Character.isLetter(c)){
+        txtSDT.setEditable(false);
+        JOptionPane.showMessageDialog(null, "Chỉ nhập số");
+        }else{
+            txtSDT.setEditable(true);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSDTKeyPressed
     public void hienThi() {
         DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
         model.setColumnCount(0);

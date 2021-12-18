@@ -190,6 +190,11 @@ public class frmNCC extends javax.swing.JInternalFrame {
         jLabel8.setText("Số điện thoại:");
 
         txtSDT.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtSDT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSDTKeyPressed(evt);
+            }
+        });
 
         btnMoi.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_new_26px_4.png"))); // NOI18N
@@ -418,6 +423,16 @@ public class frmNCC extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_btnMoiActionPerformed
+
+    private void txtSDTKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSDTKeyPressed
+        char c =evt.getKeyChar();
+        if(Character.isLetter(c)){
+        txtSDT.setEditable(false);
+        JOptionPane.showMessageDialog(null, "Chỉ nhập số");
+        }else{
+            txtSDT.setEditable(true);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSDTKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

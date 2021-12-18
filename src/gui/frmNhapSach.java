@@ -161,6 +161,11 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(155, 177, 250));
 
         txtNamXB.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtNamXB.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNamXBKeyPressed(evt);
+            }
+        });
 
         btnthem.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnthem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_add_26px.png"))); // NOI18N
@@ -230,6 +235,11 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
         jLabel15.setText("Mã hoá đơn:");
 
         txtSoLuong.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtSoLuong.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSoLuongKeyPressed(evt);
+            }
+        });
 
         tblDS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -255,6 +265,11 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
         cboNCC.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
         txtSoTrang.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtSoTrang.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSoTrangKeyPressed(evt);
+            }
+        });
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel17.setText("Số Trang:");
@@ -272,6 +287,11 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
         cboNXB.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
         txtGia.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtGia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtGiaKeyPressed(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel13.setText("Nhà cung cấp:");
@@ -546,6 +566,47 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
             Logger.getLogger(frmNhapSach.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnNewMouseClicked
+
+    private void txtSoLuongKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSoLuongKeyPressed
+        char c =evt.getKeyChar();
+        if(Character.isLetter(c)){
+        txtSoLuong.setEditable(false);
+        JOptionPane.showMessageDialog(null, "Chỉ nhập số");
+        }else{
+            txtSoLuong.setEditable(true);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSoLuongKeyPressed
+
+    private void txtGiaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGiaKeyPressed
+        char c =evt.getKeyChar();
+        if(Character.isLetter(c)){
+        txtGia.setEditable(false);
+        JOptionPane.showMessageDialog(null, "Chỉ nhập số");
+        }else{
+            txtGia.setEditable(true);
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_txtGiaKeyPressed
+
+    private void txtNamXBKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNamXBKeyPressed
+        char c =evt.getKeyChar();
+        if(Character.isLetter(c)){
+        txtNamXB.setEditable(false);
+        JOptionPane.showMessageDialog(null, "Chỉ nhập số");
+        }else{
+            txtNamXB.setEditable(true);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNamXBKeyPressed
+
+    private void txtSoTrangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSoTrangKeyPressed
+        char c =evt.getKeyChar();
+        if(Character.isLetter(c)){
+        txtSoTrang.setEditable(false);
+        JOptionPane.showMessageDialog(null, "Chỉ nhập số");
+        }else{
+            txtSoTrang.setEditable(true);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSoTrangKeyPressed
     public void hienThi() {
         DefaultTableModel model = (DefaultTableModel) tblDS.getModel();
         model.setColumnCount(0);
