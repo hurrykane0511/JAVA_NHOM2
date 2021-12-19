@@ -83,6 +83,7 @@ public class frmThongKe extends javax.swing.JInternalFrame {
             }
         });
 
+        tblThongKe.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         tblThongKe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
