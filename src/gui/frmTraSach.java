@@ -88,7 +88,6 @@ public class frmTraSach extends javax.swing.JInternalFrame {
         model.addColumn("Tên đọc giả");
         model.addColumn("Mã thẻ thư viện");
         model.addColumn("Số ngày quá hạn");
-        model.addColumn("Tiền phạt");
         model.addColumn("Mã nhân viên");
         model.addColumn("Tình trạng sách");
         tblTraSach.setModel(model);

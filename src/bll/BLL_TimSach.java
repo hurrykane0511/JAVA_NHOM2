@@ -46,8 +46,8 @@ public class BLL_TimSach {
             String lan = rs.getString("lan_name");
             String total = rs.getString("total_page");
             String price = rs.getString("price");
-
-            String[] row = {id, tt, ctg, au, p, lan, total, price};
+            String location = rs.getString("location");
+            String[] row = {id, tt, ctg, au, p, lan, total, price, location};
             DefaultTableModel tableModel = (DefaultTableModel) tb.getModel();
             tableModel.addRow(row);
         }

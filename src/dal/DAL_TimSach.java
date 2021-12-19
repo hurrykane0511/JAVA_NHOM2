@@ -34,7 +34,7 @@ public class DAL_TimSach {
         Connection conn = null;
         ResultSet rs = null;
         PreparedStatement pst = null;
-        String sql = "select b.id_book, b.title,ctg.name 'ctg',a.author_name,  p.name 'p_name', lan.name 'lan_name', total_page, price from books b\n"
+        String sql = "select b.id_book, b.title,ctg.name 'ctg',a.author_name,  p.name 'p_name', lan.name 'lan_name', total_page, price,location from books b\n"
                 + "join authors a on b.id_author = a.id_author\n"
                 + "join categories ctg on ctg.id_category = b.id_category\n"
                 + "join languages lan on lan.id_language =  b.id_language\n"

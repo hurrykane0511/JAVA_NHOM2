@@ -3,26 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/gui/frmThongKe.java</file>
-            <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/gui/frmNCC.java</file>
-            <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/gui/frmNgonNgu.java</file>
+            <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/bll/BLL_MuonSach.java</file>
             <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/gui/frmGiaHanTheTV.java</file>
-            <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/gui/frmChonTCDN.java</file>
+            <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/dal/DAL_NhanVien.java</file>
+            <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/gui/frmNhapSach.java</file>
+            <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/gui/frmTheThuVien.java</file>
+            <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/gui/frmMuonSach.java</file>
             <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/gui/frmTraSach.java</file>
             <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/gui/frmNhanVien.java</file>
-            <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/gui/frmTrangChuDocGia.java</file>
-            <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/gui/frmTimKiem.java</file>
-            <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/dal/DAL_TimSach.java</file>
-            <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/bll/BLL_TimSach.java</file>
-            <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/gui/frmLoaiDocGia.java</file>
-            <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/gui/frmDanhMuc.java</file>
-            <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/gui/frmMuonSach.java</file>
-            <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/gui/frmTheThuVien.java</file>
-            <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/gui/frmNhapSach.java</file>
-            <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/gui/frmTaiKhoan.java</file>
-            <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/gui/frmTrangChu.java</file>
-            <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/gui/frmDangNhap.java</file>
             <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/gui/frmCapNhatSach.java</file>
+            <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/dal/DAL_MuonSach.java</file>
             <file>file:/C:/Users/yushu/Documents/Java/JAVA_NHOM2/src/gui/frmNXB.java</file>
         </group>
     </open-files>

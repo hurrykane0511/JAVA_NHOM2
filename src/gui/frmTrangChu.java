@@ -35,6 +35,7 @@ public class frmTrangChu extends javax.swing.JFrame {
     private frmGiaHanTheTV frmGiaHan = null;
     private frmLoaiDocGia frmLoaiDocGia = null;
     private frmCapNhatSach frmCapNhatSach = null;
+    private frmThongKe frmThongKe = null;
 
     public frmTrangChu() {
         initComponents();
@@ -86,6 +87,8 @@ public class frmTrangChu extends javax.swing.JFrame {
         mnuTraSach = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         mnuTimKiemSach = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        mnuThongKe = new javax.swing.JCheckBoxMenuItem();
         jMenu6 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -281,6 +284,20 @@ public class frmTrangChu extends javax.swing.JFrame {
         jMenu4.add(mnuTimKiemSach);
 
         menuBar.add(jMenu4);
+
+        jMenu5.setText("Thống kê");
+        jMenu5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        mnuThongKe.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mnuThongKe.setText("Thống kê sách và độc giả");
+        mnuThongKe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuThongKeActionPerformed(evt);
+            }
+        });
+        jMenu5.add(mnuThongKe);
+
+        menuBar.add(jMenu5);
 
         jMenu6.setText("Trợ giúp");
         jMenu6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -577,6 +594,23 @@ public class frmTrangChu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mnuCapNhatActionPerformed
 
+    private void mnuThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuThongKeActionPerformed
+        if (frmThongKe == null || frmThongKe.isClosed()) {
+            try {
+                frmThongKe = new frmThongKe();
+            } catch (Exception ex) {
+                Logger.getLogger(frmTrangChu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            dpMain.add(frmThongKe);
+            frmThongKe.setLocation(this.getWidth() / 2 - frmThongKe.getWidth() / 2, (this.getHeight() - 20) / 2 - frmThongKe.getHeight() / 2 - 20);
+            frmThongKe.setVisible(true);
+        } else {
+            frmThongKe.setLocation(this.getWidth() / 2 - frmThongKe.getWidth() / 2, (this.getHeight() - 20) / 2 - frmThongKe.getHeight() / 2 - 20);
+            frmThongKe.setVisible(true);
+            frmThongKe.toFront();
+        }
+    }//GEN-LAST:event_mnuThongKeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -623,6 +657,7 @@ public class frmTrangChu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem mnuCapNhat;
@@ -640,6 +675,7 @@ public class frmTrangChu extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuTaiKhoan;
     private javax.swing.JMenu mnuTheTV;
     private javax.swing.JMenuItem mnuThoat;
+    private javax.swing.JCheckBoxMenuItem mnuThongKe;
     private javax.swing.JMenuItem mnuTimKiemSach;
     private javax.swing.JMenuItem mnuTraSach;
     // End of variables declaration//GEN-END:variables

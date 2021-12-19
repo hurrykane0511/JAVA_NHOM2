@@ -153,12 +153,12 @@ public class frmNXB extends javax.swing.JInternalFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 78, Short.MAX_VALUE)
+            .addGap(0, 60, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 15, Short.MAX_VALUE)
                     .addComponent(jLabel2)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 16, Short.MAX_VALUE)))
         );
 
         btnNew.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -179,15 +179,6 @@ public class frmNXB extends javax.swing.JInternalFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(36, 36, 36)
-                        .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
-                        .addComponent(jLabel6)
-                        .addGap(41, 41, 41)
-                        .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -198,46 +189,54 @@ public class frmNXB extends javax.swing.JInternalFrame {
                         .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45)
                         .addComponent(btnThoat)
-                        .addGap(40, 40, 40))))
+                        .addGap(40, 40, 40))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(36, 36, 36)
+                                .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(42, 42, 42)
+                        .addComponent(jLabel6)
+                        .addGap(41, 41, 41)
+                        .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane3)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGap(43, 43, 43)
-                            .addComponent(jLabel9)
-                            .addGap(25, 25, 25)
-                            .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 392, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane3)
                     .addContainerGap()))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel8)
                         .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtTen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(84, 84, 84)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSua)
                     .addComponent(btnThoat)
                     .addComponent(btnXoa)
                     .addComponent(btnThem)
                     .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addContainerGap(216, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addContainerGap(131, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel9)
-                        .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(118, 118, 118)
+                    .addContainerGap(277, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
         );
@@ -280,11 +279,12 @@ public class frmNXB extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "Đã tồn tại Nhà xuất bản");
                 } else {
                     if (bll.themNXB(et)) {
-                        JOptionPane.showMessageDialog(rootPane, "Thành công");
+                        JOptionPane.showMessageDialog(rootPane, "Thêm thành công");
+                        hienThi();
                         hienThiNXB();
                         reset();
                     } else {
-                        JOptionPane.showMessageDialog(rootPane, "Không thành công");
+                        JOptionPane.showMessageDialog(rootPane, "Thêm không thành công");
                     }
                     hienThiNXB();
                 }
@@ -307,12 +307,13 @@ public class frmNXB extends javax.swing.JInternalFrame {
             ET_NXB et = new ET_NXB(ma, ten, diachi);
             try {
                 if (bll.suaNXB(et)) {
-                    JOptionPane.showMessageDialog(rootPane, "Thành công");
+                    JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
+                    hienThi();
+                    hienThiNXB();
                     reset();
                 } else {
-                    JOptionPane.showMessageDialog(rootPane, "Không thành công");
+                    JOptionPane.showMessageDialog(rootPane, "Sửa không thành công");
                 }
-                hienThiNXB();
             } catch (SQLException ex) {
                 ex.printStackTrace();
             } catch (Exception ex) {
@@ -330,12 +331,12 @@ public class frmNXB extends javax.swing.JInternalFrame {
             try {
                 if (bll.xoaNXB(ma)) {
                     JOptionPane.showMessageDialog(rootPane, "Xoá thành công");
+                    hienThi();
+                    hienThiNXB();
+                    reset();
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "Xóa không thành công");
                 }
-                hienThi();
-                hienThiNXB();
-                reset();
             } catch (Exception ex) {
                 Logger.getLogger(frmNXB.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -375,7 +376,6 @@ public class frmNXB extends javax.swing.JInternalFrame {
         model.addColumn("Mã Nhà Xuất Bản");
         model.addColumn("Tên Nhà Xuất Bản");
         model.addColumn("Địa Chỉ");
-
         tblDS.setModel(model);
     }
 
@@ -406,6 +406,8 @@ public class frmNXB extends javax.swing.JInternalFrame {
         }
         String ma = String.format("%02d", STT);
         txtMa.setText("NXB" + ma);
+        txtTen.setText("");
+        txtDiaChi.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
