@@ -25,7 +25,7 @@ public class DAL_CapNhatSach {
         try {
             conn = DatabaseUtil.getConnection();
             Statement st = conn.createStatement();
-            String sql = "SELECT `id_book`, `title` ,`id_category`, `id_language`, `id_author`, `id_publisher`,`release_year` FROM `books`";
+            String sql = "SELECT `id_book`, `title` ,`id_category`, `id_language`, `id_author`, `id_publisher`,`release_year` , `location` FROM `books`";
             rs = st.executeQuery(sql);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -37,7 +37,7 @@ public class DAL_CapNhatSach {
     public Boolean suaSach(ET_Sach et) throws SQLException {
         Boolean kq = false;
         Connection conn = null;
-        try {
+         try {
             conn = DatabaseUtil.getConnection();
             Statement st = conn.createStatement();
             String sql = "update books "
@@ -46,7 +46,8 @@ public class DAL_CapNhatSach {
                     + "id_language = '" + et.getNgonNgu()+ "',"
                     + "id_author = '" + et.getMaTD()+ "',"
                     + "id_publisher = '" + et.getMaNXB()+ "',"
-                    + "release_year = '" + et.getNamXB()+ "'"
+                    + "release_year = " + et.getNamXB()+ ","
+                    + "location = '" + et.getViTri()+ "'"
                     + "where id_book ='" + et.getMaSach()+ "'";
             if (st.executeUpdate(sql) > 0) {
                 kq = true;
