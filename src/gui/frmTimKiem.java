@@ -95,7 +95,7 @@ public class frmTimKiem extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Mã sách", "Tên sách", "Thể loại", "Tác giả", "Nhà XB", "Ngôn ngữ", "Số Trang", "Giá tiền"
+                "Mã sách", "Tên sách", "Thể loại", "Tác giả", "Nhà XB", "Ngôn ngữ", "Số Trang", "Giá tiền", "Vị trí"
             }
         ));
         TbSach.getTableHeader().setReorderingAllowed(false);
