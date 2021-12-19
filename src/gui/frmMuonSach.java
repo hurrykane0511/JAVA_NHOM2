@@ -42,7 +42,7 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
         java.util.Date date = new java.util.Date();
         ngayMuonJDate.setDate(date);
         ngayMuonJDate.setEnabled(false);
-        
+
         loadCBNV();
         LoadDSPM();
     }
@@ -68,7 +68,7 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
     public void loadCBNV() {
         cbNhanVien.removeAllItems();
         Map<String, String> map = new TreeMap<>(hm_nv);
-        
+
         for (Map.Entry<String, String> entry : map.entrySet()) {
             Object value = entry.getValue();
             cbNhanVien.addItem(value.toString());
@@ -304,9 +304,9 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnClear)
                     .addComponent(btnThoat)
-                    .addComponent(btnThem))
+                    .addComponent(btnThem)
+                    .addComponent(btnClear))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45))
@@ -338,7 +338,7 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
             }
             LoadDSPM();
         } catch (Exception ex) {
-            
+
         }
     }//GEN-LAST:event_txtMaDocGiaFocusLost
 
@@ -348,12 +348,12 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbNhanVienActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-      
+
         try {
             // TODO add your handling code here:
             if (!bll_muonsach.HetHan(txtMaDocGia.getText())) {
                 JOptionPane.showMessageDialog(null, "Thẻ đã hết hạn, vui lòng gian hạn thêm", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                
+
                 return;
             }
             if (!bll_muonsach.DuocMuon(txtMaDocGia.getText())) {
@@ -364,15 +364,15 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Sách đã hết !!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(frmMuonSach.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         ET_MuonSach muonsach = new ET_MuonSach(txtMasach.getText(), txtMaDocGia.getText(), getMaNV(), ngayMuonJDate.getDate(), Integer.parseInt((String) cbNgay.getSelectedItem()), txtTinhTrang.getText());
-        
+
         try {
-            
+
             bll_muonsach.ChoMuon(muonsach);
             clearTextFields(jPanel1);
             JOptionPane.showMessageDialog(null, "Mượn thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
@@ -380,7 +380,7 @@ public class frmMuonSach extends javax.swing.JInternalFrame {
         } catch (SQLException ex) {
             JOptionPane.showConfirmDialog(null, jPanel1, "Mượn thất bại lỗi" + ex, JOptionPane.OK_OPTION, JOptionPane.PLAIN_MESSAGE);
             try {
-                
+
             } catch (Exception ex1) {
                 Logger.getLogger(frmMuonSach.class.getName()).log(Level.SEVERE, null, ex1);
             }

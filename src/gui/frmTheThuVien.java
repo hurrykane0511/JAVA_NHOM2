@@ -271,6 +271,11 @@ public class frmTheThuVien extends javax.swing.JInternalFrame {
                 txtCCCDFocusLost(evt);
             }
         });
+        txtCCCD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCCCDActionPerformed(evt);
+            }
+        });
 
         btnMoi.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         btnMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_new_26px_4.png"))); // NOI18N
@@ -574,6 +579,10 @@ public class frmTheThuVien extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         rdNam.setSelected(false);
     }//GEN-LAST:event_rdNuMouseClicked
+
+    private void txtCCCDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCCCDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCCCDActionPerformed
 
     // Lấy mã độc giả
     public String layMaDG() throws Exception {
