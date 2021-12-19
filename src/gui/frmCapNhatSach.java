@@ -106,6 +106,7 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
         model.addColumn("Tác giả");
         model.addColumn("Nhà xuất bản");
         model.addColumn("Năm xuất bản");
+         model.addColumn("Vị trí");
         txtMasach.setEditable(false);
         tbSach.setModel(model);
     }
@@ -116,8 +117,8 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
         DefaultTableModel model = (DefaultTableModel) tbSach.getModel();
         model.setRowCount(0);
         while (rs.next()) {
-            Object[] col = new Object[7];
-            for (int i = 1; i <= 7; i++) {
+            Object[] col = new Object[8];
+            for (int i = 1; i <= 8; i++) {
                 if(i==3){
                     col[i - 1] =bllTL.layTen(rs.getObject(i).toString());
                 }else if(i==4){
@@ -164,6 +165,8 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
         cbNXB = new javax.swing.JComboBox<>();
         cbNgonNgu = new javax.swing.JComboBox<>();
         cbTacGia = new javax.swing.JComboBox<>();
+        txtViTri = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(155, 177, 255));
 
@@ -267,6 +270,16 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
 
         cbTacGia.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
+        txtViTri.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtViTri.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtViTriActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setText("Vị trí");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -300,18 +313,22 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel5))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(130, 130, 130)
-                                .addComponent(jLabel6)))
+                                .addComponent(jLabel6))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(139, 139, 139)
+                                .addComponent(jLabel7)))
                         .addGap(9, 9, 9)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cbTacGia, 0, 200, Short.MAX_VALUE)
-                            .addComponent(cbNXB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtNamXB)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtViTri)
+                            .addComponent(cbTacGia, javax.swing.GroupLayout.Alignment.LEADING, 0, 200, Short.MAX_VALUE)
+                            .addComponent(cbNXB, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtNamXB, javax.swing.GroupLayout.Alignment.LEADING)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(569, 569, 569)
                         .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(80, 80, 80)
                         .addComponent(btnThoat)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,12 +352,19 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
                     .addComponent(cbTheLoai, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtNamXB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(jLabel3))
-                    .addComponent(cbNgonNgu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(jLabel3))
+                            .addComponent(cbNgonNgu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtViTri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))))
                 .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSua)
@@ -360,7 +384,7 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 4, Short.MAX_VALUE))
         );
 
         pack();
@@ -402,6 +426,7 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
         txtNamXB.setText(model.getValueAt(row, 6).toString());
+        txtViTri.setText(model.getValueAt(row, 7).toString());
     }//GEN-LAST:event_tbSachMouseClicked
 
 
@@ -436,15 +461,17 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
                 ex.printStackTrace();
             }
             int namXB = Integer.parseInt(txtNamXB.getText());
+            String viTri = txtViTri.getText();
 
             ET_Sach et;
             if (maSach.compareTo("") == 0
                     || tenSach.compareTo("") == 0
+                    || viTri.compareTo("") == 0
                     || (txtNamXB.getText()).compareTo("") == 0) {
                 JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
             } else {
                 try {
-                    et = new ET_Sach(maSach, tenSach, theLoai, ngonNgu, tacGia, NXB, namXB);
+                    et = new ET_Sach(maSach, tenSach, theLoai, ngonNgu, tacGia, NXB, namXB , viTri);
 
                     if (bll.suaSach(et)) {
                         JOptionPane.showMessageDialog(rootPane, "Thành công");
@@ -469,6 +496,10 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_btnThoatActionPerformed
 
+    private void txtViTriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtViTriActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtViTriActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSua;
@@ -483,6 +514,7 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -492,5 +524,6 @@ public class frmCapNhatSach extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtMasach;
     private javax.swing.JTextField txtNamXB;
     private javax.swing.JTextField txtTensach;
+    private javax.swing.JTextField txtViTri;
     // End of variables declaration//GEN-END:variables
 }

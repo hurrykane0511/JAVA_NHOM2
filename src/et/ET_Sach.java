@@ -23,6 +23,15 @@ public class ET_Sach {
     private String theLoai; // thể loại
     private String ngonNgu; // ngôn ngữ
     private int sLuongThuc; // số lượng
+    private String viTri; // Vị trí sách
+
+    public String getViTri() {
+        return viTri;
+    }
+
+    public void setViTri(String viTri) {
+        this.viTri = viTri;
+    }
 
     public int getsLuongThuc() {
         return sLuongThuc;
@@ -137,7 +146,7 @@ public class ET_Sach {
         this.theLoai = theLoai;
         this.ngonNgu = ngonNgu;
     }
-     public ET_Sach(String maSach, String tenSach,String theLoai, String ngonNgu , String maTD, String maNXB,int namXB) {
+     public ET_Sach(String maSach, String tenSach,String theLoai, String ngonNgu , String maTD, String maNXB,int namXB , String viTri) {
         this.maSach = maSach;
         this.tenSach = tenSach;
         this.namXB = namXB;
@@ -145,5 +154,6 @@ public class ET_Sach {
         this.maNXB = maNXB;
         this.theLoai = theLoai;
         this.ngonNgu = ngonNgu;
+        this.viTri = viTri;
     }
 }
