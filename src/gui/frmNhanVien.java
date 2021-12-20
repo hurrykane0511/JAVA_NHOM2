@@ -474,7 +474,7 @@ public class frmNhanVien extends javax.swing.JInternalFrame {
     private void txtCCCDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCCCDKeyPressed
         char c = evt.getKeyChar();
         if (Character.isLetter(c)) {
-            // txtCCCD.setEditable(false);
+            txtCCCD.setEditable(false);
             JOptionPane.showMessageDialog(null, "Chỉ nhập số");
         } else {
             txtCCCD.setEditable(true);
@@ -484,7 +484,7 @@ public class frmNhanVien extends javax.swing.JInternalFrame {
     private void txtSDTKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSDTKeyPressed
         char c = evt.getKeyChar();
         if (Character.isLetter(c)) {
-            // txtSDT.setEditable(false);
+            txtSDT.setEditable(false);
             JOptionPane.showMessageDialog(null, "Chỉ nhập số");
         } else {
             txtSDT.setEditable(true);

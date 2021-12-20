@@ -526,7 +526,7 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
                             }
 
                         } else {
-                            ET_Sach et = new ET_Sach(maSach, ten, sl, gia, nxb, st, maTD, maNXB, maDM, maNN, st);
+                            ET_Sach et = new ET_Sach(maSach, ten, sl, gia, nxb, st, maTD, maNXB, maDM, maNN, sl);
                             try {
                                 if (bll.themSach(et)) {
                                     JOptionPane.showMessageDialog(rootPane, "Thêm thành công");
@@ -583,7 +583,7 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
     private void txtSoLuongKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSoLuongKeyPressed
         char c = evt.getKeyChar();
         if (Character.isLetter(c)) {
-            //txtSoLuong.setEditable(false);
+            txtSoLuong.setEditable(false);
             JOptionPane.showMessageDialog(null, "Chỉ nhập số");
         } else {
             txtSoLuong.setEditable(true);
@@ -594,7 +594,7 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
     private void txtGiaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGiaKeyPressed
         char c = evt.getKeyChar();
         if (Character.isLetter(c)) {
-          //  txtGia.setEditable(false);
+            txtGia.setEditable(false);
             JOptionPane.showMessageDialog(null, "Chỉ nhập số");
         } else {
             txtGia.setEditable(true);
@@ -604,7 +604,7 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
     private void txtNamXBKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNamXBKeyPressed
         char c = evt.getKeyChar();
         if (Character.isLetter(c)) {
-           // txtNamXB.setEditable(false);
+            txtNamXB.setEditable(false);
             JOptionPane.showMessageDialog(null, "Chỉ nhập số");
         } else {
             txtNamXB.setEditable(true);
@@ -614,7 +614,7 @@ public class frmNhapSach extends javax.swing.JInternalFrame {
     private void txtSoTrangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSoTrangKeyPressed
         char c = evt.getKeyChar();
         if (Character.isLetter(c)) {
-           // txtSoTrang.setEditable(false);
+            txtSoTrang.setEditable(false);
             JOptionPane.showMessageDialog(null, "Chỉ nhập số");
         } else {
             txtSoTrang.setEditable(true);
